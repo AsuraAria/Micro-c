@@ -47,53 +47,6 @@ void clean_memory();
  * Note:
  * - Self explanatory.
  **********************************************************************/
-int load_save(int);
-/*********************************************************************//**
- * @brief			Load a save if uncorrupted
- * @param[in]	int, save number
- * @return		int; 0 for succes, 1 for error
- *
- * Note:
- * - If an error is seen no loading will be done.
- **********************************************************************/
-int check_save(int);
-/*********************************************************************//**
- * @brief			Check key
- * @param[in]	int, save number
- * @return		int; 0 for succes, 1 for error
- *
- * Note:
- * - None.
- **********************************************************************/ 
-void restaure_backup(int);
-/*********************************************************************//**
- * @brief			Replace existing save by backup save
- * @param[in]	int, save number
- * @return		None
- *
- * Note:
- * - Use create_save.
- **********************************************************************/ 
-void create_save(int, uint8_t*);
-/*********************************************************************//**
- * @brief			Replace existing save by backup save
- * @param[in]	int, save number
- *						uint8_t*, backup pointer
- * @return		None
- *
- * Note:
- * - None
- **********************************************************************/ 
-void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/*********************************************************************//**
- * @brief			fill structure with wanted parameter
- * @param[in]	uint8_t*, buffer pointer
- * @return		None
- *
- * Note:
- * - None
- **********************************************************************/ 
-
 void create_gamekey();
 /*********************************************************************//**
  * @brief			Create gamekey
@@ -111,6 +64,52 @@ int check_memory();
  *
  * Note:
  * - None.
+ **********************************************************************/ 
+void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/*********************************************************************//**
+ * @brief			fill structure with wanted parameter
+ * @param[in]	uint8_t*, buffer pointer
+ * @return		None
+ *
+ * Note:
+ * - None
+ **********************************************************************/ 
+void create_save(int, uint8_t*);
+/*********************************************************************//**
+ * @brief			Replace existing save by backup save
+ * @param[in]	int, save number
+ *						uint8_t*, backup pointer
+ * @return		None
+ *
+ * Note:
+ * - None
+ **********************************************************************/ 
+int check_save(int);
+/*********************************************************************//**
+ * @brief			Check key
+ * @param[in]	int, save number
+ * @return		int; 0 for succes, 1 for error
+ *
+ * Note:
+ * - None.
+ **********************************************************************/ 
+int load_save(int);
+/*********************************************************************//**
+ * @brief			Load a save if uncorrupted
+ * @param[in]	int, save number
+ * @return		int; 0 for succes, 1 for error
+ *
+ * Note:
+ * - If an error is seen no loading will be done.
+ **********************************************************************/
+void restaure_backup(int);
+/*********************************************************************//**
+ * @brief			Replace existing save by backup save
+ * @param[in]	int, save number
+ * @return		None
+ *
+ * Note:
+ * - Use create_save.
  **********************************************************************/ 
 //========================================
 // Fin
