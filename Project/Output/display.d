@@ -18,4 +18,5 @@
 .\output\display.o: ..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_pinsel.h
 .\output\display.o: ..\User\touch/ili_lcd_general.h
 .\output\display.o: ..\User\affichagelcd.h
+.\output\display.o: ..\User\memory.h
 .\output\display.o: ..\User\texture.h

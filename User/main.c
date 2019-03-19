@@ -131,183 +131,199 @@ void pin_Configuration()
 
 int main(void)
 {
-		//=============
-		// Definition
-		//=============
-		
-		// Variable pour savoir si un tableau doit être affiché
-		bool mapLoad = true;
-		// Variables des coordonnées du tableau à afficher
-	  unsigned int mapX=0, mapY=0;
-		
-		// Coordonnées du joueur et direction pour afficher le sprite
-		unsigned int pX=30, pY=30, dir=4, vit=1;
-		// Coordonnées de l'ancienne position du joueur
-		unsigned int pBX=pX, pBY=pY;
-		
-		unsigned int menu = 1;
 	
-		//uint16_t previousTouch = 0;
-		
-		uint8_t data[20];
+	//=============
+	// Definition
+	//=============
 	
-		//=============
-		// Init
-		//=============
+	// Variable pour savoir si un tableau doit être affiché
+	bool mapLoad = true;
+	// Variables des coordonnées du tableau à afficher
+	unsigned int mapX=0, mapY=0;
+	
+	// Coordonnées du joueur et direction pour afficher le sprite
+	unsigned int pX=30, pY=30, dir=4, vit=1;
+	// Coordonnées de l'ancienne position du joueur
+	unsigned int pBX=pX, pBY=pY;
+	
+	unsigned int menu = 1;
+
+	//uint16_t previousTouch = 0;
+	
+	uint8_t data[20];
+
+	//=============
+	// Init
+	//=============
+	
+	lcd_Initializtion(); // init pinsel ecran et init LCD
+	touch_init(); // init pinsel tactile et init tactile
+	pin_Configuration(); // init pinsel memoire, buzzer, led
+	init_i2c_eeprom(); // init mémoire
+	T0_Init(); // init timer musique
+	T1_Init();
+	
+	musintro();
+	
+	clean_memory();
+	
+	/*n=sprintf(chaine,"Ceci est un exemple      ");
+	LCD_write_english_string (32,30,chaine,White,Blue);
+	dessiner_rect(0,0,240,320,0,1,Black,Black);*/
+	
+	if (!check_memory()) // (Si la sauvegarde 0 existe : 
+	{
+		clean_memory();
+		create_gamekey();
+		//i2c_eeprom_read(0,data,20);
+		//filldown_save(data, 0, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+	}
+	
+	//=============
+	// Boucle
+	//=============
+	
+	dessiner_rect(0,0,240,320,0,1,Black,Black);
+	
+	while(1)
+	{
 		
-		lcd_Initializtion(); // init pinsel ecran et init LCD
-	  touch_init(); // init pinsel tactile et init tactile
-		pin_Configuration(); // init pinsel memoire, buzzer, led
-		init_i2c_eeprom(); // init mémoire
-		T0_Init(); // init timer musique
-		T1_Init();
-		
-		musintro();
-		
-		//clean_memory();
-		
-		/*n=sprintf(chaine,"Ceci est un exemple      ");
-	  LCD_write_english_string (32,30,chaine,White,Blue);
-		dessiner_rect(0,0,240,320,0,1,Black,Black);*/
-		
-		if (check_memory()) // (Si la sauvegarde 0 existe : 
+		if (menu == -1)
 		{
-			i2c_eeprom_read(0,data,20);
-			filldown_save(data, 0, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
-		}
-		
-		//=============
-		// Boucle
-		//=============
-		
-		dessiner_rect(0,0,240,320,0,1,Black,Black);
-		
-    while(1)
-		{
+			// Si il y a un changement de tableau, on affiche ce tableau (x,y) sur l'écran
+			if (mapLoad)
+				drawMap(mapX, mapY, &mapLoad); // On le fait qu'une seule fois pour une question de rapidité d'execution
 			
-			if (menu == -1)
+			// Rafraîchir les cases derrière l'ancienne position du personnage pour le faire disparaître
+			if (pBX!=pX || pBY != pY)
 			{
-				// Si il y a un changement de tableau, on affiche ce tableau (x,y) sur l'écran
-				if (mapLoad)
-					drawMap(mapX, mapY, &mapLoad); // On le fait qu'une seule fois pour une question de rapidité d'execution
+				clearOldPlayer(pBX, pBY, mapX, mapY);
+			}
+			// Raffraichir la zone d'effaçage
+			pBX=pX, pBY=pY;
+			
+			// Gestion du joystick
+			dir = readJoystick();
+			
+			if (dir == 5)
+			{
+				menu = 1;
+				mapLoad = true;
 				
-				// Rafraîchir les cases derrière l'ancienne position du personnage pour le faire disparaître
-				if (pBX!=pX || pBY != pY)
+				fillup_save(data, 0, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
+				create_save(0,data);
+			}
+			
+			// Déplacement du personnage
+			if (!isColliding(pX, pY, mapX, mapY, dir))
+			{
+				if (dir==1)
 				{
-					clearOldPlayer(pBX, pBY, mapX, mapY);
+					pX+=vit;
 				}
-				// Raffraichir la zone d'effaçage
-				pBX=pX, pBY=pY;
-				
-				// Gestion du joystick
-				dir = readJoystick();
-				
-				if (dir == 5)
+				else if (dir==2)
 				{
-					menu = 1;
-					mapLoad = true;
-					
-					fillup_save(data, 0, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
-					create_save(0,data);
+					pY+=vit;
 				}
-				
-				// Déplacement du personnage
-				if (!isColliding(pX, pY, mapX, mapY, dir))
+				else if (dir==3)
 				{
-					if (dir==1)
-					{
-						pX+=vit;
-					}
-					else if (dir==2)
-					{
-						pY+=vit;
-					}
-					else if (dir==3)
-					{
-						pX-=vit;
-					}
-					else if (dir==0)
-					{
-						pY-=vit;
-					}
+					pX-=vit;
 				}
-				else
+				else if (dir==0)
 				{
-					dir = 4;
+					pY-=vit;
 				}
-				
-				// Changement de tableau
-				if (pX >= 220)
-				{
-					mapY++;
-					pX = 10;
-					mapLoad = true;
-				}
-				else if (pX <= 5)
-				{
-					mapY--;
-					pX = 215;
-					mapLoad = true;
-				}
-				else if (pY >= 300)
-				{
-					mapX++;
-					pY = 10;
-					mapLoad = true;
-				}
-				else if (pY <= 5)
-				{
-					mapX--;
-					pY = 295;
-					mapLoad = true;
-				}
-				
-				// Affiche le joueur sur l'écran
-				drawPlayer(pX, pY, dir);//dir
-				
-				//pseudoSleep(100);
-		
-				//sprintf(chaine,"%d - %d | %d - %d",pX, pY, mapX, mapY);
-				//LCD_write_english_string (30,30,chaine,White,Blue);
 			}
 			else
 			{
-				touch_read();
+				dir = 4;
+			}
+			
+			// Changement de tableau
+			if (pX >= 220)
+			{
+				mapY++;
+				pX = 10;
+				mapLoad = true;
+			}
+			else if (pX <= 5)
+			{
+				mapY--;
+				pX = 215;
+				mapLoad = true;
+			}
+			else if (pY >= 300)
+			{
+				mapX++;
+				pY = 10;
+				mapLoad = true;
+			}
+			else if (pY <= 5)
+			{
+				mapX--;
+				pY = 295;
+				mapLoad = true;
+			}
+			
+			// Affiche le joueur sur l'écran
+			drawPlayer(pX, pY, dir);//dir
+			
+			//pseudoSleep(100);
+	
+			//sprintf(chaine,"%d - %d | %d - %d",pX, pY, mapX, mapY);
+			//LCD_write_english_string (30,30,chaine,White,Blue);
+		}
+		else
+		{
+			touch_read();
+			
+			if (menu == 1)
+			{
+				if (mapLoad)
+				{
+					drawMap(250, 0, &mapLoad);
+					drawMenu(menu);
+				}
 				
-				if (menu == 1)
+				// Play 
+				// x : 1950 - 2300
+				// y : 800 - 1670
+				
+				if (flagTouch)
 				{
-					if (mapLoad)
-					{
-						drawMap(250, 0, &mapLoad);
-						drawMenu(menu);
-					}
+					flagTouch = 0;
+					sprintf(chaine,"%d - %d ",touch_x , touch_y);
+					LCD_write_english_string(30,30,chaine,White,Blue);
 					
-					// Play 
-					// x : 1950 - 2300
-					// y : 800 - 1670
-					
-					if (flagTouch)
+					if (touch_x>=1750 && touch_x<=2300 && touch_y>=700 && touch_y<=1700)
 					{
-						flagTouch = 0;
-						sprintf(chaine,"%d - %d ",touch_x , touch_y);
-						LCD_write_english_string(30,30,chaine,White,Blue);
-						
-						if (touch_x>=1750 && touch_x<=2300 && touch_y>=700 && touch_y<=1700)
-						{
-							mapLoad = true;
-							menu = 2;
-						}
+						mapLoad = true;
+						menu = 2;
 					}
 				}
-				else if (menu == 2)
+			}
+			else if (menu == 2)
+			{
+				if (mapLoad)
 				{
-					if (mapLoad)
-						drawMap(250, 0, &mapLoad);
-						drawMenu(menu);
+					drawMap(250, 0, &mapLoad);
+					drawMenu(menu);
 				}
-
+				if (flagTouch)
+				{
+					flagTouch = 0;
+					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
+					//LCD_write_english_string(30,30,chaine,White,Blue);
+					
+					if (touch_x>=1750 && touch_x<=2300 && touch_y>=700 && touch_y<=1700)
+					{
+						mapLoad = true;
+						menu = -1;
+					}
+				}
 			}
 		}
+	}
 }
 
 //---------------------------------------------------------------------------------------------

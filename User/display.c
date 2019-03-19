@@ -1,4 +1,5 @@
 #include "display.h"
+#include "memory.h"
 
 // Defined in .c to avoid defining variables multiple times
 #include "texture.h"
@@ -42,7 +43,12 @@ void drawMenu(unsigned int m)
 		
 		for(i=0; i<3; i++)
 		{
-			dessiner_rect(6*TSIZE,1*TSIZE+i*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, Black, Black);
+			unsigned short color = Black;
+			if (check_save(i))
+			{
+				color = Black;
+			}
+			dessiner_rect(6*TSIZE,1*TSIZE+i*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
 		}
 	}
 }

@@ -74,6 +74,8 @@ void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, u
  * Note:
  * - None
  **********************************************************************/ 
+void filldown_save(uint8_t* Buffer, int *num, int *, unsigned int *, unsigned int* Map_y, unsigned int *Location_x, unsigned int *Location_y,unsigned int *score);
+
 void create_save(int, uint8_t*);
 /*********************************************************************//**
  * @brief			Replace existing save by backup save

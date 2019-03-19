@@ -71,15 +71,21 @@ compiling main.c...
   void init_i2c_eeprom();
 ..\User\memory.h(41): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
   void clean_memory();
+..\User\memory.h(50): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
+  void create_gamekey();
+..\User\memory.h(59): warning:  #1295-D: Deprecated declaration check_memory - give arg types
+  int check_memory();
 ..\User\musicien.h(40): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
   void T0_Init();
 ..\User\musicien.h(42): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
   void TIMER0_IRQHandler();
 ..\User\musicien.h(46): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\main.c(188): warning:  #68-D: integer conversion resulted in a change of sign
-                        if (menu == -1)
-..\User\main.c: 9 warnings, 0 errors
+..\User\main.c(191): warning:  #68-D: integer conversion resulted in a change of sign
+                if (menu == -1)
+..\User\main.c(321): warning:  #68-D: integer conversion resulted in a change of sign
+                                                menu = -1;
+..\User\main.c: 12 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -93,15 +99,20 @@ compiling display.c...
    
 ..\User\display.h(67): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   int readJoystick();
+..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
+  void init_i2c_eeprom();
+..\User\memory.h(41): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
+  void clean_memory();
+..\User\memory.h(50): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
+  void create_gamekey();
+..\User\memory.h(59): warning:  #1295-D: Deprecated declaration check_memory - give arg types
+  int check_memory();
 ..\User\texture.h(1487): warning:  #1-D: last line of file ends without a newline
   //
-..\User\display.c(65): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
+..\User\display.c(71): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
   }
-..\User\display.c: 4 warnings, 0 errors
+..\User\display.c: 8 warnings, 0 errors
 compiling memory.c...
-..\User\memory.c(195): warning:  #1-D: last line of file ends without a newline
-  }
-..\User\memory.c: 1 warning, 0 errors
 compiling musicien.c...
 ..\User\musicien.h(40): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
   void T0_Init();
@@ -115,9 +126,9 @@ compiling musicien.c...
   }
 ..\User\musicien.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=21688 RO-data=7428 RW-data=440 ZI-data=744  
+Program Size: Code=21988 RO-data=7428 RW-data=440 ZI-data=744  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 30 Warning(s).
+".\Output\Project.axf" - 0 Error(s), 36 Warning(s).
 Build Time Elapsed:  00:00:07
 </pre>
 </body>

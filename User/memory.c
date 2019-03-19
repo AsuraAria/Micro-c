@@ -191,6 +191,18 @@ void fillup_save(uint8_t* Buffer, int num, int life, unsigned int Map_x, unsigne
 	Buffer[19]='x';
 }
 
+void filldown_save(uint8_t* Buffer, int *num, int *life, unsigned int *Map_x, unsigned int* Map_y, unsigned int *Location_x, unsigned int *Location_y,unsigned int *score)
+{
+	//Buffer[12]=(uint8_t)num;
+	//Buffer[13]=(uint8_t)life;
+	*Map_x = (unsigned int)Buffer[14];
+	*Map_y = (unsigned int)Buffer[15];
+	*Location_x = (unsigned int)Buffer[16];
+	*Location_y = (unsigned int)Buffer[17];
+	//Buffer[18]=(uint8_t)score;
+	//Buffer[19]='x';
+}
+
 void create_save(int num, uint8_t* Current_save)
 {
   // creation of a backup in memory
