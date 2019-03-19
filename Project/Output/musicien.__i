@@ -1,0 +1,6 @@
+-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User
+-ID:\Programs\MDK\ARM\RV31\INC
+-ID:\Programs\MDK\ARM\CMSIS\Include
+-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx
+-D__UVISION_VERSION="526"
+-o .\output\musicien.o --omf_browse .\output\musicien.crf --depend .\output\musicien.d "..\User\musicien.c"

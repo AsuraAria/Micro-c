@@ -1,0 +1,169 @@
+<html>
+	<script type="text/javascript">
+		//document.getElementById("button").onclick = getResult()
+		
+		function load()
+		{
+			let r = 0;
+			let v = 0;
+			let b = 0;
+			
+			document.getElementById("Result").innerHTML = r/8+" "+v/4+" "+b/8;
+			
+			document.getElementById("Debug").innerHTML = "#"+(r<16?"0"+Math.abs(r).toString(16):Math.abs(r).toString(16))
+															+(v<16?"0"+Math.abs(v).toString(16):Math.abs(v).toString(16))
+															+(b<16?"0"+Math.abs(b).toString(16):Math.abs(b).toString(16));
+															
+			document.getElementById("16bits").innerHTML = "#"+Math.abs((r/8)<<(6+5)|(v/4)<<(5)|(b/8)).toString(16)
+															
+			document.getElementById("Explain").innerHTML = "#"+((r/8))+" "+((v/4))+" "+(b/8)+"                "/*+
+															+(r/8).toString(2)+" "+(v/4).toString(2)+" "+(b/8).toString(2);*/
+															
+			//COMPARE COLOR
+			document.getElementById("24").style.backgroundColor =  "#"+(r<16?"0"+Math.abs(r).toString(16):Math.abs(r).toString(16))
+															   +(v<16?"0"+Math.abs(v).toString(16):Math.abs(v).toString(16))
+															   +(b<16?"0"+Math.abs(b).toString(16):Math.abs(b).toString(16));
+			
+			document.getElementById("16").style.backgroundColor = "#"+(r<16?"0"+(Math.floor(r/8)*8).toString(16):(Math.floor(r/8)*8).toString(16))
+															   +(v<16?"0"+(Math.floor(v/4)*4).toString(16):(Math.floor(v/4)*4).toString(16))
+															   +(b<16?"0"+(Math.floor(b/8)*8).toString(16):(Math.floor(b/8)*8).toString(16));
+															   
+															   
+			document.getElementById("24").style.color = "white";
+			document.getElementById("16").style.color = "white";
+		}
+		
+		function getResult()
+		{
+			let r = document.getElementById("red").value;
+			let v = document.getElementById("green").value;
+			let b = document.getElementById("blue").value;
+			
+			if (parseInt(r)+parseInt(v)+parseInt(b) >= 600)
+			{
+				document.getElementById("Result").style.backgroundColor = "black";
+				document.getElementById("Debug").style.backgroundColor = "black";
+				document.getElementById("16bits").style.backgroundColor = "black";
+				document.getElementById("Explain").style.backgroundColor = "black";
+				
+				document.getElementById("24").style.color = "black";
+				document.getElementById("16").style.color = "black";
+			}
+			else
+			{
+				document.getElementById("Result").style.backgroundColor = "white";
+				document.getElementById("Debug").style.backgroundColor = "white";
+				document.getElementById("16bits").style.backgroundColor = "white";
+				document.getElementById("Explain").style.backgroundColor = "white";
+				
+				document.getElementById("24").style.color = "white";
+				document.getElementById("16").style.color = "white";
+			}
+			
+			//COLOR
+			document.getElementById("Result").style.color = "#"+(r<16?"0"+(Math.floor(r/8)*8).toString(16):(Math.floor(r/8)*8).toString(16))
+															   +(v<16?"0"+(Math.floor(v/4)*4).toString(16):(Math.floor(v/4)*4).toString(16))
+															   +(b<16?"0"+(Math.floor(b/8)*8).toString(16):(Math.floor(b/8)*8).toString(16));
+			
+			document.getElementById("Debug").style.color = "#"+(r<16?"0"+Math.abs(r).toString(16):Math.abs(r).toString(16))
+															   +(v<16?"0"+Math.abs(v).toString(16):Math.abs(v).toString(16))
+															   +(b<16?"0"+Math.abs(b).toString(16):Math.abs(b).toString(16));
+			
+			document.getElementById("16bits").style.color = "#"+(r<16?"0"+(Math.floor(r/8)*8).toString(16):(Math.floor(r/8)*8).toString(16))
+															   +(v<16?"0"+(Math.floor(v/4)*4).toString(16):(Math.floor(v/4)*4).toString(16))
+															   +(b<16?"0"+(Math.floor(b/8)*8).toString(16):(Math.floor(b/8)*8).toString(16));
+			
+			document.getElementById("Explain").style.color = "#"+(r<16?"0"+(Math.floor(r/8)*8).toString(16):(Math.floor(r/8)*8).toString(16))
+															   +(v<16?"0"+(Math.floor(v/4)*4).toString(16):(Math.floor(v/4)*4).toString(16))
+															   +(b<16?"0"+(Math.floor(b/8)*8).toString(16):(Math.floor(b/8)*8).toString(16));
+															   
+													
+			//COMPARE COLOR
+			document.getElementById("24").style.backgroundColor =  "#"+(r<16?"0"+Math.abs(r).toString(16):Math.abs(r).toString(16))
+															   +(v<16?"0"+Math.abs(v).toString(16):Math.abs(v).toString(16))
+															   +(b<16?"0"+Math.abs(b).toString(16):Math.abs(b).toString(16));
+			
+			document.getElementById("16").style.backgroundColor = "#"+(r<16?"0"+(Math.floor(r/8)*8).toString(16):(Math.floor(r/8)*8).toString(16))
+															   +(v<16?"0"+(Math.floor(v/4)*4).toString(16):(Math.floor(v/4)*4).toString(16))
+															   +(b<16?"0"+(Math.floor(b/8)*8).toString(16):(Math.floor(b/8)*8).toString(16));
+			
+			//VALUE
+			
+			document.getElementById("Result").innerHTML = r/8+" "+v/4+" "+b/8;
+			
+			document.getElementById("Debug").innerHTML = "#"+(r<16?"0"+Math.abs(r).toString(16):Math.abs(r).toString(16))
+															+(v<16?"0"+Math.abs(v).toString(16):Math.abs(v).toString(16))
+															+(b<16?"0"+Math.abs(b).toString(16):Math.abs(b).toString(16));
+															
+			document.getElementById("16bits").innerHTML = "#"+Math.abs((r/8)<<(6+5)|(v/4)<<(5)|(b/8)).toString(16)
+															
+			document.getElementById("Explain").innerHTML = (r/8).toString(2)+" "+(v/4).toString(2)+" "+(b/8).toString(2);
+		}
+	</script>
+	<style>
+		body 
+		{
+			color:black;
+			background-color:white;
+			background-image:url(http://wallpaperswide.com/download/city_of_love-wallpaper-5120x3200.jpg);
+			-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+			background-size: cover; /* version standardisée */
+		}
+	</style>
+	<body onLoad="load()">
+		Entrez des valeurs entre 0 et 255 (RVB/RGB 24bits) :<br>
+		<input id="red" type="text" value="red">
+		<input id="green" type="text" value="green">
+		<input id="blue" type="text" value="blue">
+		<input id="button" type="submit" value="Start" onclick="getResult();">
+		
+		<br><br>
+		
+		Red Green Blue en 16bits : entre 0 et 63 pour Rouge et Bleu | entre 0 et 31 pour Vert (Valeurs décimales) :<br>
+		<font size="6"><strong>
+		<div id="Result" color="#000000">
+			Si ce texte s'affiche, il y a une erreur !
+		</div>
+		</strong></font>
+		
+		<br>
+		
+		Valeur en hexadecimal sur 24bits (RVB/RGB de base) :
+		<font size="6"><strong>
+		<div id="Debug" color="#000000">
+			Si ce texte s'affiche, il y a une erreur !
+		</div>
+		</strong></font>
+		
+		<br>
+		
+		Valeur en hexadecimal sur 16bits (RVB/RGB pour le LCD) :<br>
+		/!\ AJOUTEZ DES "0" A GAUCHE POUR OBTENIR 4 CARACTERES) /!\
+		<font size="6"><strong>
+		<div id="16bits" color="#000000">
+			Si ce texte s'affiche, il y a une erreur !
+		</div>
+		</strong></font>
+		
+		<br>
+		
+		Valeur pour chaque couleur : 5bits de rouge, 6bits de vert, 5bits de bleu :
+		<font size="6"><strong>
+		<div id="Explain" color="#000000">
+			Si ce texte s'affiche, il y a une erreur !
+		</div>
+		</strong></font>
+		
+		<br>
+		
+		Comparatif de la résolution de nuance (en mettant 151 partout par exemple, on voit, mais la diff est ridicule MDR)
+		<div id="24" color="#ffffff">Couleur en 24bits</div>
+		<div id="16" color="#ffffff">Couleur en 16bits</div>
+		
+		<br><br>
+		
+		Bref, la difference entre le 24bits et le 16bits c'est qu'il y'a 8 fois moins de nuance dans le rouge et le bleu <br>
+		et 4 fois moins de nuance dans le vert !
+		
+	</body>
+</html>
