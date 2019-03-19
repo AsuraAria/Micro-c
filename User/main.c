@@ -170,7 +170,7 @@ int main(void)
 	  LCD_write_english_string (32,30,chaine,White,Blue);
 		dessiner_rect(0,0,240,320,0,1,Black,Black);*/
 		
-		if (!check_save(0)) // (Si la sauvegarde 0 existe : 
+		if (check_memory()) // (Si la sauvegarde 0 existe : 
 		{
 			i2c_eeprom_read(0,data,20);
 			filldown_save(data, 0, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"

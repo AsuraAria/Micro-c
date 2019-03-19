@@ -10,6 +10,8 @@ char text[30];
 
 void drawMenu(unsigned int m)
 {
+	int i;
+	
 	if (m == 1)
 	{
 		/*sprintf(text,"klmnopqrstuvw");
@@ -33,10 +35,15 @@ void drawMenu(unsigned int m)
 	}
 	else if (m == 2)
 	{
-		sprintf(text,"Save");
+		sprintf(text,"choose your");
 		drawText(text, 1, TSIZE*1, (unsigned int)(320-11*TSIZE/1)/2);
-		sprintf(text,"adventure");
-		drawText(text, 1, TSIZE*2, (unsigned int)(320-9*TSIZE/1)/2);
+		sprintf(text,"save");
+		drawText(text, 1, TSIZE*2, (unsigned int)(320-4*TSIZE/1)/2);
+		
+		for(i=0; i<3; i++)
+		{
+			dessiner_rect(6*TSIZE,1*TSIZE+i*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, Black, Black);
+		}
 	}
 }
 
