@@ -101,10 +101,111 @@ void clean_memory()
 				i2c_eeprom_write(i, C0,1);
 		}
 }
+void create_gamekey()
+{
+	// create local gamekey
+	uint8_t GK[10];
+	// local gamekey writting
+	GK[0]='f';
+	GK[1]='l';
+	GK[2]='u';
+	GK[3]='f';
+	GK[4]='f';
+	GK[5]='i';
+	GK[6]='t';
+	GK[7]='t';
+	GK[8]='e';
+	GK[9]='n';
+	// gamekey pushup in memory
+	i2c_eeprom_write(2037, GK, 10);
+}
+int check_memory()
+{
+	// create local gamekey
+	uint8_t clefcheck[12];
+	// local gamekey writting
+	i2c_eeprom_read(2037,clefcheck,10);
+	// check gamekey eligibility
+	if(
+			clefcheck[0]=='f'
+		&&
+			clefcheck[1]=='l'
+		&&
+			clefcheck[2]=='u'
+		&&
+			clefcheck[3]=='f'
+		&&
+			clefcheck[4]=='f'
+		&&
+			clefcheck[5]=='i'
+		&&
+			clefcheck[6]=='t'
+		&&
+			clefcheck[7]=='t'
+		&&
+			clefcheck[8]=='e'
+		&&
+			clefcheck[9]=='n'
+		)
+	{
+		return 1;
+	}
+	// if not eligible
+	else
+	{
+		return 0;
+	}
+}
+
+
+void fillup_save(uint8_t* Buffer, int num, int life, unsigned int Map_x, unsigned int Map_y, unsigned int Location_x, unsigned int Location_y,unsigned int score)
+{
+  //writting of key in local
+	Buffer[0]='m';
+	Buffer[1]='a';
+	Buffer[2]='r';
+	Buffer[3]='c';
+	Buffer[4]='d';
+	Buffer[5]='i';
+	Buffer[6]='v';
+	Buffer[7]='i';
+	Buffer[8]='t';
+	Buffer[9]='o';
+	Buffer[10]='n';
+	Buffer[11]='y';
+  //writting of save number in local
+	Buffer[12]=(uint8_t)num;
+  //writting of life in local
+	Buffer[13]=(uint8_t)life;
+  //writting of Map x in local
+	Buffer[14]=(uint8_t)Map_x;
+  //writting of Map y in local
+	Buffer[15]=(uint8_t)Map_y;
+  //writting of Location x in local
+	Buffer[16]=(uint8_t)Location_x;
+  //writting of Location y in local
+	Buffer[17]=(uint8_t)Location_y;
+  //writting of score in local
+	Buffer[18]=(uint8_t)score;
+  //writting in local of random chosen letter because 20 bytes is better than 19 for maths
+	Buffer[19]='x';
+}
+
+void create_save(int num, uint8_t* Current_save)
+{
+  // creation of a backup in memory
+	i2c_eeprom_write(20*(num+3), Current_save,20);
+  // creation of a save in memory
+	i2c_eeprom_write(20*num, Current_save,20);
+}
+
 int check_save(int num)
 {
+	// create local key
 	uint8_t clefcheck[12];
+	// local key writting
 	i2c_eeprom_read(20*num,clefcheck,12);
+	// check key eligibility
 	if(
 		clefcheck[0]=='m'
 		&&
@@ -130,66 +231,37 @@ int check_save(int num)
 		&&
 		clefcheck[11]=='y'
 		)
-		{return 0;}
+	{
+		return 1;
+	}
+	// if not eligible
 	else
-		{return 1;}
+	{
+		return 0;
+	}
 }
 
 int load_save(int num, uint8_t* Current_save)
 {
+	// check eligibility of save
 	if (num<3 && check_save(num)==0)
 	{
-		num--;
+		// loading of said save in local
 		i2c_eeprom_read(20*num, Current_save,20);
-		return 0;
+		return 1;
 	}
+	// if not eligible
 	else
-	{return 0;}
-}
-
-void create_save(int num, uint8_t* Current_save)
-{
-	i2c_eeprom_write(20*(num+3), Current_save,20); //creation of a backup
-	i2c_eeprom_write(20*num, Current_save,20); //creation of a backup
+	{
+	return 0;
+	}
 }
 void restaure_backup(int num)
 {
+	// local backup creation
 	uint8_t BK_save[20];
+	// local backup writting
 	i2c_eeprom_read(20*(num+3), BK_save,20);
-	create_save(num, BK_save);	
-}
-void fillup_save(uint8_t* Buffer, int num, int life, unsigned int Map_x, unsigned int Map_y, unsigned int Location_x, unsigned int Location_y,unsigned int score)
-{
-	Buffer[0]='m';
-	Buffer[1]='a';
-	Buffer[2]='r';
-	Buffer[3]='c';
-	Buffer[4]='d';
-	Buffer[5]='i';
-	Buffer[6]='v';
-	Buffer[7]='i';
-	Buffer[8]='t';
-	Buffer[9]='o';
-	Buffer[10]='n';
-	Buffer[11]='y';
-	Buffer[12]=(uint8_t)num;
-	Buffer[13]=(uint8_t)life;
-	Buffer[14]=(uint8_t)Map_x;
-	Buffer[15]=(uint8_t)Map_y;
-	Buffer[16]=(uint8_t)Location_x;
-	Buffer[17]=(uint8_t)Location_y;
-	Buffer[18]=(uint8_t)score;
-	Buffer[19]='x';
-}
-
-void filldown_save(uint8_t* Buffer, int *num, int *life, unsigned int *Map_x, unsigned int* Map_y, unsigned int *Location_x, unsigned int *Location_y,unsigned int *score)
-{
-	//Buffer[12]=(uint8_t)num;
-	//Buffer[13]=(uint8_t)life;
-	*Map_x = (unsigned int)Buffer[14];
-	*Map_y = (unsigned int)Buffer[15];
-	*Location_x = (unsigned int)Buffer[16];
-	*Location_y = (unsigned int)Buffer[17];
-	//Buffer[18]=(uint8_t)score;
-	//Buffer[19]='x';
+	// replacement of save by backup in memory
+	create_save(num, BK_save);
 }
