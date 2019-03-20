@@ -12,6 +12,7 @@ char text[30];
 void drawMenu(unsigned int m)
 {
 	int i;
+	unsigned short color = White;
 	
 	if (m == 1)
 	{
@@ -41,15 +42,23 @@ void drawMenu(unsigned int m)
 		sprintf(text,"save");
 		drawText(text, 1, TSIZE*2, (unsigned int)(320-4*TSIZE/1)/2);
 		
-		for(i=0; i<3; i++)
-		{
-			unsigned short color = Black;
-			if (check_save(i))
-			{
-				color = Black;
-			}
-			dessiner_rect(6*TSIZE,1*TSIZE+i*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
-		}
+		if (check_save(0))
+			color = White;
+		else
+			color = Black;
+		dessiner_rect(6*TSIZE,1*TSIZE+0*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
+		
+		if (check_save(1))
+			color = White;
+		else
+			color = Black;
+		dessiner_rect(6*TSIZE,1*TSIZE+1*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
+		
+		if (check_save(2))
+			color = White;
+		else
+			color = Black;
+		dessiner_rect(6*TSIZE,1*TSIZE+2*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
 	}
 }
 

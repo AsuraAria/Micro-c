@@ -139,19 +139,22 @@ int main(void)
 	// Variable pour savoir si un tableau doit être affiché
 	bool mapLoad = true;
 	// Variables des coordonnées du tableau à afficher
-	unsigned int mapX=0, mapY=0;
+	char mapX=0, mapY=0;
 	
 	// Coordonnées du joueur et direction pour afficher le sprite
-	unsigned int pX=30, pY=30, dir=4, vit=1;
+	unsigned short pX=30, pY=30;
+	char dir=4, vit=1;
 	// Coordonnées de l'ancienne position du joueur
-	unsigned int pBX=pX, pBY=pY;
+	unsigned short pBX=pX, pBY=pY;
 	
-	unsigned int menu = 1;
+	char menu = 1;
 
+	char num;
+	
 	//uint16_t previousTouch = 0;
 	
 	uint8_t data[20];
-
+	uint8_t testdata[20];
 	//=============
 	// Init
 	//=============
@@ -165,7 +168,7 @@ int main(void)
 	
 	musintro();
 	
-	clean_memory();
+	//clean_memory();
 	
 	/*n=sprintf(chaine,"Ceci est un exemple      ");
 	LCD_write_english_string (32,30,chaine,White,Blue);
@@ -178,7 +181,9 @@ int main(void)
 		//i2c_eeprom_read(0,data,20);
 		//filldown_save(data, 0, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 	}
-	
+	fillup_save(data, 0, 0, 0, 0, 0, 0, 0); // Préparation de la sauvegarde "data"
+	create_save(0,data);
+	i2c_eeprom_read(0, testdata, 20);
 	//=============
 	// Boucle
 	//=============
@@ -210,8 +215,8 @@ int main(void)
 				menu = 1;
 				mapLoad = true;
 				
-				fillup_save(data, 0, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
-				create_save(0,data);
+				fillup_save(data, num, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
+				create_save(num,data);
 			}
 			
 			// Déplacement du personnage
@@ -315,7 +320,19 @@ int main(void)
 					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
 					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
-					if (touch_x>=1750 && touch_x<=2300 && touch_y>=700 && touch_y<=1700)
+					if (0)
+					{
+						mapLoad = true;
+						menu = -1;
+					}
+					
+					if (0)
+					{
+						mapLoad = true;
+						menu = -1;
+					}
+					
+					if (0)
 					{
 						mapLoad = true;
 						menu = -1;
