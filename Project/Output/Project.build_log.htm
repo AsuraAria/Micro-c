@@ -66,7 +66,7 @@ compiling main.c...
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
 ..\User\display.h(67): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
-  int readJoystick();
+  char readJoystick();
 ..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
   void init_i2c_eeprom();
 ..\User\memory.h(41): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
@@ -102,7 +102,7 @@ compiling display.c...
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
 ..\User\display.h(67): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
-  int readJoystick();
+  char readJoystick();
 ..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
   void init_i2c_eeprom();
 ..\User\memory.h(41): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
@@ -111,7 +111,7 @@ compiling display.c...
   void create_gamekey();
 ..\User\memory.h(59): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
-..\User\texture.h(1487): warning:  #1-D: last line of file ends without a newline
+..\User\texture.h(1489): warning:  #1-D: last line of file ends without a newline
   //
 ..\User\display.c(14): warning:  #177-D: variable "i"  was declared but never referenced
         int i;
@@ -126,16 +126,20 @@ compiling musicien.c...
   void TIMER0_IRQHandler();
 ..\User\musicien.h(46): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\partitions.h(24): warning:  #1-D: last line of file ends without a newline
-  tnote alarme[3]={{sol4,700},{si4,200},finp};*/
+..\User\partitions.h(17): warning:  #1-D: last line of file ends without a newline
+                                
+..\User\musicien.c(83): warning:  #68-D: integer conversion resulted in a change of sign
+        MatchValue = -1;//on commence sans jouer de musique
+..\User\musicien.c(107): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+        if(Matchrestant != -1){//on decremente le nombre de match avant le prochain front sonor
 ..\User\musicien.c(136): warning:  #1-D: last line of file ends without a newline
   }
-..\User\musicien.c: 5 warnings, 0 errors
+..\User\musicien.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=22060 RO-data=7428 RW-data=440 ZI-data=744  
+Program Size: Code=22012 RO-data=7428 RW-data=412 ZI-data=748  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 39 Warning(s).
-Build Time Elapsed:  00:00:11
+".\Output\Project.axf" - 0 Error(s), 41 Warning(s).
+Build Time Elapsed:  00:00:09
 </pre>
 </body>
 </html>

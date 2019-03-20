@@ -51,7 +51,7 @@ const char PSIZE = 15; // Tailles des sprites du joueur (en pixels)
 //========================================
 
 // Herbe 0 :
-const unsigned char grass[TSIZE][TSIZE] = {
+/*const unsigned char grass[TSIZE][TSIZE] = {
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -72,6 +72,7 @@ const unsigned char grass[TSIZE][TSIZE] = {
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0},
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+*/
 
 // Buisson 1 :
 const unsigned char bush[TSIZE][TSIZE] = {
@@ -122,7 +123,7 @@ const unsigned char stone[TSIZE][TSIZE] = {
 //========================================
 // Definitions des tableaux
 //========================================
-
+	
 // Tableau du menu
 const char tMenu[MSIZEX][MSIZEY] = {
 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
@@ -201,6 +202,8 @@ const char t01[MSIZEX][MSIZEY] = {
 //========================================
 // Definitions des sprites du joueur
 //========================================
+
+//A STOCKER SUR 4 BIT
 
 const unsigned char pUp[PSIZE][PSIZE] = {
 {250,250,250,250,250,250,250,250,250,250,250,250,250,250,250},
