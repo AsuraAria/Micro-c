@@ -81,11 +81,15 @@ compiling main.c...
   void TIMER0_IRQHandler();
 ..\User\musicien.h(46): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\main.c(195): warning:  #68-D: integer conversion resulted in a change of sign
+..\User\main.c(196): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
                 if (menu == -1)
-..\User\main.c(325): warning:  #68-D: integer conversion resulted in a change of sign
+..\User\main.c(326): warning:  #68-D: integer conversion resulted in a change of sign
                                                 menu = -1;
-..\User\main.c: 12 warnings, 0 errors
+..\User\main.c(332): warning:  #68-D: integer conversion resulted in a change of sign
+                                                menu = -1;
+..\User\main.c(338): warning:  #68-D: integer conversion resulted in a change of sign
+                                                menu = -1;
+..\User\main.c: 14 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -128,10 +132,10 @@ compiling musicien.c...
   }
 ..\User\musicien.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=22048 RO-data=7428 RW-data=440 ZI-data=744  
+Program Size: Code=22060 RO-data=7428 RW-data=440 ZI-data=744  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 37 Warning(s).
-Build Time Elapsed:  00:00:14
+".\Output\Project.axf" - 0 Error(s), 39 Warning(s).
+Build Time Elapsed:  00:00:11
 </pre>
 </body>
 </html>

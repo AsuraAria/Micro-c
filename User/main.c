@@ -60,7 +60,7 @@ void TIMER1_IRQHandler()
 
 void pin_Configuration()
 {
-		int i;
+		unsigned char i;
 	
 		PINSEL_CFG_Type memory27;
 		PINSEL_CFG_Type memory28;

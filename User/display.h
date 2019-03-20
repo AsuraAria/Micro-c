@@ -34,7 +34,7 @@
 
 void drawMenu(char);
 char unCompressLetter(char);
-void drawText(char*, unsigned short, unsigned short, unsigned short);
+void drawText(char*, char, unsigned short, unsigned short);
 
 //=======================
 // Affichage des maps
@@ -47,26 +47,26 @@ unsigned short getColor(unsigned char);
 void drawTexture(unsigned short, unsigned short, char);
 
 // Permet la gestion des maps (aux coordonnées x et y)						
-unsigned short getMap(unsigned short, unsigned short, char, char);
+unsigned short getMap(unsigned char, unsigned char, unsigned short, unsigned short);
 														
 // Dessine un des tableaux de la map (tableau aux coordonnées x et y)
-void drawMap(unsigned short, unsigned short, bool*);
+void drawMap(unsigned char, unsigned char, bool*);
 
 //=======================
 // Affichage du personnage
 //=======================
 
-void drawPlayer(unsigned short, unsigned short, unsigned short);
+void drawPlayer(unsigned short, unsigned short, unsigned char);
 
-void clearOldPlayer(unsigned short, unsigned short, unsigned int, unsigned short);
+void clearOldPlayer(unsigned short, unsigned short, unsigned char, unsigned char);
 
 //=======================
 // Déplacement personnage
 //=======================
 
-int readJoystick();
+char readJoystick();
 
-bool isColliding(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+bool isColliding(unsigned short, unsigned short, unsigned char, unsigned char, char);
 
 //========================================
 // Fin

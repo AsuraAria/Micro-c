@@ -9,7 +9,7 @@
 //=======================
 char text[30];
 
-void drawMenu(unsigned int m)
+void drawMenu(char m)
 {
 	int i;
 	unsigned short color = White;
@@ -46,19 +46,19 @@ void drawMenu(unsigned int m)
 			color = White;
 		else
 			color = Black;
-		dessiner_rect(6*TSIZE,1*TSIZE+0*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
+			dessiner_rect(6*TSIZE,1*TSIZE+0*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
 		
 		if (check_save(1))
 			color = White;
 		else
 			color = Black;
-		dessiner_rect(6*TSIZE,1*TSIZE+1*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
+			dessiner_rect(6*TSIZE,1*TSIZE+1*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
 		
 		if (check_save(2))
 			color = White;
 		else
 			color = Black;
-		dessiner_rect(6*TSIZE,1*TSIZE+2*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
+			dessiner_rect(6*TSIZE,1*TSIZE+2*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
 	}
 }
 
@@ -79,10 +79,10 @@ char unCompressLetter(char v)
 	}
 }
 
-void drawText(char*s, unsigned int l, unsigned int x, unsigned int y)
+void drawText(char*s, char l, unsigned short x, unsigned short y)
 {
-	int i,j,k;
-	int len = 0;
+	short i,j,k;
+	short len = 0;
 	char letterCode = 0;
 	
 	while (*s)
@@ -91,7 +91,7 @@ void drawText(char*s, unsigned int l, unsigned int x, unsigned int y)
 		s++;
 	}
 	s--;
-
+	
 	for (k=0;k<len;k++)
 	{
 		for(i=0; i<TSIZE/l; i++)
@@ -106,7 +106,7 @@ void drawText(char*s, unsigned int l, unsigned int x, unsigned int y)
 				
 				if (*s >= 97 && *s <=122)
 				{
-					letterCode = unCompressLetter((a[(*s)-97][j][(int)i/4]>>((i*2)%8))&3);
+					letterCode = unCompressLetter((a[(*s)-97][j][(short)i/4]>>((i*2)%8))&3);
 					if (letterCode != 250)
 					{
 						lcd_SetCursor(x+j,y+k*TSIZE/l+i);
@@ -118,7 +118,7 @@ void drawText(char*s, unsigned int l, unsigned int x, unsigned int y)
 				{
 					if (*s == 39)
 					{
-						letterCode = unCompressLetter((a[26][j][(int)i/4]>>((i*2)%8))&3);
+						letterCode = unCompressLetter((a[26][j][(short)i/4]>>((i*2)%8))&3);
 						if (letterCode != 250)
 						{
 							lcd_SetCursor(x+j,y+k*TSIZE/l+i);
@@ -128,7 +128,7 @@ void drawText(char*s, unsigned int l, unsigned int x, unsigned int y)
 					}
 					if (*s == 126)
 					{
-						letterCode = unCompressLetter((a[27][j][(int)i/4]>>((i*2)%8))&3);
+						letterCode = unCompressLetter((a[27][j][(short)i/4]>>((i*2)%8))&3);
 						if (letterCode != 250)
 						{
 							lcd_SetCursor(x+j,y+k*TSIZE/l+i);
@@ -200,9 +200,9 @@ unsigned short getColor(unsigned char c)
 	return color; 
 }
 
-void drawTexture(unsigned int x, unsigned int y, char tex)
+void drawTexture(unsigned short x, unsigned short y, char tex)
 {
-	int i,j;
+	unsigned  i,j;
 	
 	for(i=0; i<TSIZE; i++)
 	{
@@ -233,7 +233,7 @@ void drawTexture(unsigned int x, unsigned int y, char tex)
 	}
 }
 
-unsigned short getMap(unsigned int x, unsigned int y, int i, int j)
+unsigned short getMap(unsigned char x, unsigned char y, unsigned short i, unsigned short j)
 {
 	if (x==0 && y==0)
 		return t00[i][j];
@@ -247,9 +247,9 @@ unsigned short getMap(unsigned int x, unsigned int y, int i, int j)
 	return 0;
 }
 
-void drawMap(unsigned int x, unsigned int y, bool * notDone)
+void drawMap(unsigned char x, unsigned char y, bool * notDone)
 {
-	int i,j;
+	unsigned char i,j;
 	
 	for(i=0; i<MSIZEY; i++)
 	{
@@ -266,15 +266,7 @@ void drawMap(unsigned int x, unsigned int y, bool * notDone)
 // Affichage du personnage
 //=======================
 
-void clearOldPlayer(unsigned int x, unsigned int y, unsigned int mx, unsigned int my)
-{
-	drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y-1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y-1)/TSIZE)));
-	drawTexture(floor((x+PSIZE+1)/TSIZE)*TSIZE, floor((y-1)/TSIZE)*TSIZE, getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y-1)/TSIZE)));
-	drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y+PSIZE+1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y+PSIZE+1)/TSIZE)));
-	drawTexture(floor((x+PSIZE+1)/TSIZE)*TSIZE, floor((y+PSIZE+1)/TSIZE)*TSIZE, getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y+PSIZE+1)/TSIZE)));
-}
-
-void drawPlayer(unsigned int x, unsigned int y, unsigned int d)
+void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 {
 	int i,j;
 	
@@ -352,6 +344,16 @@ void drawPlayer(unsigned int x, unsigned int y, unsigned int d)
 	}
 }
 
+
+void clearOldPlayer(unsigned short x, unsigned short y, unsigned char mx, unsigned char my)
+{
+	drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y-1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y-1)/TSIZE)));
+	drawTexture(floor((x+PSIZE+1)/TSIZE)*TSIZE, floor((y-1)/TSIZE)*TSIZE, getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y-1)/TSIZE)));
+	drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y+PSIZE+1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y+PSIZE+1)/TSIZE)));
+	drawTexture(floor((x+PSIZE+1)/TSIZE)*TSIZE, floor((y+PSIZE+1)/TSIZE)*TSIZE, getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y+PSIZE+1)/TSIZE)));
+}
+
+
 //=======================
 // Affichage des ennemis
 //=======================
@@ -362,7 +364,7 @@ void drawPlayer(unsigned int x, unsigned int y, unsigned int d)
 // Déplacement personnage
 //=======================
 
-int readJoystick()
+char readJoystick()
 {
 	if (!(GPIO_ReadValue(2) & (1<<12)))
 	{
@@ -390,7 +392,7 @@ int readJoystick()
 	}
 }
 
-bool isColliding(unsigned int x, unsigned int y, unsigned int mx, unsigned int my, unsigned int d)
+bool isColliding(unsigned short x, unsigned short y, unsigned char mx, unsigned char my, char d)
 {
 	switch(d)
 	{
