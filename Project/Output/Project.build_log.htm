@@ -81,15 +81,9 @@ compiling main.c...
   void TIMER0_IRQHandler();
 ..\User\musicien.h(46): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\main.c(196): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
-                if (menu == -1)
-..\User\main.c(326): warning:  #68-D: integer conversion resulted in a change of sign
-                                                menu = -1;
-..\User\main.c(332): warning:  #68-D: integer conversion resulted in a change of sign
-                                                menu = -1;
-..\User\main.c(338): warning:  #68-D: integer conversion resulted in a change of sign
-                                                menu = -1;
-..\User\main.c: 14 warnings, 0 errors
+..\User\main.c(168): warning:  #177-D: variable "testdata"  was declared but never referenced
+        uint8_t testdata[20];
+..\User\main.c: 11 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -111,13 +105,11 @@ compiling display.c...
   void create_gamekey();
 ..\User\memory.h(59): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
-..\User\texture.h(1489): warning:  #1-D: last line of file ends without a newline
+..\User\texture.h(1560): warning:  #1-D: last line of file ends without a newline
   //
-..\User\display.c(14): warning:  #177-D: variable "i"  was declared but never referenced
-        int i;
-..\User\display.c(80): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
+..\User\display.c(81): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
   }
-..\User\display.c: 9 warnings, 0 errors
+..\User\display.c: 8 warnings, 0 errors
 compiling memory.c...
 compiling musicien.c...
 ..\User\musicien.h(40): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
@@ -126,20 +118,16 @@ compiling musicien.c...
   void TIMER0_IRQHandler();
 ..\User\musicien.h(46): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\partitions.h(17): warning:  #1-D: last line of file ends without a newline
-                                
-..\User\musicien.c(83): warning:  #68-D: integer conversion resulted in a change of sign
-        MatchValue = -1;//on commence sans jouer de musique
-..\User\musicien.c(107): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
-        if(Matchrestant != -1){//on decremente le nombre de match avant le prochain front sonor
+..\User\partitions.h(24): warning:  #1-D: last line of file ends without a newline
+  tnote alarme[3]={{sol4,700},{si4,200},finp};*/
 ..\User\musicien.c(136): warning:  #1-D: last line of file ends without a newline
   }
-..\User\musicien.c: 7 warnings, 0 errors
+..\User\musicien.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=22012 RO-data=7428 RW-data=412 ZI-data=748  
+Program Size: Code=22676 RO-data=6528 RW-data=412 ZI-data=748  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 41 Warning(s).
-Build Time Elapsed:  00:00:09
+".\Output\Project.axf" - 0 Error(s), 35 Warning(s).
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

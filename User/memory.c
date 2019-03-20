@@ -191,14 +191,14 @@ void fillup_save(uint8_t* Buffer, int num, int life, unsigned int Map_x, unsigne
 	Buffer[19]='x';
 }
 
-void filldown_save(uint8_t* Buffer, int *num, int *life, unsigned int *Map_x, unsigned int* Map_y, unsigned int *Location_x, unsigned int *Location_y,unsigned int *score)
+void filldown_save(uint8_t* Buffer, char num, char *life, char *Map_x, char* Map_y, unsigned short *Location_x, unsigned short *Location_y, char *score)
 {
 	//Buffer[12]=(uint8_t)num;
 	//Buffer[13]=(uint8_t)life;
-	*Map_x = (unsigned int)Buffer[14];
-	*Map_y = (unsigned int)Buffer[15];
-	*Location_x = (unsigned int)Buffer[16];
-	*Location_y = (unsigned int)Buffer[17];
+	*Map_x = (unsigned char)Buffer[14];
+	*Map_y = (unsigned char)Buffer[15];
+	*Location_x = (unsigned short)Buffer[16];
+	*Location_y = (unsigned short)Buffer[17];
 	//Buffer[18]=(uint8_t)score;
 	//Buffer[19]='x';
 }
@@ -211,8 +211,9 @@ void create_save(int num, uint8_t* Current_save)
 	i2c_eeprom_write(20*num, Current_save,20);
 }
 
-int check_save(int num)
+int check_save(char n)
 {
+	int num = n;
 	// create local key
 	uint8_t clefcheck[12];
 	// local key writting

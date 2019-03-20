@@ -54,6 +54,10 @@ void TIMER1_IRQHandler()
 	{
 		flagTouch = 1;
 	}
+	else
+	{
+		flagReset = 1;
+	}
 	TIM_ClearIntPending(LPC_TIM1, TIM_MR1_INT);//Acquitement
 }
 
@@ -125,13 +129,20 @@ void pin_Configuration()
 		}
 }
 
+void reset(char*mX, char*mY, unsigned short*x, unsigned short *y)
+{
+	*mX = 0;
+	*mY = 0;
+	*x = 30;
+	*y = 30;
+}
+
 //===========================================================//
 // Function: Main
 //===========================================================//
 
 int main(void)
 {
-	
 	//=============
 	// Definition
 	//=============
@@ -143,13 +154,13 @@ int main(void)
 	
 	// Coordonnées du joueur et direction pour afficher le sprite
 	unsigned short pX=30, pY=30;
-	char dir=4, vit=1;
+	signed char dir=4, vit=1;
 	// Coordonnées de l'ancienne position du joueur
 	unsigned short pBX=pX, pBY=pY;
 	
-	char menu = 1;
-
-	char num;
+	signed char menu = 1;
+	
+	char numSave = 0;
 	
 	//uint16_t previousTouch = 0;
 	
@@ -174,16 +185,16 @@ int main(void)
 	LCD_write_english_string (32,30,chaine,White,Blue);
 	dessiner_rect(0,0,240,320,0,1,Black,Black);*/
 	
-	if (!check_memory()) // (Si la sauvegarde 0 existe : 
+	if (!check_memory() || !(GPIO_ReadValue(2) & (1<<11))) // (Si la sauvegarde 0 existe : 
 	{
 		clean_memory();
 		create_gamekey();
 		//i2c_eeprom_read(0,data,20);
 		//filldown_save(data, 0, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 	}
-	fillup_save(data, 0, 0, 0, 0, 0, 0, 0); // Préparation de la sauvegarde "data"
-	create_save(0,data);
-	i2c_eeprom_read(0, testdata, 20);
+	//fillup_save(data, 0, 0, 0, 0, 0, 0, 0); // Préparation de la sauvegarde "data"
+	//create_save(0,data);
+	//i2c_eeprom_read(0, testdata, 20);
 	//=============
 	// Boucle
 	//=============
@@ -192,7 +203,6 @@ int main(void)
 	
 	while(1)
 	{
-		
 		if (menu == -1)
 		{
 			// Si il y a un changement de tableau, on affiche ce tableau (x,y) sur l'écran
@@ -215,8 +225,8 @@ int main(void)
 				menu = 1;
 				mapLoad = true;
 				
-				fillup_save(data, num, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
-				create_save(num,data);
+				fillup_save(data, numSave, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
+				create_save(numSave,data);
 			}
 			
 			// Déplacement du personnage
@@ -294,16 +304,18 @@ int main(void)
 				// x : 1950 - 2300
 				// y : 800 - 1670
 				
-				if (flagTouch)
+				if (flagTouch && flagReset == 1)
 				{
 					flagTouch = 0;
 					sprintf(chaine,"%d - %d ",touch_x , touch_y);
 					LCD_write_english_string(30,30,chaine,White,Blue);
 					
-					if (touch_x>=1750 && touch_x<=2300 && touch_y>=700 && touch_y<=1700)
+					if (touch_x>=1650 && touch_x<=2500
+							&& touch_y>=700 && touch_y<=1700)
 					{
 						mapLoad = true;
 						menu = 2;
+						flagReset = 0;
 					}
 				}
 			}
@@ -314,28 +326,66 @@ int main(void)
 					drawMap(250, 0, &mapLoad);
 					drawMenu(menu);
 				}
-				if (flagTouch)
+				
+				if (flagTouch && flagReset == 1)
 				{
 					flagTouch = 0;
-					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
-					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
-					if (0)
+					sprintf(chaine,"%d - %d ",touch_x , touch_y);
+					LCD_write_english_string(30,30,chaine,White,Blue);
+					
+					// Save 3
+					if (touch_x >= 1900 && touch_x <= 3200
+							&& touch_y >= 2650 && touch_y <= 3500)
 					{
 						mapLoad = true;
 						menu = -1;
+						numSave = 2;
+						if (check_save(2))
+						{
+							i2c_eeprom_read(numSave,data,20);
+							filldown_save(data, numSave, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+						}
+						else
+						{
+							reset(&mapX, &mapY, &pX, &pY);
+						}
 					}
 					
-					if (0)
+					// Save 1
+					if (touch_x >= 1900 && touch_x <= 3200
+							&& touch_y >= 1650 && touch_y <= 2650)
 					{
 						mapLoad = true;
 						menu = -1;
+						numSave = 1;
+						if (check_save(1))
+						{
+							i2c_eeprom_read(numSave, data,20);
+							filldown_save(data, numSave, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+						}
+						else
+						{
+							reset(&mapX, &mapY, &pX, &pY);
+						}
 					}
 					
-					if (0)
+					// Save 0
+					if (touch_x >= 1900 && touch_x <= 3200
+							&& touch_y >= 650 && touch_y <= 1650)
 					{
 						mapLoad = true;
 						menu = -1;
+						numSave = 0;
+						if (check_save(0))
+						{
+							i2c_eeprom_read(numSave,data,20);
+							filldown_save(data, numSave, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+						}
+						else
+						{
+							reset(&mapX, &mapY, &pX, &pY);
+						}
 					}
 				}
 			}

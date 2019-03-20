@@ -1,6 +1,6 @@
 #include "display.h"
 #include "memory.h"
-
+ 
 // Defined in .c to avoid defining variables multiple times
 #include "texture.h"
 
@@ -11,7 +11,6 @@ char text[30];
 
 void drawMenu(char m)
 {
-	int i;
 	unsigned short color = White;
 	
 	if (m == 1)
@@ -42,23 +41,25 @@ void drawMenu(char m)
 		sprintf(text,"save");
 		drawText(text, 1, TSIZE*2, (unsigned int)(320-4*TSIZE/1)/2);
 		
+		
 		if (check_save(0))
 			color = White;
 		else
 			color = Black;
-			dessiner_rect(6*TSIZE,1*TSIZE+0*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
+		dessiner_rect(6*TSIZE,(16-3-2)*TSIZE, 3*TSIZE, 3*TSIZE, 0, 1, color, color);
 		
 		if (check_save(1))
 			color = White;
 		else
 			color = Black;
-			dessiner_rect(6*TSIZE,1*TSIZE+1*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
+		dessiner_rect(6*TSIZE,(16-3*2-2-1.5)*TSIZE, 3*TSIZE, 3*TSIZE, 0, 1, color, color);
 		
 		if (check_save(2))
 			color = White;
 		else
 			color = Black;
-			dessiner_rect(6*TSIZE,1*TSIZE+2*TSIZE*4+2*TSIZE, 2*TSIZE, 2*TSIZE, 0, 1, color, color);
+		dessiner_rect(6*TSIZE,(16-3*3-2-3)*TSIZE, 3*TSIZE, 3*TSIZE, 0, 1, color, color);
+		
 	}
 }
 
@@ -202,7 +203,8 @@ unsigned short getColor(unsigned char c)
 
 void drawTexture(unsigned short x, unsigned short y, char tex)
 {
-	unsigned  i,j;
+	unsigned char i,j;
+	unsigned char c;
 	
 	for(i=0; i<TSIZE; i++)
 	{
@@ -214,13 +216,17 @@ void drawTexture(unsigned short x, unsigned short y, char tex)
 			switch(tex)
 			{
 				case 0:
-					write_data(getColor(grass[j][i]));
+					write_data(getColor((grass[j][(short)i/4]>>((i*2)%8))&3));
+					//write_data(getColor(grass[j][i]));
 					break;
 				case 1:
-					write_data(getColor(bush[j][i]));
+					write_data(getColor((bush[j][(short)i/4]>>((i*2)%8))&3));
+					//write_data(getColor(bush[j][i]));
 					break;
 				case 2:
-					write_data(getColor(stone[j][i]));
+					c = (stone[j][(short)i/4]>>((i*2)%8))&3;
+					write_data(getColor(c!=0?c+3:c));
+					//write_data(getColor(stone[j][i]));
 					break;
 				case 7:
 					write_data(getColor(7));

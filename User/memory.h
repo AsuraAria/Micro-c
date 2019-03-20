@@ -74,7 +74,9 @@ void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, u
  * Note:
  * - None
  **********************************************************************/ 
-void filldown_save(uint8_t* Buffer, int *num, int *, unsigned int *, unsigned int* Map_y, unsigned int *Location_x, unsigned int *Location_y,unsigned int *score);
+
+void filldown_save(uint8_t* Buffer, char num, char *, char*, char* Map_y, unsigned short *Location_x, unsigned short
+	*Location_y,char *score);
 
 void create_save(int, uint8_t*);
 /*********************************************************************//**
@@ -86,10 +88,10 @@ void create_save(int, uint8_t*);
  * Note:
  * - None
  **********************************************************************/ 
-int check_save(int);
+int check_save(char);
 /*********************************************************************//**
  * @brief			Check key
- * @param[in]	int, save number
+ * @param[in]	char, save number
  * @return		int; 0 for succes, 1 for error
  *
  * Note:

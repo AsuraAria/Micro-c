@@ -4,12 +4,12 @@
 #include "lpc17xx.h"
 #include "partitions.h"
 
-unsigned short nbperi;//nb periodes de note
-unsigned short frontmusique;//pointe vers la note qui doit etre joué
+short nbperi;//nb periodes de note
+short frontmusique;//pointe vers la note qui doit etre joué
 LPC_TIM_TypeDef val_reg_timer;//variable globale
 
-unsigned short MatchValue;//nombres de fronts de timer a attendre pour un front sonore
-unsigned short Matchrestant;//nombres de fronts de timer restant a atendre pour un front sonore
+short MatchValue;//nombres de fronts de timer a attendre pour un front sonore
+short Matchrestant;//nombres de fronts de timer restant a atendre pour un front sonore
 
 char silencieux = 1;//indique si le timer est silencieux
 
