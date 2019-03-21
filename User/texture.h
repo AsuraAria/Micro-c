@@ -330,6 +330,19 @@ const unsigned char pLeft[PSIZE][PSIZE] = {
 {250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250}};
 
 //========================================
+// Definitions des enemies
+//========================================
+
+const unsigned char en[PSIZE][PSIZE];
+
+//========================================
+// Definitions des enemies
+//========================================
+
+const unsigned char mouton[TSIZE][TSIZE];
+const unsigned char demouton[TSIZE][TSIZE];
+
+//========================================
 // Definitions des lettres
 //========================================
 
