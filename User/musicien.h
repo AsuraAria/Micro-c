@@ -1,9 +1,9 @@
  //une note est une frequence pendant un certain temps
 typedef struct
-   {
-     char frequence;//en hertz
-     char longueur;//en ms
-	} tnote;
+{
+	char frequence;//en hertz
+	char longueur;//en ms
+} tnote;
 
 //une partition est un tableaux de notes se terminant par une note de longueur 0
 typedef tnote * tpartition;
