@@ -75,7 +75,7 @@ void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, u
  * - None
  **********************************************************************/ 
 
-void filldown_save(uint8_t* Buffer, char num, char *, char*, char* Map_y, unsigned short *Location_x, unsigned short
+void filldown_save(uint8_t* Buffer, char num, char *,unsigned char*,unsigned char* Map_y, unsigned short *Location_x, unsigned short
 	*Location_y,char *score);
 
 void create_save(int, uint8_t*);

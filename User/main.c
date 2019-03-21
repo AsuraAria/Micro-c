@@ -129,7 +129,7 @@ void pin_Configuration()
 		}
 }
 
-void reset(char*mX, char*mY, unsigned short*x, unsigned short *y)
+void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short *y)
 {
 	*mX = 0;
 	*mY = 0;
@@ -150,7 +150,7 @@ int main(void)
 	// Variable pour savoir si un tableau doit être affiché
 	bool mapLoad = true;
 	// Variables des coordonnées du tableau à afficher
-	char mapX=0, mapY=0;
+	unsigned char mapX=0, mapY=0;
 	
 	// Coordonnées du joueur et direction pour afficher le sprite
 	unsigned short pX=30, pY=30;
@@ -343,7 +343,7 @@ int main(void)
 						numSave = 2;
 						if (check_save(2))
 						{
-							i2c_eeprom_read(numSave,data,20);
+							i2c_eeprom_read(numSave*20,data,20);
 							filldown_save(data, numSave, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 						}
 						else
@@ -361,7 +361,7 @@ int main(void)
 						numSave = 1;
 						if (check_save(1))
 						{
-							i2c_eeprom_read(numSave, data,20);
+							i2c_eeprom_read(numSave*20, data,20);
 							filldown_save(data, numSave, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 						}
 						else
@@ -379,7 +379,7 @@ int main(void)
 						numSave = 0;
 						if (check_save(0))
 						{
-							i2c_eeprom_read(numSave,data,20);
+							i2c_eeprom_read(numSave*20,data,20);
 							filldown_save(data, numSave, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 						}
 						else
