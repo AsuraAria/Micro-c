@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Output\Project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Output\Project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Mar 21 09:20:57 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Mar 21 10:15:46 2019
 <BR><P>
 <H3>Maximum Stack Usage =        224 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1226,7 +1226,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMenu
 </UL>
 
-<P><STRONG><a name="[b3]"></a>drawPlayer</STRONG> (Thumb, 410 bytes, Stack size 32 bytes, display.o(.text))
+<P><STRONG><a name="[b3]"></a>drawPlayer</STRONG> (Thumb, 416 bytes, Stack size 32 bytes, display.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = drawPlayer &rArr; lcd_SetCursor &rArr; write_reg &rArr; write_cmd &rArr; wait_delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getColor
@@ -1251,7 +1251,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[d4]"></a>drawTexture</STRONG> (Thumb, 376 bytes, Stack size 40 bytes, display.o(.text))
+<P><STRONG><a name="[d4]"></a>drawTexture</STRONG> (Thumb, 370 bytes, Stack size 40 bytes, display.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = drawTexture &rArr; lcd_SetCursor &rArr; write_reg &rArr; write_cmd &rArr; wait_delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getColor
@@ -1263,8 +1263,8 @@ Global Symbols
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearOldPlayer
 </UL>
 
-<P><STRONG><a name="[d5]"></a>getMap</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, display.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = getMap
+<P><STRONG><a name="[d5]"></a>getMap</STRONG> (Thumb, 230 bytes, Stack size 36 bytes, display.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = getMap
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isColliding
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMap

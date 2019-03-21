@@ -239,16 +239,20 @@ void drawTexture(unsigned short x, unsigned short y, char tex)
 	}
 }
 
-unsigned short getMap(unsigned char x, unsigned char y, unsigned short i, unsigned short j)
+unsigned short getMap(unsigned char x, unsigned char y, unsigned short j, unsigned short i)
 {
 	if (x==0 && y==0)
-		return t00[i][j];
+		return (t00[j][(short)i/4]>>((i*2)%8))&3;
+		//return t00[j][i];
 	else if (x==1 && y==0)
-		return t10[i][j];
+		return (t10[j][(short)i/4]>>((i*2)%8))&3;
+		//return t10[j][i];
 	else if (x==0 && y==1)
-		return t01[i][j];
+		return (t01[j][(short)i/4]>>((i*2)%8))&3;
+		//return t01[j][i];
 	else if (x==250)
-		return tMenu[i][j];
+		return (tMenu[j][(short)i/4]>>((i*2)%8))&3;
+		//return tMenu[j][i];
 	
 	return 0;
 }
@@ -296,11 +300,11 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 						}
 						break;
 					case 0:
-						if (pLeft[j][i] != 250)
+						if (pRight[j][PSIZE-i] != 250)
 						{
 							lcd_SetCursor(x+j,y+i);
 							rw_data_prepare();
-							write_data(getColor(pLeft[j][i]));
+							write_data(getColor(pRight[j][PSIZE-i]));
 						}
 						break;
 					case 3:
