@@ -65,7 +65,7 @@ int check_memory();
  * Note:
  * - None.
  **********************************************************************/ 
-void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+void fillup_save(uint8_t*, char, char, unsigned char, unsigned char, unsigned short, unsigned short,char)
 /*********************************************************************//**
  * @brief			fill structure with wanted parameter
  * @param[in]	uint8_t*, buffer pointer
@@ -78,7 +78,7 @@ void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, u
 void filldown_save(uint8_t* Buffer, char num, char *,unsigned char*,unsigned char* Map_y, unsigned short *Location_x, unsigned short
 	*Location_y,char *score);
 
-void create_save(int, uint8_t*);
+void create_save(char, uint8_t*);
 /*********************************************************************//**
  * @brief			Replace existing save by backup save
  * @param[in]	int, save number
@@ -97,7 +97,7 @@ int check_save(char);
  * Note:
  * - None.
  **********************************************************************/ 
-int load_save(int);
+int load_save(char);
 /*********************************************************************//**
  * @brief			Load a save if uncorrupted
  * @param[in]	int, save number
@@ -106,7 +106,7 @@ int load_save(int);
  * Note:
  * - If an error is seen no loading will be done.
  **********************************************************************/
-void restaure_backup(int);
+void restaure_backup(char);
 /*********************************************************************//**
  * @brief			Replace existing save by backup save
  * @param[in]	int, save number
