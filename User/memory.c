@@ -206,7 +206,7 @@ void filldown_save(uint8_t* Buffer, char num, char *life,unsigned char *Map_x,un
 void create_save(int num, uint8_t* Current_save)
 {
   // creation of a backup in memory
-	i2c_eeprom_write(20*(num+3), Current_save,20);
+	//i2c_eeprom_write(20*(num+3), Current_save,20);
   // creation of a save in memory
 	i2c_eeprom_write(20*num, Current_save,20);
 }

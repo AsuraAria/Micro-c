@@ -75,15 +75,27 @@ compiling main.c...
   void create_gamekey();
 ..\User\memory.h(59): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
-..\User\musicien.h(40): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
+..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
   void T0_Init();
-..\User\musicien.h(42): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
+..\User\musicien.h(41): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
   void TIMER0_IRQHandler();
-..\User\musicien.h(46): warning:  #1295-D: Deprecated declaration musintro - give arg types
+..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\main.c(168): warning:  #177-D: variable "testdata"  was declared but never referenced
+..\User\main.c(149): warning:  #177-D: variable "i"  was declared but never referenced
+        char i;
+..\User\main.c(168): warning:  #177-D: variable "numEn"  was declared but never referenced
+        char numEn = 3;
+..\User\main.c(169): warning:  #177-D: variable "eX"  was declared but never referenced
+        unsigned short eX[3] = {50, 100, 100};
+..\User\main.c(170): warning:  #177-D: variable "eY"  was declared but never referenced
+        unsigned short eY[3] = {100, 200, 50};
+..\User\main.c(171): warning:  #177-D: variable "peX"  was declared but never referenced
+        unsigned short peX[3] = {50, 100, 100};
+..\User\main.c(172): warning:  #177-D: variable "peY"  was declared but never referenced
+        unsigned short peY[3] = {100, 200, 50};
+..\User\main.c(177): warning:  #177-D: variable "testdata"  was declared but never referenced
         uint8_t testdata[20];
-..\User\main.c: 11 warnings, 0 errors
+..\User\main.c: 17 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -105,18 +117,18 @@ compiling display.c...
   void create_gamekey();
 ..\User\memory.h(59): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
-..\User\texture.h(1624): warning:  #1-D: last line of file ends without a newline
+..\User\texture.h(1641): warning:  #1-D: last line of file ends without a newline
   //
-..\User\display.c(81): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
+..\User\display.c(108): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
   }
 ..\User\display.c: 8 warnings, 0 errors
 compiling memory.c...
 compiling musicien.c...
-..\User\musicien.h(40): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
+..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
   void T0_Init();
-..\User\musicien.h(42): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
+..\User\musicien.h(41): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
   void TIMER0_IRQHandler();
-..\User\musicien.h(46): warning:  #1295-D: Deprecated declaration musintro - give arg types
+..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
 ..\User\partitions.h(24): warning:  #1-D: last line of file ends without a newline
   tnote alarme[3]={{sol4,700},{si4,200},finp};*/
@@ -124,9 +136,9 @@ compiling musicien.c...
   }
 ..\User\musicien.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=22844 RO-data=6560 RW-data=412 ZI-data=748  
+Program Size: Code=23252 RO-data=6592 RW-data=416 ZI-data=704  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 35 Warning(s).
+".\Output\Project.axf" - 0 Error(s), 41 Warning(s).
 Build Time Elapsed:  00:00:08
 </pre>
 </body>

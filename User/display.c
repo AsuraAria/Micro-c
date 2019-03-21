@@ -7,7 +7,8 @@
 //=======================
 // Affichage des menus
 //=======================
-char text[30];
+char text[20];
+char text1[5];
 
 void drawMenu(char m)
 {
@@ -16,49 +17,75 @@ void drawMenu(char m)
 	if (m == 1)
 	{
 		/*sprintf(text,"klmnopqrstuvw");
-		drawText(text, 1, TSIZE*2, (unsigned int)(320-12*TSIZE/1)/2);
+		drawText(text, 1, TSIZE*2, (unsigned short)(320-12*TSIZE/1)/2);
 		sprintf(text,"abcdefghij");
-		drawText(text, 1, TSIZE*4, (unsigned int)(320-9*TSIZE/1)/2);*/
+		drawText(text, 1, TSIZE*4, (unsigned short)(320-9*TSIZE/1)/2);*/
 		
 		
 		sprintf(text,"fluffiten's");
-		drawText(text, 1, TSIZE*1, (unsigned int)(320-11*TSIZE/1)/2);
+		drawText(text, 1, TSIZE*1, (unsigned short)(320-11*TSIZE/1)/2);
 		sprintf(text,"adventure");
-		drawText(text, 1, TSIZE*2, (unsigned int)(320-9*TSIZE/1)/2);
+		drawText(text, 1, TSIZE*2, (unsigned short)(320-9*TSIZE/1)/2);
 		
 		
 		sprintf(text,"play");
-		drawText(text, 1, TSIZE*5.5, (unsigned int) 320-TSIZE*2-TSIZE*4);
+		drawText(text, 1, TSIZE*5.5, (unsigned short) 320-TSIZE*2-TSIZE*4);
 		sprintf(text,"extra");
-		drawText(text, 1, TSIZE*8.5, (unsigned int) 320-TSIZE*2-TSIZE*5);
+		drawText(text, 1, TSIZE*8.5, (unsigned short) 320-TSIZE*2-TSIZE*5);
 		
-		drawPlayer((unsigned int) TSIZE*5, TSIZE*2, 10);
+		drawPlayer((unsigned short) TSIZE*5, TSIZE*2, 10);
 	}
 	else if (m == 2)
 	{
 		sprintf(text,"choose your");
-		drawText(text, 1, TSIZE*1, (unsigned int)(320-11*TSIZE/1)/2);
+		drawText(text, 1, TSIZE*1, (unsigned short)(320-11*TSIZE/1)/2);
 		sprintf(text,"save");
-		drawText(text, 1, TSIZE*2, (unsigned int)(320-4*TSIZE/1)/2);
-		
+		drawText(text, 1, TSIZE*2, (unsigned short)(320-4*TSIZE/1)/2);
 		
 		if (check_save(0))
-			color = White;
+		{
+			color = getColor(9);
+			sprintf(text1,"load");
+		}
 		else
-			color = Black;
-		dessiner_rect(6*TSIZE,(16-3-2)*TSIZE, 3*TSIZE, 3*TSIZE, 0, 1, color, color);
+		{
+			color = getColor(4);
+			sprintf(text1,"new");
+		}
+		dessiner_rect(5.5*TSIZE,(16-3-2.5)*TSIZE, 4*TSIZE, 4*TSIZE, 0, 1, color, color);
+		sprintf(text,"a");
+		drawText(text, 1, 7*TSIZE,(12)*TSIZE);
+		drawText(text1, 1, 8.5*TSIZE,(text1[0]=='l'?10.5:11)*TSIZE);
 		
 		if (check_save(1))
-			color = White;
+		{
+			color = getColor(9);
+			sprintf(text1,"load");
+		}
 		else
-			color = Black;
-		dessiner_rect(6*TSIZE,(16-3*2-2-1.5)*TSIZE, 3*TSIZE, 3*TSIZE, 0, 1, color, color);
+		{
+			color = getColor(4);
+			sprintf(text1,"new");
+		}
+		dessiner_rect(5.5*TSIZE,(16-3*2-2-2)*TSIZE, 4*TSIZE, 4*TSIZE, 0, 1, color, color);
+		sprintf(text,"b");
+		drawText(text, 1, 7*TSIZE,(7.5)*TSIZE);
+		drawText(text1, 1, 8.5*TSIZE,(text1[0]=='l'?6:6.5)*TSIZE);
 		
 		if (check_save(2))
-			color = White;
+		{
+			color = getColor(9);
+			sprintf(text1,"load");
+		}
 		else
-			color = Black;
-		dessiner_rect(6*TSIZE,(16-3*3-2-3)*TSIZE, 3*TSIZE, 3*TSIZE, 0, 1, color, color);
+		{
+			color = getColor(4);
+			sprintf(text1,"new");
+		}
+		dessiner_rect(5.5*TSIZE,(16-3*3-2-3.5)*TSIZE, 4*TSIZE, 4*TSIZE, 0, 1, color, color);
+		sprintf(text,"c");
+		drawText(text, 1, 7*TSIZE,(3)*TSIZE);
+		drawText(text1, 1, 8.5*TSIZE,(text1[0]=='l'?1.5:2)*TSIZE);
 		
 	}
 }
@@ -107,7 +134,7 @@ void drawText(char*s, char l, unsigned short x, unsigned short y)
 				
 				if (*s >= 97 && *s <=122)
 				{
-					letterCode = unCompressLetter((a[(*s)-97][j][(short)i/4]>>((i*2)%8))&3);
+					letterCode = unCompressLetter((a[(*s)-97][j*l][(short)(i*l)/4]>>(((i*l)*2)%8))&3);
 					if (letterCode != 250)
 					{
 						lcd_SetCursor(x+j,y+k*TSIZE/l+i);
@@ -194,7 +221,7 @@ unsigned short getColor(unsigned char c)
 			color = 0x9492;
 			break;
 		case 13:
-			color = 0x4a69;
+			color = 0x8800;
 			break;
 	}
 	
@@ -300,11 +327,11 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 						}
 						break;
 					case 0:
-						if (pRight[j][PSIZE-i] != 250)
+						if (pRight[j][PSIZE-i-1] != 250)
 						{
 							lcd_SetCursor(x+j,y+i);
 							rw_data_prepare();
-							write_data(getColor(pRight[j][PSIZE-i]));
+							write_data(getColor(pRight[j][PSIZE-i-1]));
 						}
 						break;
 					case 3:
@@ -348,6 +375,21 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 					lcd_SetCursor(x+j,y+i);
 					rw_data_prepare();
 					write_data(getColor(pDown[(int)(j/6)][(int)(i/6)]));
+				}
+			}
+		}
+	}
+	else if (d == 20)
+	{
+		for(i=0; i<PSIZE; i++)
+		{
+			for(j=0; j<PSIZE; j++)
+			{
+				if (en[j][i] != 250)
+				{
+					lcd_SetCursor(x+j,y+i);
+					rw_data_prepare();
+					write_data(getColor(en[j][i]));
 				}
 			}
 		}

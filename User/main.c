@@ -146,6 +146,7 @@ int main(void)
 	//=============
 	// Definition
 	//=============
+	char i;
 	
 	// Variable pour savoir si un tableau doit être affiché
 	bool mapLoad = true;
@@ -161,6 +162,14 @@ int main(void)
 	signed char menu = 1;
 	
 	char numSave = 0;
+	
+	//Ennemies
+	
+	char numEn = 3;
+	unsigned short eX[3] = {50, 100, 100};
+	unsigned short eY[3] = {100, 200, 50};
+	unsigned short peX[3] = {50, 100, 100};
+	unsigned short peY[3] = {100, 200, 50};
 	
 	//uint16_t previousTouch = 0;
 	
@@ -214,6 +223,25 @@ int main(void)
 			{
 				clearOldPlayer(pBX, pBY, mapX, mapY);
 			}
+			
+			/*if (mapX<250 && (mapX > 0 || mapY > 0))
+			{
+				vit = numEn;
+				for (i=0; i<3; i++)
+				{
+					eX[i] = eX[i]+1;
+					if (eX[2] >= 150)
+					{
+						eX[i]-=100;
+					}
+					//if (peX[i]!=eX[i] || peY[i]!= eY[i])
+					//{
+					clearOldPlayer(peX[i], peY[i], mapX, mapY);
+					//}
+					peX[i] = eX[i], peY[i] = eY[i];
+				}
+			}*/
+			
 			// Raffraichir la zone d'effaçage
 			pBX=pX, pBY=pY;
 			
@@ -283,8 +311,18 @@ int main(void)
 			// Affiche le joueur sur l'écran
 			drawPlayer(pX, pY, dir);//dir
 			
-			//pseudoSleep(100);
-	
+			/*if (mapX<250 && (mapX > 0 || mapY > 0))
+			{
+				for (i=0; i<3; i++)
+				{
+					drawPlayer(eX[i], eY[i], 20);
+				}
+			}
+			else
+			{
+				vit = 1;
+			}*/
+			
 			//sprintf(chaine,"%d - %d | %d - %d",pX, pY, mapX, mapY);
 			//LCD_write_english_string (30,30,chaine,White,Blue);
 		}
@@ -307,8 +345,8 @@ int main(void)
 				if (flagTouch && flagReset == 1)
 				{
 					flagTouch = 0;
-					sprintf(chaine,"%d - %d ",touch_x , touch_y);
-					LCD_write_english_string(30,30,chaine,White,Blue);
+					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
+					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
 					if (touch_x>=1650 && touch_x<=2500
 							&& touch_y>=700 && touch_y<=1700)
@@ -331,8 +369,8 @@ int main(void)
 				{
 					flagTouch = 0;
 					
-					sprintf(chaine,"%d - %d ",touch_x , touch_y);
-					LCD_write_english_string(30,30,chaine,White,Blue);
+					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
+					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
 					// Save 3
 					if (touch_x >= 1900 && touch_x <= 3200

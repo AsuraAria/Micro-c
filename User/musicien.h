@@ -29,7 +29,6 @@ typedef tnote * tpartition;
 
 #define la2 220/2
 
-
 #define usil {0,3} //petit silence de coupure
 
 //joue une note
