@@ -186,11 +186,18 @@ void fillup_save(uint8_t* Buffer, int num, int life, unsigned int Map_x, unsigne
   //writting of Location x in local
 	Buffer[16]=(uint8_t)Location_x;
   //writting of Location y in local
-	Buffer[17]=(uint8_t)Location_y;
-  //writting of score in local
-	Buffer[18]=(uint8_t)score;
-  //writting in local of random chosen letter because 20 bytes is better than 19 for maths
-	Buffer[19]='x';
+	if (Location_y > 255)
+	{
+		Buffer[17]=(uint8_t)255;
+		Buffer[18]=(uint8_t)(Location_y-255);
+	}
+	else
+	{
+		Buffer[17]=(uint8_t)Location_y;
+		Buffer[18]=(uint8_t)0;
+	}
+	//writting of score in local
+	Buffer[19]=(uint8_t)score;
 }
 
 void filldown_save(uint8_t* Buffer, char num, char *life,unsigned char *Map_x,unsigned char* Map_y, unsigned short *Location_x, unsigned short *Location_y, char *score)
@@ -200,9 +207,8 @@ void filldown_save(uint8_t* Buffer, char num, char *life,unsigned char *Map_x,un
 	*Map_x = (unsigned char)Buffer[14];
 	*Map_y = (unsigned char)Buffer[15];
 	*Location_x = (unsigned short)Buffer[16];
-	*Location_y = (unsigned short)Buffer[17];
-	//Buffer[18]=(uint8_t)score;
-	//Buffer[19]='x';
+	*Location_y = (unsigned short)(Buffer[17]+Buffer[18]);
+	//Buffer[19]=(uint8_t)score;
 }
 
 void create_save(int num, uint8_t* Current_save)
