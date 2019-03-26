@@ -1,7 +1,15 @@
-
 //================================================================================================
 // Fichier contenants les textures, les tableaux
 //================================================================================================
+
+// THE OLD MATRIX VERSION IS UNDER COMMENTS MODE
+// THE USED VERSION IS SO TRULY HARD CODED
+
+// Ecran 320*240
+
+// Tactile
+// x : 180-3850
+// y : 380-3850
 
 //========================================
 // Definition des constantes
@@ -122,7 +130,7 @@ const unsigned char bush[TSIZE][TSIZE] = {
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 */
 
-const char bush[TSIZE][5] = {
+const unsigned char bush[TSIZE][5] = {
 {0, 0, 0, 0, 0},
 {192, 3, 63, 0, 0},
 {176, 254, 234, 63, 0},
@@ -191,6 +199,7 @@ const unsigned char stone[TSIZE][5] = {
 {0, 0, 0, 0, 0},
 {0, 0, 0, 0, 0}};
 
+//
 //========================================
 // Definitions des tableaux
 //========================================
@@ -319,6 +328,7 @@ const char t01[MSIZEX][4] = {
 {22, 0, 96, 149},
 {170, 170, 170, 170}};
 
+//
 //========================================
 // Definitions des sprites du joueur
 //========================================
@@ -395,6 +405,7 @@ const unsigned char pLeft[PSIZE][PSIZE] = {
 {250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250}};
 */
 
+//
 //========================================
 // Definitions des enemies
 //========================================
@@ -417,6 +428,7 @@ const unsigned char en[PSIZE][PSIZE] = {
 {250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250}
 };
 
+//
 //========================================
 // Definitions des enemies
 //========================================
@@ -424,18 +436,10 @@ const unsigned char en[PSIZE][PSIZE] = {
 const unsigned char mouton[TSIZE][TSIZE];
 const unsigned char demouton[TSIZE][TSIZE];
 
+//
 //========================================
 // Definitions des lettres
 //========================================
-
-/*
-20 * 8 = 160
-char 8
-int 32 * 2 => 160 - 64 = 96 free + (sur une ligne)
-
-
-
-*/
 
 const char a[28][TSIZE][5] ={
 {{255, 255, 255, 255, 255},
@@ -1027,12 +1031,6 @@ const char a[28][TSIZE][5] ={
 {255, 255, 255, 255, 255}}
 };
 
-/*
-3 = T
-2 = G
-1 = N
-0 = B
-*/
 
 /*
 const char a[11][TSIZE][TSIZE] = {
@@ -1627,15 +1625,4 @@ const char a[11][TSIZE][TSIZE] = {
 }};
 
 */
-//
-
-
-
-
-
-
-
-
-
-
 //

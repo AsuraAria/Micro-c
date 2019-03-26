@@ -35,7 +35,7 @@ void setup()
   
   for(int i=0; i<4; i++)
   {
-    player[i] = loadImage("tank"+i+".png");
+    player[i] = loadImage("fluffitten"+i+".png");
   }
   
   for(int i=0; i<16; i++)
@@ -109,14 +109,14 @@ void draw()
   //rect(p.x, p.y, 20, 20);
   if (dir[0] && !dir[2])
     image(player[3], p.x, p.y, 20, 20);
-  if (!dir[0] && dir[1] && !dir[2] && !dir[3])
+  else if (!dir[0] && dir[1] && !dir[2] && !dir[3])
     image(player[0], p.x, p.y, 20, 20);
-  if (!dir[0]&& dir[2])
+  else if (!dir[0]&& dir[2])
     image(player[1], p.x, p.y, 20, 20);
-  if (!dir[0] && !dir[1] && !dir[2] && dir[3])
+  else if (!dir[0] && !dir[1] && !dir[2] && dir[3])
     image(player[2], p.x, p.y, 20, 20);
-  if (!dir[0] && !dir[1] && !dir[2] && !dir[3])
-    image(player[1], p.x, p.y, 20, 20);
+  else if (!dir[0] && !dir[1] && !dir[2] && !dir[3])
+    image(player[2], p.x, p.y, 20, 20);
     
   pb = p;
 }

@@ -65,15 +65,17 @@ compiling main.c...
    
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
-..\User\display.h(67): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+..\User\display.h(147): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   char readJoystick();
+..\User\display.h(171): warning:  #1-D: last line of file ends without a newline
+  //========================================
 ..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
   void init_i2c_eeprom();
-..\User\memory.h(41): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
+..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
   void clean_memory();
-..\User\memory.h(50): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
+..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
   void create_gamekey();
-..\User\memory.h(59): warning:  #1295-D: Deprecated declaration check_memory - give arg types
+..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
 ..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
   void T0_Init();
@@ -95,7 +97,7 @@ compiling main.c...
         unsigned short peY[3] = {100, 200, 50};
 ..\User\main.c(177): warning:  #177-D: variable "testdata"  was declared but never referenced
         uint8_t testdata[20];
-..\User\main.c: 17 warnings, 0 errors
+..\User\main.c: 18 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -107,18 +109,18 @@ compiling touch_panel.c...
 compiling display.c...
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
-..\User\display.h(67): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+..\User\display.h(147): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   char readJoystick();
+..\User\display.h(171): warning:  #1-D: last line of file ends without a newline
+  //========================================
 ..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
   void init_i2c_eeprom();
-..\User\memory.h(41): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
+..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
   void clean_memory();
-..\User\memory.h(50): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
+..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
   void create_gamekey();
-..\User\memory.h(59): warning:  #1295-D: Deprecated declaration check_memory - give arg types
+..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
-..\User\texture.h(1641): warning:  #1-D: last line of file ends without a newline
-  //
 ..\User\display.c(108): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
   }
 ..\User\display.c: 8 warnings, 0 errors
@@ -136,10 +138,10 @@ compiling musicien.c...
   }
 ..\User\musicien.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=23252 RO-data=6592 RW-data=416 ZI-data=704  
+Program Size: Code=23212 RO-data=5072 RW-data=416 ZI-data=704  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 41 Warning(s).
-Build Time Elapsed:  00:00:08
+".\Output\Project.axf" - 0 Error(s), 42 Warning(s).
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

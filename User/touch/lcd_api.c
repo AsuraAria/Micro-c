@@ -12,7 +12,7 @@ void LCD_write_english(uint16_t x,uint16_t y,uint8_t str,unsigned int color,unsi
 
     for(i=0; i<16; i++) //16ÐÐ
     {
-        avl= (english[str-32][i]);
+        avl= 0;//(english[str-32][i]);
         lcd_SetCursor(xpos,ypos);
         ypos++;
         rw_data_prepare();

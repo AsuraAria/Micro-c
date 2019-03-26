@@ -171,6 +171,7 @@ void drawText(char*s, char l, unsigned short x, unsigned short y)
 	}
 }
 
+//
 //=======================
 // Affichage des maps
 //=======================
@@ -266,7 +267,7 @@ void drawTexture(unsigned short x, unsigned short y, char tex)
 	}
 }
 
-unsigned short getMap(unsigned char x, unsigned char y, unsigned short j, unsigned short i)
+unsigned short getMap(unsigned char x, unsigned char y, unsigned char j, unsigned char i)
 {
 	if (x==0 && y==0)
 		return (t00[j][(short)i/4]>>((i*2)%8))&3;
@@ -299,6 +300,7 @@ void drawMap(unsigned char x, unsigned char y, bool * notDone)
 	*notDone = false;
 }
 
+//
 //=======================
 // Affichage du personnage
 //=======================
@@ -406,12 +408,7 @@ void clearOldPlayer(unsigned short x, unsigned short y, unsigned char mx, unsign
 }
 
 
-//=======================
-// Affichage des ennemis
-//=======================
-
-
-
+//
 //=======================
 // Déplacement personnage
 //=======================
@@ -489,6 +486,7 @@ bool isColliding(unsigned short x, unsigned short y, unsigned char mx, unsigned 
 	}
 }
 
+//
 //========================================
 // Fin
 //========================================

@@ -4,7 +4,7 @@
 
 // mettez ici toutes les déclarations de variables globales
 
-//char chaine[30]; // buffer pour l'affichage sur le LCD
+char chaine[30]; // buffer pour l'affichage sur le LCD
 uint16_t touch_x, touch_y ;
 char flagTouch = 0;
 char flagReset = 1;

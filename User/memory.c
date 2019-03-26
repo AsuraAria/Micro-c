@@ -101,6 +101,7 @@ void clean_memory()
 				i2c_eeprom_write(i, C0,1);
 		}
 }
+
 void create_gamekey()
 {
 	// create local gamekey
@@ -119,6 +120,7 @@ void create_gamekey()
 	// gamekey pushup in memory
 	i2c_eeprom_write(2037, GK, 10);
 }
+
 int check_memory()
 {
 	// create local gamekey

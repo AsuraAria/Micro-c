@@ -16,6 +16,7 @@ void init_i2c_eeprom();
  * - All remaining bits that are not affected in bitValue (value '0')
  * will not be effected by this function.
  **********************************************************************/
+
 void i2c_eeprom_write(uint16_t, uint8_t*, int);
 /*********************************************************************//**
  * @brief			Write in memory
@@ -27,6 +28,7 @@ void i2c_eeprom_write(uint16_t, uint8_t*, int);
  * Note:
  * - None.
  **********************************************************************/
+
 void i2c_eeprom_read(uint16_t, uint8_t*, int);
 /*********************************************************************//**
  * @brief			Read in memory
@@ -38,6 +40,7 @@ void i2c_eeprom_read(uint16_t, uint8_t*, int);
  * Note:
  * - None.
  **********************************************************************/
+
 void clean_memory();
 /*********************************************************************//**
  * @brief			Re-initialisation of memory
@@ -47,6 +50,7 @@ void clean_memory();
  * Note:
  * - Self explanatory.
  **********************************************************************/
+
 void create_gamekey();
 /*********************************************************************//**
  * @brief			Create gamekey
@@ -56,6 +60,7 @@ void create_gamekey();
  * Note:
  * - None.
  **********************************************************************/ 
+
 int check_memory();
 /*********************************************************************//**
  * @brief			Check gamekey
@@ -65,6 +70,7 @@ int check_memory();
  * Note:
  * - None.
  **********************************************************************/ 
+
 void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /*********************************************************************//**
  * @brief			fill structure with wanted parameter
@@ -88,6 +94,7 @@ void create_save(int, uint8_t*);
  * Note:
  * - None
  **********************************************************************/ 
+
 int check_save(char);
 /*********************************************************************//**
  * @brief			Check key
@@ -97,6 +104,7 @@ int check_save(char);
  * Note:
  * - None.
  **********************************************************************/ 
+
 int load_save(int);
 /*********************************************************************//**
  * @brief			Load a save if uncorrupted
@@ -106,6 +114,7 @@ int load_save(int);
  * Note:
  * - If an error is seen no loading will be done.
  **********************************************************************/
+
 void restaure_backup(int);
 /*********************************************************************//**
  * @brief			Replace existing save by backup save
