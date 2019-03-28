@@ -22,7 +22,6 @@
 #include "globaldec.h" // fichier contenant toutes les d�clarations de variables globales
 #include <stdio.h>
 
-
 void T1_Init(){//initiation du timer1
 
 	TIM_TIMERCFG_Type conf_timer;
@@ -58,9 +57,16 @@ void TIMER1_IRQHandler()
 	{
 		flagReset = 1;
 	}
+	
+	//Valeur random
+	/*if (random2 >= 10)
+	{
+		random2 = 1;
+	}
+	random2++;*/
+	
 	TIM_ClearIntPending(LPC_TIM1, TIM_MR1_INT);//Acquitement
 }
-
 
 void pin_Configuration()
 {
@@ -72,8 +78,8 @@ void pin_Configuration()
 		int ledBit = (1<<3);
 		int hpBit = (1<<9);
 	
-		int joystickPort[2] = {2, 2}; //Port
-		int joystickPin[2] = {10, 12}; //Pin
+		int joystickPort[6] = {2, 2, 2, 2, 1, 1}; //Port
+		int joystickPin[6] = {10, 12, 13, 8, 20, 21}; //Pin
 	
 		FIO_SetDir(2, (1<<11), 0); // Bouton Menu : Entrée
 		FIO_SetMask(2, (1<<11), 0); // Bouton Menu : Utilisable
@@ -122,7 +128,7 @@ void pin_Configuration()
 		//Fin
 		
 		// Congifuration
-		for (i=0; i<5; i++)
+		for (i=0; i<6; i++)
 		{
 			FIO_SetDir(joystickPort[i], joystickPin[i], 0); // joystick : Entrée
 			FIO_SetMask(joystickPort[i], joystickPin[i], 0); // joystick : Utilisable
@@ -136,6 +142,11 @@ void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short 
 	*x = 30;
 	*y = 30;
 }
+
+/*short rand(short n)
+{
+	return (random/random2)%n;
+}*/
 
 //===========================================================//
 // Function: Main
@@ -163,13 +174,8 @@ int main(void)
 	
 	char numSave = 0;
 	
-	//Ennemies
-	
-	char numEn = 3;
-	unsigned short eX[3] = {50, 100, 100};
-	unsigned short eY[3] = {100, 200, 50};
-	unsigned short peX[3] = {50, 100, 100};
-	unsigned short peY[3] = {100, 200, 50};
+	//Les enemies bougent 2 fois moins vite
+	char iEn=0;
 	
 	//uint16_t previousTouch = 0;
 	
@@ -212,6 +218,9 @@ int main(void)
 	
 	while(1)
 	{
+		/*randValue[iRandom] = rand(400);
+		iRandom = (iRandom+1)%20;*/
+		
 		if (menu == -1)
 		{
 			// Si il y a un changement de tableau, on affiche ce tableau (x,y) sur l'écran
@@ -224,23 +233,25 @@ int main(void)
 				clearOldPlayer(pBX, pBY, mapX, mapY);
 			}
 			
-			/*if (mapX<250 && (mapX > 0 || mapY > 0))
+			if (iEn==0)
 			{
-				vit = numEn;
-				for (i=0; i<3; i++)
+				if (mapX<250 && (mapX > 0 || mapY > 0))
 				{
-					eX[i] = eX[i]+1;
-					if (eX[2] >= 150)
+					for (i=0; i<3; i++)
 					{
-						eX[i]-=100;
+						eX[i]>pX?eX[i]--:eX[i]++;
+						eY[i]>pY?eY[i]--:eY[i]++;
+						
+						//eX[i] = eX[i]+1;
+						//if (peX[i]!=eX[i] || peY[i]!= eY[i])
+						//{
+						clearOldPlayer(peX[i], peY[i], mapX, mapY);
+						//}
+						peX[i] = eX[i], peY[i] = eY[i];
 					}
-					//if (peX[i]!=eX[i] || peY[i]!= eY[i])
-					//{
-					clearOldPlayer(peX[i], peY[i], mapX, mapY);
-					//}
-					peX[i] = eX[i], peY[i] = eY[i];
 				}
-			}*/
+			}
+			iEn = (iEn+1)%3;
 			
 			// Raffraichir la zone d'effaçage
 			pBX=pX, pBY=pY;
@@ -248,6 +259,7 @@ int main(void)
 			// Gestion du joystick
 			dir = readJoystick();
 			
+			// Retourner au menu
 			if (dir == 5)
 			{
 				menu = 1;
@@ -255,6 +267,12 @@ int main(void)
 				
 				fillup_save(data, numSave, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
 				create_save(numSave,data);
+			}
+			
+			// Attaquer
+			if (dir == 6)
+			{
+				attack(&pX, &pY, eX, eY, &numEn);
 			}
 			
 			// Déplacement du personnage
@@ -307,12 +325,18 @@ int main(void)
 				pY = 295;
 				mapLoad = true;
 			}
+			if (mapLoad)
+			{
+				initEnemy(eX, eY, random);
+			}
 			
 			// Affiche le joueur sur l'écran
 			drawPlayer(pX, pY, dir);//dir
 			
-			/*if (mapX<250 && (mapX > 0 || mapY > 0))
+			if (mapX<250 && (mapX > 0 || mapY > 0))
 			{
+				vit = numEn;
+				
 				for (i=0; i<3; i++)
 				{
 					drawPlayer(eX[i], eY[i], 20);
@@ -321,7 +345,7 @@ int main(void)
 			else
 			{
 				vit = 1;
-			}*/
+			}
 			
 			//sprintf(chaine,"%d - %d | %d - %d",pX, pY, mapX, mapY);
 			//LCD_write_english_string (30,30,chaine,White,Blue);

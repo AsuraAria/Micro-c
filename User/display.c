@@ -435,6 +435,10 @@ char readJoystick()
 	{
 		return 5;
 	}
+	else if (!(GPIO_ReadValue(1) & (1<<20)))
+	{
+		return 6;
+	}
 	else
 	{
 		return 4;
@@ -483,6 +487,23 @@ bool isColliding(unsigned short x, unsigned short y, unsigned char mx, unsigned 
 			}
 		default:
 			return true;
+	}
+}
+
+//
+//========================================
+// Deplacement enemies
+//========================================
+
+void initEnemy(unsigned short x[3], unsigned short y[3], unsigned int r)
+{
+	char i;
+	srand(r);
+	
+	for (i=0; i<3; i++)
+	{
+		x[i] = rand()%160+40;
+		y[i] = rand()%240+40;
 	}
 }
 

@@ -3,6 +3,7 @@
 .\output\display.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\output\display.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\math.h
 .\output\display.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\display.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\display.o: ..\User\touch/ili_lcd_general.h
 .\output\display.o: ..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_gpio.h
 .\output\display.o: ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\LPC17xx.h

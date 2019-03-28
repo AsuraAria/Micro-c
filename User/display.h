@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "touch/ili_lcd_general.h"
 #include "touch/lcd_api.h"
@@ -165,6 +166,13 @@ bool isColliding(unsigned short, unsigned short, unsigned char, unsigned char, c
  * Note:
  * - None
  **********************************************************************/
+ 
+//
+//========================================
+// Deplacement enemies
+//========================================
+
+void initEnemy(unsigned short[3], unsigned short[3], unsigned int r);
  
 //========================================
 // Fin

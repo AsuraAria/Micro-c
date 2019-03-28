@@ -3,6 +3,8 @@
 #include "lpc17xx_gpio.h"
 #include "lpc17xx.h"
 #include "partitions.h"
+//#include "globaldec.h"
+extern int random;
 
 short nbperi;//nb periodes de note
 short frontmusique;//pointe vers la note qui doit etre joué
@@ -21,7 +23,7 @@ tnote nsilence;//variable temporaire lorsque la note est silencieuxse
 
 void jouer_note(tnote note){//parametre les variables globales pour que le handler joue note
 	//Freq divisé par 2
-  MatchValue =(1000000) / (note.frequence*2*2 *50) ;//temps d'attente pour une demi periode en 50 aine de uS selon Hz
+  MatchValue =(1000000) / (note.frequence*2*2 *50);//temps d'attente pour une demi periode en 50 aine de uS selon Hz
 	nbperi = (note.longueur*10 * 1000)/ (MatchValue*50);//nb de periode de timer a jouer
 	frontmusique =0;//commence sur front montant
 	Matchrestant= MatchValue;
@@ -111,8 +113,16 @@ void TIMER0_IRQHandler(){//change tous les timers temps le front
 	if ((addr_note_actuelle==0)&&on_repeat){//si on est a la fin de la partition et en repeat alors on repete la partition
 			jouer_partition(pactuelle);
 	}
-
+	
+	//Valeur random
+	if (random >= 5000)
+	{
+		random = 0;
+	}
+	random++;
+	
 	TIM_ClearIntPending(LPC_TIM0, TIM_MR0_INT);//Acquitement
+	
 }
 
 void musintro(void){//joue la musique d'intro

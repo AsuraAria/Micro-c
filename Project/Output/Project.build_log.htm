@@ -65,9 +65,9 @@ compiling main.c...
    
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
-..\User\display.h(147): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+..\User\display.h(148): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   char readJoystick();
-..\User\display.h(171): warning:  #1-D: last line of file ends without a newline
+..\User\display.h(179): warning:  #1-D: last line of file ends without a newline
   //========================================
 ..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
   void init_i2c_eeprom();
@@ -83,21 +83,11 @@ compiling main.c...
   void TIMER0_IRQHandler();
 ..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\main.c(149): warning:  #177-D: variable "i"  was declared but never referenced
-        char i;
-..\User\main.c(168): warning:  #177-D: variable "numEn"  was declared but never referenced
-        char numEn = 3;
-..\User\main.c(169): warning:  #177-D: variable "eX"  was declared but never referenced
-        unsigned short eX[3] = {50, 100, 100};
-..\User\main.c(170): warning:  #177-D: variable "eY"  was declared but never referenced
-        unsigned short eY[3] = {100, 200, 50};
-..\User\main.c(171): warning:  #177-D: variable "peX"  was declared but never referenced
-        unsigned short peX[3] = {50, 100, 100};
-..\User\main.c(172): warning:  #177-D: variable "peY"  was declared but never referenced
-        unsigned short peY[3] = {100, 200, 50};
-..\User\main.c(177): warning:  #177-D: variable "testdata"  was declared but never referenced
+..\User\globaldec.h(22): warning:  #1-D: last line of file ends without a newline
+  unsigned short peY[3] = {0, 0, 0};
+..\User\main.c(183): warning:  #177-D: variable "testdata"  was declared but never referenced
         uint8_t testdata[20];
-..\User\main.c: 18 warnings, 0 errors
+..\User\main.c: 13 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -109,9 +99,9 @@ compiling touch_panel.c...
 compiling display.c...
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
-..\User\display.h(147): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+..\User\display.h(148): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   char readJoystick();
-..\User\display.h(171): warning:  #1-D: last line of file ends without a newline
+..\User\display.h(179): warning:  #1-D: last line of file ends without a newline
   //========================================
 ..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
   void init_i2c_eeprom();
@@ -134,14 +124,14 @@ compiling musicien.c...
   void musintro();
 ..\User\partitions.h(24): warning:  #1-D: last line of file ends without a newline
   tnote alarme[3]={{sol4,700},{si4,200},finp};*/
-..\User\musicien.c(136): warning:  #1-D: last line of file ends without a newline
+..\User\musicien.c(146): warning:  #1-D: last line of file ends without a newline
   }
 ..\User\musicien.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=23248 RO-data=5072 RW-data=416 ZI-data=704  
+Program Size: Code=23880 RO-data=5072 RW-data=448 ZI-data=928  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 42 Warning(s).
-Build Time Elapsed:  00:00:15
+".\Output\Project.axf" - 0 Error(s), 37 Warning(s).
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

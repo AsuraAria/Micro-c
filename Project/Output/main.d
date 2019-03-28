@@ -19,6 +19,7 @@
 .\output\main.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\output\main.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\math.h
 .\output\main.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\main.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\main.o: ..\User\touch/ili_lcd_general.h
 .\output\main.o: ..\User\touch/touch_panel.h
 .\output\main.o: ..\User\touch/ili_lcd_general.h
