@@ -203,7 +203,7 @@ void fillup_save(uint8_t* Buffer, int num, int life, unsigned int Map_x, unsigne
 void filldown_save(uint8_t* Buffer, char num, unsigned char *life,unsigned char *Map_x,unsigned char* Map_y, unsigned short *Location_x, unsigned short *Location_y, char *score)
 {
 	//Buffer[12]=(uint8_t)num;
-	Buffer[13]=(uint8_t)life;
+	*life = (unsigned char)Buffer[13];
 	*Map_x = (unsigned char)Buffer[14];
 	*Map_y = (unsigned char)Buffer[15];
 	*Location_x = (unsigned short)Buffer[16];

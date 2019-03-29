@@ -383,7 +383,7 @@ int main(void)
 						mapX=0;
 						mapY=0;
 						
-						fillup_save(data, numSave, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
+						fillup_save(data, numSave, life, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
 						create_save(numSave,data);
 					}
 					
