@@ -58,12 +58,17 @@ void TIMER1_IRQHandler()
 		flagReset = 1;
 	}
 	
-	//Valeur random
-	/*if (random2 >= 10)
+	if (hitReset<hitResetMax)
 	{
-		random2 = 1;
+		hitReset++;
 	}
-	random2++;*/
+	
+	enFlag = 1;
+	
+	if (stamina < staminaMax)
+	{
+		stamina++;
+	}
 	
 	TIM_ClearIntPending(LPC_TIM1, TIM_MR1_INT);//Acquitement
 }
@@ -167,6 +172,8 @@ int main(void)
 	// Coordonnées du joueur et direction pour afficher le sprite
 	unsigned short pX=30, pY=30;
 	signed char dir=4, vit=1;
+	unsigned char life = 3;
+	unsigned char pLife = 0;
 	// Coordonnées de l'ancienne position du joueur
 	unsigned short pBX=pX, pBY=pY;
 	
@@ -225,7 +232,30 @@ int main(void)
 		{
 			// Si il y a un changement de tableau, on affiche ce tableau (x,y) sur l'écran
 			if (mapLoad)
-				drawMap(mapX, mapY, &mapLoad); // On le fait qu'une seule fois pour une question de rapidité d'execution
+			{
+				drawMap(mapX, mapY, &mapLoad);
+				pLife = 0;				// On le fait qu'une seule fois pour une question de rapidité d'execution
+			}
+			
+			if (stamina != 100)
+				dessiner_rect(8,10, 4, staminaMax-stamina, 0, 1, Grey, Grey);
+			dessiner_rect(8,10+staminaMax-stamina, 4, stamina, 0, 1, Blue, Blue);
+			
+			if (pLife != life)
+			{
+				for (i=0; i<3; i++)
+				{
+					if(i<life)
+					{
+						drawPlayer(0, 20*(13+2-i), 0);
+					}
+					else
+					{
+						drawTexture(0, 20*(13+2-i), 2);
+					}
+				}
+				pLife = life;
+			}
 			
 			// Rafraîchir les cases derrière l'ancienne position du personnage pour le faire disparaître
 			if (pBX!=pX || pBY != pY)
@@ -237,21 +267,17 @@ int main(void)
 			{
 				if (mapX<250 && (mapX > 0 || mapY > 0))
 				{
-					for (i=0; i<3; i++)
+					for (i=0; i<6; i++)
 					{
-						eX[i]>pX?eX[i]--:eX[i]++;
-						eY[i]>pY?eY[i]--:eY[i]++;
-						
-						//eX[i] = eX[i]+1;
-						//if (peX[i]!=eX[i] || peY[i]!= eY[i])
-						//{
-						clearOldPlayer(peX[i], peY[i], mapX, mapY);
-						//}
+						if (eX[i] >= 0 || oneMoreClear[i])
+						{
+							clearOldPlayer(peX[i], peY[i], mapX, mapY);
+							oneMoreClear[i]=0;
+						}	
 						peX[i] = eX[i], peY[i] = eY[i];
 					}
 				}
 			}
-			iEn = (iEn+1)%3;
 			
 			// Raffraichir la zone d'effaçage
 			pBX=pX, pBY=pY;
@@ -265,14 +291,15 @@ int main(void)
 				menu = 1;
 				mapLoad = true;
 				
-				fillup_save(data, numSave, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
+				fillup_save(data, numSave, life, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
 				create_save(numSave,data);
 			}
 			
 			// Attaquer
-			if (dir == 6)
+			if (dir == 6 && stamina == staminaMax)
 			{
-				attack(&pX, &pY, eX, eY, &numEn);
+				attack(pX, pY, eX, eY, oneMoreClear, &numEn);
+				stamina = 0;
 			}
 			
 			// Déplacement du personnage
@@ -327,25 +354,83 @@ int main(void)
 			}
 			if (mapLoad)
 			{
+				numEn = 3;
 				initEnemy(eX, eY, random);
 			}
 			
 			// Affiche le joueur sur l'écran
 			drawPlayer(pX, pY, dir);//dir
 			
-			if (mapX<250 && (mapX > 0 || mapY > 0))
+			if (iEn==0)
 			{
-				vit = numEn;
-				
-				for (i=0; i<3; i++)
+				if (mapX<250 && (mapX > 0 || mapY > 0))
 				{
-					drawPlayer(eX[i], eY[i], 20);
+					if (enFlag && hitReset == hitResetMax)
+					{
+						if (attackE(pX, pY, eX, eY, &life))
+						{
+							hitReset = 0;
+						}
+						enFlag = 0;
+					}
+					if (life == 0)
+					{
+						life = 3;
+						menu = 1;
+						mapLoad = 1;
+						pX=30;
+						pY=30;
+						mapX=0;
+						mapY=0;
+						
+						fillup_save(data, numSave, 0, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
+						create_save(numSave,data);
+					}
+					
+					vit = (signed char)(sqrt(numEn));
+					
+					for (i=0; i<6; i++)
+					{
+						if (eX[i] > 0)
+						{
+							if (i%3==0)
+							{
+								if (eX[i] != pX)
+								{
+									eX[i]>pX?eX[i]--:eX[i]++;
+								}
+								else
+								{
+									eY[i]>pY?eY[i]--:eY[i]++;
+								}
+							}
+							else if (i%3 == 1)
+							{
+								if (eY[i] != pY)
+								{
+									eY[i]>pY?eY[i]--:eY[i]++;
+								}
+								else
+								{
+									eX[i]>pX?eX[i]--:eX[i]++;
+								}
+							}
+							else
+							{
+								eY[i]>pY?eY[i]--:eY[i]++;
+								eX[i]>pX?eX[i]--:eX[i]++;
+							}
+							
+							drawPlayer(eX[i], eY[i], 20);
+						}
+					}
+				}
+				else
+				{
+					vit = 1;
 				}
 			}
-			else
-			{
-				vit = 1;
-			}
+			iEn = (iEn+1)%3;
 			
 			//sprintf(chaine,"%d - %d | %d - %d",pX, pY, mapX, mapY);
 			//LCD_write_english_string (30,30,chaine,White,Blue);
@@ -406,7 +491,7 @@ int main(void)
 						if (check_save(2))
 						{
 							i2c_eeprom_read(numSave*20,data,20);
-							filldown_save(data, numSave, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+							filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 						}
 						else
 						{
@@ -424,7 +509,7 @@ int main(void)
 						if (check_save(1))
 						{
 							i2c_eeprom_read(numSave*20, data,20);
-							filldown_save(data, numSave, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+							filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 						}
 						else
 						{
@@ -442,7 +527,7 @@ int main(void)
 						if (check_save(0))
 						{
 							i2c_eeprom_read(numSave*20,data,20);
-							filldown_save(data, numSave, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+							filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 						}
 						else
 						{

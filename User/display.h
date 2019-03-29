@@ -9,6 +9,7 @@
 #include "touch\lcd_api.h"
 
 #include "affichagelcd.h"
+#include "memory.h"
 
 //================================================================================================
 // Fichier contenants les prototypes des fonctions d'affichages
@@ -142,7 +143,7 @@ void clearOldPlayer(unsigned short, unsigned short, unsigned char, unsigned char
  **********************************************************************/
 
 //=======================
-// Déplacement personnage
+// Gestion du joueur
 //=======================
 
 char readJoystick();
@@ -167,12 +168,40 @@ bool isColliding(unsigned short, unsigned short, unsigned char, unsigned char, c
  * - None
  **********************************************************************/
  
-//
+void attack(unsigned short, unsigned short, short[6], short[6], char[6], float*);
+ /*********************************************************************//**
+ * @brief			Player attack
+ * @param[in]	unsigned short, x coordinates of the player(0-239)
+ * 						unsigned short, y coordinates of the player(0-319)
+ *						short[3], x coordinates of enemies(0-239)
+ * 						short[3], y coordinates of enemies(0-319)
+ * 						char, number of enemies still alive
+ * @return		None
+ *
+ * Note:
+ * - None
+ **********************************************************************/
+ 
 //========================================
-// Deplacement enemies
+// Gestion enemies
 //========================================
 
-void initEnemy(unsigned short[3], unsigned short[3], unsigned int r);
+void initEnemy(short[6], short[6], unsigned int);
+/*********************************************************************//**
+ * @brief			Initialize enemies position on the map
+ * @param[in]	short[3], x coordinates of enemies(0-239)
+ * 						short[3], y coordinates of enemies(0-319)
+ * 						unsigned int, random seed
+ * @return		None
+ *
+ * Note:
+ * - None
+ **********************************************************************/
+
+char attackE(unsigned short, unsigned short, short[6], short[6], unsigned char*);
+/*********************************************************************//**
+ * 
+ **********************************************************************/
  
 //========================================
 // Fin

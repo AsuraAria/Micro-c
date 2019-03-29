@@ -65,10 +65,16 @@ compiling main.c...
    
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
-..\User\display.h(148): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
+  void init_i2c_eeprom();
+..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
+  void clean_memory();
+..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
+  void create_gamekey();
+..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
+  int check_memory();
+..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   char readJoystick();
-..\User\display.h(179): warning:  #1-D: last line of file ends without a newline
-  //========================================
 ..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
   void init_i2c_eeprom();
 ..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
@@ -83,11 +89,9 @@ compiling main.c...
   void TIMER0_IRQHandler();
 ..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\globaldec.h(22): warning:  #1-D: last line of file ends without a newline
-  unsigned short peY[3] = {0, 0, 0};
-..\User\main.c(183): warning:  #177-D: variable "testdata"  was declared but never referenced
+..\User\main.c(190): warning:  #177-D: variable "testdata"  was declared but never referenced
         uint8_t testdata[20];
-..\User\main.c: 13 warnings, 0 errors
+..\User\main.c: 15 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -99,10 +103,6 @@ compiling touch_panel.c...
 compiling display.c...
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
-..\User\display.h(148): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
-  char readJoystick();
-..\User\display.h(179): warning:  #1-D: last line of file ends without a newline
-  //========================================
 ..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
   void init_i2c_eeprom();
 ..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
@@ -111,10 +111,15 @@ compiling display.c...
   void create_gamekey();
 ..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
-..\User\display.c(108): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
+..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+  char readJoystick();
+..\User\display.c(107): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
   }
-..\User\display.c: 8 warnings, 0 errors
+..\User\display.c: 7 warnings, 0 errors
 compiling memory.c...
+..\User\memory.c(206): warning:  #767-D: conversion from pointer to smaller integer
+        Buffer[13]=(uint8_t)life;
+..\User\memory.c: 1 warning, 0 errors
 compiling musicien.c...
 ..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
   void T0_Init();
@@ -124,14 +129,12 @@ compiling musicien.c...
   void musintro();
 ..\User\partitions.h(24): warning:  #1-D: last line of file ends without a newline
   tnote alarme[3]={{sol4,700},{si4,200},finp};*/
-..\User\musicien.c(146): warning:  #1-D: last line of file ends without a newline
-  }
-..\User\musicien.c: 5 warnings, 0 errors
+..\User\musicien.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=23880 RO-data=5072 RW-data=448 ZI-data=928  
+Program Size: Code=26240 RO-data=5072 RW-data=436 ZI-data=1012  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 37 Warning(s).
-Build Time Elapsed:  00:00:03
+".\Output\Project.axf" - 0 Error(s), 38 Warning(s).
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

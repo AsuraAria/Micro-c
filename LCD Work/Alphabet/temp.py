@@ -13,25 +13,8 @@ for i in range(int(image.size/image[0].size)):
     #print(str(int(image[0].size/3-1))+" yger")
     for j in range(int(image[0].size/3)):
         #f.write(str(image[i][j][0])+str(image[i][j][1])+str(image[i][j][2])+",")
-        #print(j)
-        if (j == int(image[0].size/3)-1):#int(image[0].size/3-1)):
-            if (image[i][j][0] <= 0.1):
-                f.write("7")
-            elif (image[i][j][0]<=0.35):
-                f.write("13")
-            elif (image[i][j][0] <=0.66):
-                f.write("12")
-            else:
-                f.write("8")
-        else:
-            if (image[i][j][0] <= 0.1):
-                f.write("7,")
-            elif (image[i][j][0] <=0.35):
-                f.write("13,")
-            elif (image[i][j][0] <=0.66):
-                f.write("12,")
-            else:
-                f.write("8,")
+        print(image[i][j])
+       
             
     f.write("},\n")
     #f.write("\n")

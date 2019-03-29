@@ -15,8 +15,16 @@ char iRandom = 0;
 short randValue[20];*/
 
 //Ennemies
-char numEn = 3;
-unsigned short eX[3] = {0, 0, 0};
-unsigned short eY[3] = {0, 0, 0};
-unsigned short peX[3] = {0, 0, 0};
-unsigned short peY[3] = {0, 0, 0};
+float numEn = 3;
+char oneMoreClear[6] = {0, 0, 0, 0, 0, 0};
+short eX[6] = {0, 0, 0, 0, 0, 0};
+short eY[6] = {0, 0, 0, 0, 0, 0};
+unsigned short peX[6] = {0, 0, 0, 0, 0, 0};
+unsigned short peY[6] = {0, 0, 0, 0, 0, 0};
+
+char staminaMax = 50;
+char stamina = 50;
+
+char enFlag = 0;
+char hitResetMax = 10;
+char hitReset = 10;

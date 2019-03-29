@@ -25,6 +25,7 @@
 .\output\main.o: ..\User\touch/ili_lcd_general.h
 .\output\main.o: ..\User\affichagelcd.h
 .\output\main.o: ..\User\memory.h
+.\output\main.o: ..\User\memory.h
 .\output\main.o: ..\User\musicien.h
 .\output\main.o: ..\User\globaldec.h
 .\output\main.o: ..\User\constantes.h

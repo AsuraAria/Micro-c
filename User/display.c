@@ -1,6 +1,5 @@
 #include "display.h"
-#include "memory.h"
- 
+
 // Defined in .c to avoid defining variables multiple times
 #include "texture.h"
 
@@ -401,20 +400,31 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 
 void clearOldPlayer(unsigned short x, unsigned short y, unsigned char mx, unsigned char my)
 {
-	drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y-1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y-1)/TSIZE)));
+	if ((x-1)/TSIZE != 0 || ((y-1)/TSIZE > 3 &&  (y-1)/TSIZE < 11))
+	{
+		drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y-1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y-1)/TSIZE)));
+	}
 	drawTexture(floor((x+PSIZE+1)/TSIZE)*TSIZE, floor((y-1)/TSIZE)*TSIZE, getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y-1)/TSIZE)));
-	drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y+PSIZE+1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y+PSIZE+1)/TSIZE)));
+	if ((x-1)/TSIZE != 0 || ((y-1)/TSIZE > 3 &&  (y-1)/TSIZE < 11))
+	{
+		drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y+PSIZE+1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y+PSIZE+1)/TSIZE)));
+	}
 	drawTexture(floor((x+PSIZE+1)/TSIZE)*TSIZE, floor((y+PSIZE+1)/TSIZE)*TSIZE, getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y+PSIZE+1)/TSIZE)));
 }
 
 
 //
 //=======================
-// Déplacement personnage
+// Gestion personnage
 //=======================
 
 char readJoystick()
 {
+	if (!(GPIO_ReadValue(1) & (1<<20)))
+	{
+		return 6;
+	}
+	
 	if (!(GPIO_ReadValue(2) & (1<<12)))
 	{
 		return 0;
@@ -434,10 +444,6 @@ char readJoystick()
 	else if (!(GPIO_ReadValue(2) & (1<<11)))
 	{
 		return 5;
-	}
-	else if (!(GPIO_ReadValue(1) & (1<<20)))
-	{
-		return 6;
 	}
 	else
 	{
@@ -459,7 +465,7 @@ bool isColliding(unsigned short x, unsigned short y, unsigned char mx, unsigned 
 				return true;
 			}
 		case 1:
-			if (getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y+3)/TSIZE))==0 && getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y+PSIZE-3)/TSIZE))==0)
+			if (getMap(mx,my,floor((x+PSIZE+3)/TSIZE),floor((y+3)/TSIZE))==0 && getMap(mx,my,floor((x+PSIZE+3)/TSIZE),floor((y+PSIZE-3)/TSIZE))==0)
 			{
 				return false;
 			}
@@ -477,7 +483,7 @@ bool isColliding(unsigned short x, unsigned short y, unsigned char mx, unsigned 
 				return true;
 			}
 		case 3:
-			if (getMap(mx,my,floor((x-1)/TSIZE),floor((y+3)/TSIZE))==0 && getMap(mx,my,floor((x-1)/TSIZE),floor((y+PSIZE-3)/TSIZE))==0)
+			if (getMap(mx,my,floor((x-3)/TSIZE),floor((y+3)/TSIZE))==0 && getMap(mx,my,floor((x-3)/TSIZE),floor((y+PSIZE-3)/TSIZE))==0)
 			{
 				return false;
 			}
@@ -490,21 +496,64 @@ bool isColliding(unsigned short x, unsigned short y, unsigned char mx, unsigned 
 	}
 }
 
+void attack(unsigned short x, unsigned short y, short eX[6], short eY[6], char clearEn[6], float* eN)
+{
+	char i=0;
+	
+	for(i=0; i<6; i++)
+	{
+		if (sqrt((x-eX[i])*(x-eX[i])+(y-eY[i])*(y-eY[i]))<=30)
+		{
+			eX[i] = -100;
+			eY[i] = -100;
+			
+			clearEn[i] = 1;
+			
+			if (*eN > 1)
+			{
+				(*eN) -= 0.5;
+			}
+		}
+	}
+}
+
 //
 //========================================
-// Deplacement enemies
+// Gestion enemies
 //========================================
 
-void initEnemy(unsigned short x[3], unsigned short y[3], unsigned int r)
+void initEnemy(short x[6], short y[6], unsigned int r)
 {
 	char i;
 	srand(r);
 	
-	for (i=0; i<3; i++)
+	for (i=0; i<6; i++)
 	{
 		x[i] = rand()%160+40;
 		y[i] = rand()%240+40;
 	}
+}
+
+char attackE(unsigned short x, unsigned short y, short eX[6], short eY[6], unsigned char * l)
+{
+	char i;
+	char reset = 1;
+	char hit = 0;
+	
+	for (i=0; i<6; i++)
+	{
+		if (sqrt((x-eX[i])*(x-eX[i])+(y-eY[i])*(y-eY[i]))<=20)
+		{
+			if ((*l)!= 0 && reset)
+			{
+				reset = 0;
+				(*l)--;
+				hit = 1;
+			}
+		}
+	}
+	
+	return hit;
 }
 
 //
