@@ -247,11 +247,11 @@ int main(void)
 				{
 					if(i<life)
 					{
-						drawPlayer(0, 20*(13+2-i), 0);
+						drawPlayer(0, 20*(13+2-i), 30);
 					}
 					else
 					{
-						drawTexture(0, 20*(13+2-i), 2);
+						drawPlayer(0, 20*(13+2-i), 31);
 					}
 				}
 				pLife = life;
@@ -387,7 +387,7 @@ int main(void)
 						create_save(numSave,data);
 					}
 					
-					vit = (signed char)(sqrt(numEn));
+					vit = (signed char)numEn;
 					
 					for (i=0; i<6; i++)
 					{
@@ -464,6 +464,14 @@ int main(void)
 						menu = 2;
 						flagReset = 0;
 					}
+					
+					if (touch_x>=2500 && touch_x<=3400
+							&& touch_y>=700 && touch_y<=1700)
+					{
+						mapLoad = true;
+						menu = 0;
+						flagReset = 0;
+					}
 				}
 			}
 			else if (menu == 2)
@@ -534,6 +542,66 @@ int main(void)
 							reset(&mapX, &mapY, &pX, &pY);
 						}
 					}
+				}
+			}
+			else if (menu == 0)
+			{
+				if (mapLoad)
+				{
+					drawMap(250, 0, &mapLoad);
+					drawMenu(menu);
+				}
+				
+				if (flagTouch && flagReset == 1)
+				{
+					flagTouch = 0;
+					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
+					//LCD_write_english_string(30,30,chaine,White,Blue);
+					
+					// Tutorial
+					if (touch_x>=1650 && touch_x<=2500
+							&& touch_y>=700 && touch_y<=1700)
+					{
+						mapLoad = true;
+						menu = 3;
+						flagReset = 0;
+					}
+					
+					// Story
+					if (touch_x>=2500 && touch_x<=3400
+							&& touch_y>=700 && touch_y<=1700)
+					{
+						mapLoad = true;
+						menu = 4;
+						flagReset = 0;
+					}
+					
+					// Back
+					if (touch_x>=2500 && touch_x<=3400
+							&& touch_y>=2200 && touch_y<=3800)
+					{
+						mapLoad = true;
+						menu = 1;
+						flagReset = 0;
+					}
+				}
+			}
+			else
+			{
+				//menu 3 et 4
+				if (mapLoad)
+				{
+					//drawMap(250, 0, &mapLoad);
+					dessiner_rect(0,0,240,320,0,1,Black, Black);
+					mapLoad = 0;
+					drawMenu(menu);
+				}
+				if (flagTouch && flagReset == 1 && touch_x>=10)
+				{
+					flagTouch = 0;
+					mapLoad = true;
+					menu = 0;
+					flagReset = 0;
 				}
 			}
 		}

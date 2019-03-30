@@ -6,7 +6,7 @@
 //=======================
 // Affichage des menus
 //=======================
-char text[20];
+//char text[20];
 char text1[5];
 
 void drawMenu(char m)
@@ -20,26 +20,19 @@ void drawMenu(char m)
 		sprintf(text,"abcdefghij");
 		drawText(text, 1, TSIZE*4, (unsigned short)(320-9*TSIZE/1)/2);*/
 		
-		
-		sprintf(text,"fluffiten's");
-		drawText(text, 1, TSIZE*1, (unsigned short)(320-11*TSIZE/1)/2);
-		sprintf(text,"adventure");
-		drawText(text, 1, TSIZE*2, (unsigned short)(320-9*TSIZE/1)/2);
+		drawText("fluffiten's", 1, TSIZE*1, (unsigned short)(320-11*TSIZE/1)/2);
+		drawText("adventure", 1, TSIZE*2, (unsigned short)(320-9*TSIZE/1)/2);
 		
 		
-		sprintf(text,"play");
-		drawText(text, 1, TSIZE*5.5, (unsigned short) 320-TSIZE*2-TSIZE*4);
-		sprintf(text,"extra");
-		drawText(text, 1, TSIZE*8.5, (unsigned short) 320-TSIZE*2-TSIZE*5);
+		drawText("play", 1, TSIZE*5.5, (unsigned short) 320-TSIZE*2-TSIZE*4);
+		drawText("extra", 1, TSIZE*8.5, (unsigned short) 320-TSIZE*2-TSIZE*5);
 		
 		drawPlayer((unsigned short) TSIZE*5, TSIZE*2, 10);
 	}
 	else if (m == 2)
 	{
-		sprintf(text,"choose your");
-		drawText(text, 1, TSIZE*1, (unsigned short)(320-11*TSIZE/1)/2);
-		sprintf(text,"save");
-		drawText(text, 1, TSIZE*2, (unsigned short)(320-4*TSIZE/1)/2);
+		drawText("choose your", 1, TSIZE*1, (unsigned short)(320-11*TSIZE/1)/2);
+		drawText("save", 1, TSIZE*2, (unsigned short)(320-4*TSIZE/1)/2);
 		
 		if (check_save(0))
 		{
@@ -52,8 +45,7 @@ void drawMenu(char m)
 			sprintf(text1,"new");
 		}
 		dessiner_rect(5.5*TSIZE,(16-3-2.5)*TSIZE, 4*TSIZE, 4*TSIZE, 0, 1, color, color);
-		sprintf(text,"a");
-		drawText(text, 1, 7*TSIZE,(12)*TSIZE);
+		drawText("a", 1, 7*TSIZE,(12)*TSIZE);
 		drawText(text1, 1, 8.5*TSIZE,(text1[0]=='l'?10.5:11)*TSIZE);
 		
 		if (check_save(1))
@@ -67,8 +59,7 @@ void drawMenu(char m)
 			sprintf(text1,"new");
 		}
 		dessiner_rect(5.5*TSIZE,(16-3*2-2-2)*TSIZE, 4*TSIZE, 4*TSIZE, 0, 1, color, color);
-		sprintf(text,"b");
-		drawText(text, 1, 7*TSIZE,(7.5)*TSIZE);
+		drawText("b", 1, 7*TSIZE,(7.5)*TSIZE);
 		drawText(text1, 1, 8.5*TSIZE,(text1[0]=='l'?6:6.5)*TSIZE);
 		
 		if (check_save(2))
@@ -82,10 +73,39 @@ void drawMenu(char m)
 			sprintf(text1,"new");
 		}
 		dessiner_rect(5.5*TSIZE,(16-3*3-2-3.5)*TSIZE, 4*TSIZE, 4*TSIZE, 0, 1, color, color);
-		sprintf(text,"c");
-		drawText(text, 1, 7*TSIZE,(3)*TSIZE);
+		drawText("c", 1, 7*TSIZE,(3)*TSIZE);
 		drawText(text1, 1, 8.5*TSIZE,(text1[0]=='l'?1.5:2)*TSIZE);
 		
+	}
+	else if (m == 0)
+	{
+		drawText("extra", 1, TSIZE*1.5, (unsigned short)(320-5*TSIZE/1)/2);
+		
+		drawText("tutorial", 1, TSIZE*5.5, (unsigned short) 320-TSIZE*2-TSIZE*8);
+		drawText("story", 1, TSIZE*8.5, (unsigned short) 320-TSIZE*2-TSIZE*5);
+		drawText("back", 1, TSIZE*8.5, (unsigned short) TSIZE*2);		
+	}
+	else if (m == 3)
+	{
+		drawText("tutorial", 1, TSIZE*0, (unsigned short)(320-8*TSIZE/1)/2);
+		
+		drawText("use the joystick to move", 2, TSIZE*2, TSIZE*3.5);
+		drawText("use the joystick click to", 2, TSIZE*4, TSIZE*3);
+		drawText("attack", 2, TSIZE*5, TSIZE*12.5);
+		drawText("you can only attack if your", 2, TSIZE*6, TSIZE*2);
+		drawText("stamina is full ~ in blue", 2, TSIZE*7, TSIZE*3);
+		
+		drawText("you've only some life so stay", 2, TSIZE*9, TSIZE*1);
+		drawText("safe ~ left up corner", 2, TSIZE*10, TSIZE*5);
+	}
+	else if (m == 4)
+	{
+		drawText("story", 1, TSIZE*0, (unsigned short)(320-5*TSIZE/1)/2);
+		
+		drawText("a fluffy is a little entity", 2, TSIZE*2, TSIZE*2);
+		drawText("who lives in the darkest world", 2, TSIZE*3, TSIZE*0.5);
+		drawText("it use magic to defend himself", 2, TSIZE*5, TSIZE*0.5);
+		drawText("and his colony", 2, TSIZE*6, TSIZE*8.5);
 	}
 }
 
@@ -145,7 +165,7 @@ void drawText(char*s, char l, unsigned short x, unsigned short y)
 				{
 					if (*s == 39)
 					{
-						letterCode = unCompressLetter((a[26][j][(short)i/4]>>((i*2)%8))&3);
+						letterCode = unCompressLetter((a[26][j*l][(short)i*l/4]>>(((i*l)*2)%8))&3);
 						if (letterCode != 250)
 						{
 							lcd_SetCursor(x+j,y+k*TSIZE/l+i);
@@ -155,7 +175,7 @@ void drawText(char*s, char l, unsigned short x, unsigned short y)
 					}
 					if (*s == 126)
 					{
-						letterCode = unCompressLetter((a[27][j][(short)i/4]>>((i*2)%8))&3);
+						letterCode = unCompressLetter((a[27][j*l][(short)i*l/4]>>(((i*l)*2)%8))&3);
 						if (letterCode != 250)
 						{
 							lcd_SetCursor(x+j,y+k*TSIZE/l+i);
@@ -222,6 +242,12 @@ unsigned short getColor(unsigned char c)
 			break;
 		case 13:
 			color = 0x8800;
+			break;
+		case 14:
+			color = 0xedae;
+			break;
+		case 15:
+			color = 0x98c1;
 			break;
 	}
 	
@@ -395,6 +421,21 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 			}
 		}
 	}
+	else if (d == 30 || d == 31)
+	{
+		for(i=0; i<TSIZE; i++)
+		{
+			for(j=0; j<TSIZE; j++)
+			{
+				if ((d==30?mouton[j][i]:demouton[j][i]) != 250)
+				{
+					lcd_SetCursor(x+j,y+i);
+					rw_data_prepare();
+					write_data(getColor(d==30?mouton[j][i]:demouton[j][i]));
+				}
+			}
+		}
+	}
 }
 
 
@@ -511,7 +552,7 @@ void attack(unsigned short x, unsigned short y, short eX[6], short eY[6], char c
 			
 			if (*eN > 1)
 			{
-				(*eN) -= 0.5;
+				(*eN) -= 0.2;
 			}
 		}
 	}
