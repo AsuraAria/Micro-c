@@ -560,7 +560,7 @@ int main(void)
 					
 					// Tutorial
 					if (touch_x>=1650 && touch_x<=2500
-							&& touch_y>=700 && touch_y<=1700)
+							&& touch_y>=700 && touch_y<=2200)
 					{
 						mapLoad = true;
 						menu = 3;
