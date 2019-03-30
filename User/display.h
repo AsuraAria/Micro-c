@@ -200,7 +200,16 @@ void initEnemy(short[6], short[6], unsigned int);
 
 char attackE(unsigned short, unsigned short, short[6], short[6], unsigned char*);
 /*********************************************************************//**
- * 
+ * @brief			Enemies attack
+ * @param[in]	unsigned short, x coordinates of the player (0-239)
+ * 						unsigned short, y coordinates of the player (0-319)
+ *						short[3], x coordinates of enemies (0-239)
+ * 						short[3], y coordinates of enemies (0-319)
+ *						unsigned char, life of player
+ * @return		None
+ *
+ * Note:
+ * - None
  **********************************************************************/
  
 //========================================
