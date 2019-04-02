@@ -1675,4 +1675,4 @@ const char a[11][TSIZE][TSIZE] = {
 */
 //
 
-const char t[80];
+//const char t[80];

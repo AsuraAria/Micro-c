@@ -401,6 +401,8 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 	}
 	else if (d == 10)
 	{
+		//unsigned char pDown[PSIZE][PSIZE] = 
+		
 		for(i=0; i<PSIZE*6; i++)
 		{
 			for(j=0; j<PSIZE*6; j++)

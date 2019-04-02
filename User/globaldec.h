@@ -29,3 +29,5 @@ char stamina = 50;
 char enFlag = 0;
 char hitResetMax = 10;
 char hitReset = 10;
+
+short dying = 

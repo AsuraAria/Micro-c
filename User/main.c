@@ -22,7 +22,8 @@
 #include "globaldec.h" // fichier contenant toutes les d�clarations de variables globales
 #include <stdio.h>
 
-void T1_Init(){//initiation du timer1
+void T1_Init()//initiation du timer1
+{
 
 	TIM_TIMERCFG_Type conf_timer;
 	TIM_MATCHCFG_Type conf_interrupt;
@@ -48,7 +49,7 @@ void T1_Init(){//initiation du timer1
 }
 
 void TIMER1_IRQHandler()
-{//change tous les timers temps le front
+{
 	if (!(GPIO_ReadValue(0) & (1<<19)))
 	{
 		flagTouch = 1;
