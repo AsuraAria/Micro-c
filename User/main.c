@@ -15,12 +15,13 @@
 #include "affichagelcd.h"
 #include "touch\touch_panel.h"
 
-#include "display.h"
 #include "memory.h"
 #include "musicien.h"
-
-#include "globaldec.h" // fichier contenant toutes les d�clarations de variables globales
+// fichier contenant toutes les d�clarations de variables globales
+#include "globaldec.h"
 #include <stdio.h>
+#include "display.h"
+
 
 void T1_Init()//initiation du timer1
 {
@@ -109,29 +110,6 @@ void pin_Configuration()
 		memory28.Pinnum = PINSEL_PIN_28;
 		memory28.Portnum = PINSEL_PORT_0; // GPIO0
 		PINSEL_ConfigPin(&memory28);
-
-		// Led Clignotante 1 fois
-		
-		/*FIO_ClearValue(0, ledBit);
-		pseudoSleep(100000); // Environ 1s
-		FIO_SetValue(0, ledBit);
-		pseudoSleep(100000); // Environ 1s*/
-		
-		//Au clair de la lune
-		/*
-		note(38);	//Pseudo Do
-		note(38);	//Pseudo Do
-		note(38);	//Pseudo Do
-		note(34);	//Pseudo Re
-		note(30); //Pseudo Mi
-		note(34);	//Pseudo Re
-		note(38);	//Pseudo Do
-		note(30); //Pseudo Mi
-		note(34);	//Pseudo Re
-		note(34);	//Pseudo Re
-		note(38);	//Pseudo Do
-		*/
-		//Fin
 		
 		// Congifuration
 		for (i=0; i<6; i++)
@@ -163,6 +141,7 @@ int main(void)
 	//=============
 	// Definition
 	//=============
+	
 	char i;
 	
 	// Variable pour savoir si un tableau doit être affiché
@@ -188,7 +167,7 @@ int main(void)
 	//uint16_t previousTouch = 0;
 	
 	uint8_t data[20];
-	uint8_t testdata[20];
+	
 	//=============
 	// Init
 	//=============
@@ -222,6 +201,9 @@ int main(void)
 	// Boucle
 	//=============
 	
+	numEn = 3;
+	initEnemy(eX, eY, random);
+	
 	dessiner_rect(0,0,240,320,0,1,Black,Black);
 	
 	while(1)
@@ -240,7 +222,11 @@ int main(void)
 			
 			if (stamina != staminaMax)
 				dessiner_rect(8,10, 4, staminaMax-stamina, 0, 1, Grey, Grey);
-			dessiner_rect(8,10+staminaMax-stamina, 4, stamina, 0, 1, Blue, Blue);
+			
+			if (stamina < staminaAttack)
+				dessiner_rect(8,10+staminaMax-stamina, 4, stamina, 0, 1, 0x8c71, 0x8c71);
+			else
+				dessiner_rect(8,10+staminaMax-stamina, 4, stamina, 0, 1, Blue, Blue);
 			
 			if (pLife != life)
 			{
@@ -383,6 +369,7 @@ int main(void)
 						pY=30;
 						mapX=0;
 						mapY=0;
+						dying = 1;
 						
 						fillup_save(data, numSave, life, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
 						create_save(numSave,data);

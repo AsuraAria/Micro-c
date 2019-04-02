@@ -160,7 +160,7 @@ int check_memory()
 }
 
 
-void fillup_save(uint8_t* Buffer, int num, int life, unsigned int Map_x, unsigned int Map_y, unsigned int Location_x, unsigned int Location_y,unsigned int score)
+void fillup_save(uint8_t* Buffer, char num, unsigned char life, unsigned char Map_x, unsigned char Map_y, unsigned short Location_x, unsigned short Location_y, char score)
 {
   //writting of key in local
 	Buffer[0]='m';
@@ -211,10 +211,10 @@ void filldown_save(uint8_t* Buffer, char num, unsigned char *life,unsigned char 
 	//Buffer[19]=(uint8_t)score;
 }
 
-void create_save(int num, uint8_t* Current_save)
+void create_save(char num, uint8_t* Current_save)
 {
   // creation of a backup in memory
-	//i2c_eeprom_write(20*(num+3), Current_save,20);
+	// i2c_eeprom_write(20*(num+3), Current_save,20);
   // creation of a save in memory
 	i2c_eeprom_write(20*num, Current_save,20);
 }

@@ -91,11 +91,7 @@ I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc_types.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_clkpwr.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_pinsel.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_libcfg_default.h)(0x5C90C2F4)
-<<<<<<< HEAD
-F (..\User\main.c)(0x5CA31FEF)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\main.o --omf_browse .\output\main.crf --depend .\output\main.d)
-=======
-F (..\User\main.c)(0x5CA11FD6)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\main.o --omf_browse .\output\main.crf --depend .\output\main.d)
->>>>>>> parent of b3c2c65... V.alpha
+F (..\User\main.c)(0x5CA341B8)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\main.o --omf_browse .\output\main.crf --depend .\output\main.d)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_gpio.h)(0x5C90C2F4)
 I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\LPC17xx.h)(0x5C90C2F4)
 I (..\Libraries\CM3\CoreSupport\core_cm3.h)(0x5C90C2F4)
@@ -107,30 +103,24 @@ I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc_types.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_pinsel.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_libcfg_default.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_timer.h)(0x5C90C2F4)
-I (..\User\touch\ili_lcd_general.h)(0x5C90C2F4)
+I (..\User\touch\ili_lcd_general.h)(0x5CA34090)
 I (..\User\touch\lcd_api.h)(0x5C90C2F4)
-I (..\User\affichagelcd.h)(0x5C90C2F4)
+I (..\User\affichagelcd.h)(0x5CA3207E)
 I (..\User\touch\touch_panel.h)(0x5C90C2F4)
-I (..\User\display.h)(0x5C9F66E2)
-I (D:\Programs\MDK\ARM\ARMCC\include\stdbool.h)(0x5C9E6263)
-I (D:\Programs\MDK\ARM\ARMCC\include\math.h)(0x599F3DAE)
-I (D:\Programs\MDK\ARM\ARMCC\include\stdio.h)(0x599F3DAC)
-I (D:\Programs\MDK\ARM\ARMCC\include\stdlib.h)(0x599F3DAC)
-I (..\User\touch/ili_lcd_general.h)(0x5C90C2F4)
-I (..\User\touch/touch_panel.h)(0x5C90C2F4)
-<<<<<<< HEAD
-I (..\User\memory.h)(0x5CA30E6C)
-I (..\User\musicien.h)(0x5CA31140)
-I (..\User\globaldec.h)(0x5CA315C8)
-=======
-I (..\User\memory.h)(0x5C9F6674)
-I (..\User\musicien.h)(0x5C9F6674)
-I (..\User\globaldec.h)(0x5CA10AC9)
->>>>>>> parent of b3c2c65... V.alpha
+I (..\User\memory.h)(0x5CA32C7A)
+I (..\User\musicien.h)(0x5CA3207E)
+I (..\User\globaldec.h)(0x5CA323FA)
 I (..\User\constantes.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_i2c.h)(0x5C90C2F4)
+I (D:\Programs\MDK\ARM\ARMCC\include\stdio.h)(0x599F3DAC)
+I (..\User\display.h)(0x5CA32800)
+I (D:\Programs\MDK\ARM\ARMCC\include\stdbool.h)(0x5C9E6263)
+I (D:\Programs\MDK\ARM\ARMCC\include\math.h)(0x599F3DAE)
+I (D:\Programs\MDK\ARM\ARMCC\include\stdlib.h)(0x599F3DAC)
+I (..\User\touch/ili_lcd_general.h)(0x5CA34090)
+I (..\User\touch/touch_panel.h)(0x5C90C2F4)
 F (..\User\touch\ili_lcd_general.c)(0x5C90C2F4)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\ili_lcd_general.o --omf_browse .\output\ili_lcd_general.crf --depend .\output\ili_lcd_general.d)
-I (..\User\touch\ili_lcd_general.h)(0x5C90C2F4)
+I (..\User\touch\ili_lcd_general.h)(0x5CA34090)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_gpio.h)(0x5C90C2F4)
 I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\LPC17xx.h)(0x5C90C2F4)
 I (..\Libraries\CM3\CoreSupport\core_cm3.h)(0x5C90C2F4)
@@ -141,7 +131,7 @@ I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\system_LPC17xx.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc_types.h)(0x5C90C2F4)
 F (..\User\touch\lcd_api.c)(0x5C9F6674)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\lcd_api.o --omf_browse .\output\lcd_api.crf --depend .\output\lcd_api.d)
 I (D:\Programs\MDK\ARM\ARMCC\include\stdint.h)(0x599F3DAE)
-I (..\User\touch\ili_lcd_general.h)(0x5C90C2F4)
+I (..\User\touch\ili_lcd_general.h)(0x5CA34090)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_gpio.h)(0x5C90C2F4)
 I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\LPC17xx.h)(0x5C90C2F4)
 I (..\Libraries\CM3\CoreSupport\core_cm3.h)(0x5C90C2F4)
@@ -151,7 +141,7 @@ I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\system_LPC17xx.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc_types.h)(0x5C90C2F4)
 F (..\User\touch\english_16x8.c)(0x5C9F6674)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\english_16x8.o --omf_browse .\output\english_16x8.crf --depend .\output\english_16x8.d)
 F (..\User\affichagelcd.c)(0x5C90C2F4)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\affichagelcd.o --omf_browse .\output\affichagelcd.crf --depend .\output\affichagelcd.d)
-I (..\User\touch/ili_lcd_general.h)(0x5C90C2F4)
+I (..\User\touch/ili_lcd_general.h)(0x5CA34090)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_gpio.h)(0x5C90C2F4)
 I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\LPC17xx.h)(0x5C90C2F4)
 I (..\Libraries\CM3\CoreSupport\core_cm3.h)(0x5C90C2F4)
@@ -176,25 +166,20 @@ I (..\Libraries\CM3\CoreSupport\core_cmInstr.h)(0x5C90C2F4)
 I (..\Libraries\CM3\CoreSupport\core_cmFunc.h)(0x5C90C2F4)
 I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\system_LPC17xx.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_gpio.h)(0x5C90C2F4)
-I (..\User\touch\ili_lcd_general.h)(0x5C90C2F4)
+I (..\User\touch\ili_lcd_general.h)(0x5CA34090)
 I (..\User\touch\lcd_api.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_spi.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_ssp.h)(0x5C90C2F4)
 I (D:\Programs\MDK\ARM\ARMCC\include\stdio.h)(0x599F3DAC)
 I (..\User\global.h)(0x5C90C2F4)
 I (..\User\constantes.h)(0x5C90C2F4)
-<<<<<<< HEAD
-F (..\User\display.c)(0x5CA31F1E)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\display.o --omf_browse .\output\display.crf --depend .\output\display.d)
-I (..\User\display.h)(0x5CA30EBA)
-=======
-F (..\User\display.c)(0x5CA11F45)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\display.o --omf_browse .\output\display.crf --depend .\output\display.d)
-I (..\User\display.h)(0x5C9F66E2)
->>>>>>> parent of b3c2c65... V.alpha
+F (..\User\display.c)(0x5CA345F5)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\display.o --omf_browse .\output\display.crf --depend .\output\display.d)
+I (..\User\display.h)(0x5CA32800)
 I (D:\Programs\MDK\ARM\ARMCC\include\stdbool.h)(0x5C9E6263)
 I (D:\Programs\MDK\ARM\ARMCC\include\math.h)(0x599F3DAE)
 I (D:\Programs\MDK\ARM\ARMCC\include\stdio.h)(0x599F3DAC)
 I (D:\Programs\MDK\ARM\ARMCC\include\stdlib.h)(0x599F3DAC)
-I (..\User\touch/ili_lcd_general.h)(0x5C90C2F4)
+I (..\User\touch/ili_lcd_general.h)(0x5CA34090)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_gpio.h)(0x5C90C2F4)
 I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\LPC17xx.h)(0x5C90C2F4)
 I (..\Libraries\CM3\CoreSupport\core_cm3.h)(0x5C90C2F4)
@@ -207,17 +192,10 @@ I (..\User\touch/lcd_api.h)(0x5C90C2F4)
 I (..\User\touch/touch_panel.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_libcfg_default.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_pinsel.h)(0x5C90C2F4)
-<<<<<<< HEAD
-I (..\User\affichagelcd.h)(0x5CA30FFB)
-I (..\User\memory.h)(0x5CA30E6C)
-I (..\User\texture.h)(0x5CA31DCD)
-F (..\User\memory.c)(0x5CA30C40)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\memory.o --omf_browse .\output\memory.crf --depend .\output\memory.d)
-=======
-I (..\User\affichagelcd.h)(0x5C90C2F4)
-I (..\User\memory.h)(0x5C9F6674)
-I (..\User\texture.h)(0x5CA11344)
-F (..\User\memory.c)(0x5C9F6674)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\memory.o --omf_browse .\output\memory.crf --depend .\output\memory.d)
->>>>>>> parent of b3c2c65... V.alpha
+I (..\User\affichagelcd.h)(0x5CA3207E)
+I (..\User\memory.h)(0x5CA32C7A)
+I (..\User\texture.h)(0x5CA343F7)
+F (..\User\memory.c)(0x5CA32B32)(-c --cpu Cortex-M3 -D__RTX -D__EVAL -g -O0 --apcs=interwork --enum_is_int -I ..\Libraries\LCP1768_StdPeriph_Driver\include -I ..\Libraries\CM3\CoreSupport -I ..\Libraries\CM3\DeviceSupport\NXP\LPC17xx -I ..\User-ID:\Programs\MDK\ARM\RV31\INC-ID:\Programs\MDK\ARM\CMSIS\Include-ID:\Programs\MDK\ARM\INC\NXP\LPC17xx-D__UVISION_VERSION="526"-o .\output\memory.o --omf_browse .\output\memory.crf --depend .\output\memory.d)
 I (D:\Programs\MDK\ARM\ARMCC\include\stdint.h)(0x599F3DAE)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_i2c.h)(0x5C90C2F4)
 I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\LPC17xx.h)(0x5C90C2F4)
@@ -235,6 +213,6 @@ I (..\Libraries\CM3\CoreSupport\core_cmInstr.h)(0x5C90C2F4)
 I (..\Libraries\CM3\CoreSupport\core_cmFunc.h)(0x5C90C2F4)
 I (..\Libraries\CM3\DeviceSupport\NXP\LPC17xx\system_LPC17xx.h)(0x5C90C2F4)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc_types.h)(0x5C90C2F4)
-I (..\User\musicien.h)(0x5C9F6674)
+I (..\User\musicien.h)(0x5CA3207E)
 I (..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_gpio.h)(0x5C90C2F4)
-I (..\User\partitions.h)(0x5C9F6674)
+I (..\User\partitions.h)(0x5CA33CC8)

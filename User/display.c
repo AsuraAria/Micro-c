@@ -7,6 +7,9 @@
 // Affichage des menus
 //=======================
 //char text[20];
+
+extern char dying;
+
 char text1[5];
 
 void drawMenu(char m)
@@ -26,7 +29,7 @@ void drawMenu(char m)
 		
 		drawText("play", 1, TSIZE*5.5, (unsigned short) 320-TSIZE*2-TSIZE*4);
 		drawText("extra", 1, TSIZE*8.5, (unsigned short) 320-TSIZE*2-TSIZE*5);
-		
+	
 		drawPlayer((unsigned short) TSIZE*5, TSIZE*2, 10);
 	}
 	else if (m == 2)
@@ -89,26 +92,25 @@ void drawMenu(char m)
 	{
 		drawText("tutorial", 1, TSIZE*0, (unsigned short)(320-8*TSIZE/1)/2);
 		
-		drawText("read readme.txt", 2, TSIZE*6, TSIZE*4.25);
-		/*drawText("use the joystick to move", 2, TSIZE*2, TSIZE*3.5);
-		drawText("use the joystick click to", 2, TSIZE*4, TSIZE*3);
-		drawText("attack", 2, TSIZE*5, TSIZE*12.5);
-		drawText("you can only attack if your", 2, TSIZE*6, TSIZE*2);
-		drawText("stamina is full ~ in blue", 2, TSIZE*7, TSIZE*3);
+		//drawText("read readme.txt", 2, TSIZE*6, TSIZE*4.25);
+		drawText("use the joystick to move", 2, TSIZE*2, TSIZE*3.5);
+		drawText("use the first button to attack.", 2, TSIZE*3, TSIZE*0.5);
+		drawText("you can only attack if your", 2, TSIZE*5, TSIZE*2);
+		drawText("stamina is blue.", 2, TSIZE*6, TSIZE*8);
 		
-		drawText("you've only some life so stay", 2, TSIZE*9, TSIZE*1);
-		drawText("safe ~ left up corner", 2, TSIZE*10, TSIZE*5);*/
+		drawText("you've only some life so stay", 2, TSIZE*8, TSIZE*1);
+		drawText("safe. left up corner.", 2, TSIZE*9, TSIZE*5.5);
 	}
 	else if (m == 4)
 	{
 		drawText("story", 1, TSIZE*0, (unsigned short)(320-5*TSIZE/1)/2);
 		
-		drawText("fluffy is a fluffitten.", 2, TSIZE*2, TSIZE*4.5);
-		drawText("a devine race born from the", 2, TSIZE*3, TSIZE*2.5);
+		drawText("fluffy is a fluffitten.", 2, TSIZE*2, TSIZE*4);
+		drawText("a divine race born from the", 2, TSIZE*3, TSIZE*2.5);
 		drawText("witch of madness long ago in", 2, TSIZE*4, TSIZE*2);
 		drawText("this sorrowful and maimed world.", 2, TSIZE*5, TSIZE*0);
 		
-		drawText("in this day and age the world", 2, TSIZE*7, TSIZE*1.5);
+		drawText("in this day and age the world", 2, TSIZE*7, TSIZE*1);
 		drawText("is starting to darn himself and", 2, TSIZE*8, TSIZE*0.5);
 		drawText("reclaim its peace. nonetheless", 2, TSIZE*9, TSIZE*1);
 		drawText("fluffy's duty is to protect the", 2, TSIZE*10, TSIZE*0.5);
@@ -130,6 +132,8 @@ char unCompressLetter(char v)
 			return 12;
 		case 3:
 			return 250;
+		default:
+			return 0;
 	}
 }
 
@@ -302,16 +306,16 @@ void drawTexture(unsigned short x, unsigned short y, char tex)
 unsigned short getMap(unsigned char x, unsigned char y, unsigned char j, unsigned char i)
 {
 	if (x==0 && y==0)
-		return (t00[j][(short)i/4]>>((i*2)%8))&3;
+		return (t00[j][(char)i/4]>>((i*2)%8))&3;
 		//return t00[j][i];
 	else if (x==1 && y==0)
-		return (t10[j][(short)i/4]>>((i*2)%8))&3;
+		return (t10[j][(char)i/4]>>((i*2)%8))&3;
 		//return t10[j][i];
 	else if (x==0 && y==1)
-		return (t01[j][(short)i/4]>>((i*2)%8))&3;
+		return (t01[j][(char)i/4]>>((i*2)%8))&3;
 		//return t01[j][i];
 	else if (x==250)
-		return (tMenu[j][(short)i/4]>>((i*2)%8))&3;
+		return (tMenu[j][(char)i/4]>>((i*2)%8))&3;
 		//return tMenu[j][i];
 	
 	return 0;
@@ -337,11 +341,37 @@ void drawMap(unsigned char x, unsigned char y, bool * notDone)
 // Affichage du personnage
 //=======================
 
+char playerColor(char c)
+{
+	switch(c)
+	{
+		case 0:
+			return 250;
+		case 1:
+			return 7;
+		case 2:
+			return 9;
+		case 3:
+			return 11;
+		case 4:
+			return 10;
+		case 5:
+			return 8;
+		case 6:
+			return 13;
+		case 7:
+			return 4;
+		default:
+			return 10;
+	}
+}
+
 void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 {
 	int i,j;
+	unsigned char c;
 	
-	if (d <= 5)
+	if (d <= 5 || d == 20)
 	{
 		for(i=0; i<PSIZE; i++)
 		{
@@ -352,80 +382,57 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 			{
 				switch(d)
 				{
+					case 4:
 					case 1:
-						if (pDown[j][i] != 250)
-						{
-							lcd_SetCursor(x+j,y+i);
-							rw_data_prepare();
-							write_data(getColor(pDown[j][i]));
-						}
+						c = playerColor((pDown[j][(char)i/2]>>((i*4)%8))&15);
 						break;
 					case 0:
-						if (pRight[j][PSIZE-i-1] != 250)
-						{
-							lcd_SetCursor(x+j,y+i);
-							rw_data_prepare();
-							write_data(getColor(pRight[j][PSIZE-i-1]));
-						}
+						c = playerColor((pRight[j][(char)(PSIZE-i-1)/2]>>(((PSIZE-i-1)*4)%8))&15);
 						break;
 					case 3:
-						if (pUp[j][i] != 250)
-						{
-							lcd_SetCursor(x+j,y+i);
-							rw_data_prepare();
-							write_data(getColor(pUp[j][i]));
-						}
+						c = playerColor((pUp[j][(char)i/2]>>((i*4)%8))&15);
 						break;
 					case 2:
-						if (pRight[j][i] != 250)
-						{
-							lcd_SetCursor(x+j,y+i);
-							rw_data_prepare();
-							write_data(getColor(pRight[j][i]));
-						}
+						c = playerColor((pRight[j][(char)i/2]>>((i*4)%8))&15);
 						break;
-					case 4:
-						if (pDown[j][i] != 250)
-						{
-							lcd_SetCursor(x+j,y+i);
-							rw_data_prepare();
-							write_data(getColor(pDown[j][i]));
-						}
-						break;
+					case 20:
+						c = playerColor((en[j][(char)i/2]>>((i*4)%8))&15);
 					default:
 						break;
+				}
+				if (c != 250)
+				{
+					lcd_SetCursor(x+j,y+i);
+					rw_data_prepare();
+					write_data(getColor(c));
 				}
 			}
 		}
 	}
 	else if (d == 10)
 	{
-		//unsigned char pDown[PSIZE][PSIZE] = 
-		
+		/*dying *= 2;
+		for (i=0; i<2; i++)
+		{
+			i*=4;
+			pDown[9][6+i] = 9+dying;
+			pDown[9][7+i] = 11-dying;
+			pDown[9][8+i] = 9+dying;
+			
+			pDown[11][6+i] = 9+dying;
+			pDown[11][7+i] = 11-dying;
+			pDown[11][8+i] = 9+dying;
+		}*/
+	
 		for(i=0; i<PSIZE*6; i++)
 		{
 			for(j=0; j<PSIZE*6; j++)
 			{
-				if (pDown[(int)(j/6)][(int)(i/6)] != 250)
+				if ((unsigned char)playerColor((pDown[(j/6)][(char)(i/6)/2]>>(((i/6)*4)%8))&15) != 250)
 				{
 					lcd_SetCursor(x+j,y+i);
 					rw_data_prepare();
-					write_data(getColor(pDown[(int)(j/6)][(int)(i/6)]));
-				}
-			}
-		}
-	}
-	else if (d == 20)
-	{
-		for(i=0; i<PSIZE; i++)
-		{
-			for(j=0; j<PSIZE; j++)
-			{
-				if (en[j][i] != 250)
-				{
-					lcd_SetCursor(x+j,y+i);
-					rw_data_prepare();
-					write_data(getColor(en[j][i]));
+					write_data(getColor(playerColor((pDown[(j/6)][(char)(i/6)/2]>>(((i/6)*4)%8))&15)));
 				}
 			}
 		}
@@ -447,21 +454,19 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 	}
 }
 
-
 void clearOldPlayer(unsigned short x, unsigned short y, unsigned char mx, unsigned char my)
 {
-	if ((x-1)/TSIZE != 0 || ((y-1)/TSIZE > 3 &&  (y-1)/TSIZE < 11))
+	if ((x-1)/TSIZE != 0 || ((y-1)/TSIZE > 3 &&  (y-1)/TSIZE < 12))
 	{
 		drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y-1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y-1)/TSIZE)));
 	}
 	drawTexture(floor((x+PSIZE+1)/TSIZE)*TSIZE, floor((y-1)/TSIZE)*TSIZE, getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y-1)/TSIZE)));
-	if ((x-1)/TSIZE != 0 || ((y-1)/TSIZE > 3 &&  (y-1)/TSIZE < 11))
+	if ((x-1)/TSIZE != 0 || ((y-1)/TSIZE > 3 &&  (y-1)/TSIZE < 12))
 	{
 		drawTexture(floor((x-1)/TSIZE)*TSIZE, floor((y+PSIZE+1)/TSIZE)*TSIZE, getMap(mx,my,floor((x-1)/TSIZE),floor((y+PSIZE+1)/TSIZE)));
 	}
 	drawTexture(floor((x+PSIZE+1)/TSIZE)*TSIZE, floor((y+PSIZE+1)/TSIZE)*TSIZE, getMap(mx,my,floor((x+PSIZE+1)/TSIZE),floor((y+PSIZE+1)/TSIZE)));
 }
-
 
 //
 //=======================

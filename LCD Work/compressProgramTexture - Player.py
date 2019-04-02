@@ -26,7 +26,7 @@ d = []
 
 for i in range(len(a)):
     
-    c = ["","","",""]
+    c = ["","","","","","","",""]
     
     for j in range(len(a[0])):
         t = ""
@@ -37,15 +37,15 @@ for i in range(len(a)):
         t = reverse_slicing(bin(a[i][j]).replace("0b",""))
         #print(t)
         
-        while len(t)<2:
+        while len(t)<4:
             t+="0"
         #print(" "+t)
             
-        c[int(j/4)] += reverse_slicing(reverse_slicing(t))
+        c[int(j/2)] += reverse_slicing(reverse_slicing(t))
         
     
         
-    for j in range(4):
+    for j in range(8):
         c[j] = reverse_slicing(c[j])
     
     b.append(c.copy())

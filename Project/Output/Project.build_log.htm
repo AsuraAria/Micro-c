@@ -61,125 +61,8 @@ compiling lpc17xx_i2c.c...
         CHECK_PARAM(PARAM_I2C_SLAVEADDR_CH(OwnSlaveAddrConfigStruct->SlaveAddrChannel));
 ..\Libraries\LCP1768_StdPeriph_Driver\source\lpc17xx_i2c.c: 9 warnings, 0 errors
 compiling main.c...
-<<<<<<< HEAD
-..\User\globaldec.h(33): warning:  #1-D: last line of file ends without a newline
-  short dying = 
-..\User\main.c(25): error:  #29: expected an expression
-  void T1_Init(){//initiation du timer1
-..\User\main.c(47): warning:  #12-D: parsing restarts here after previous syntax error
-        TIM_Cmd(LPC_TIM1, ENABLE);
-..\User\main.c(48): error:  #169: expected a declaration
-  }
-..\User\main.c(73): warning:  #12-D: parsing restarts here after previous syntax error
-        TIM_ClearIntPending(LPC_TIM1, TIM_MR1_INT);//Acquitement
-..\User\main.c(74): error:  #169: expected a declaration
-  }
-..\User\main.c(98): warning:  #12-D: parsing restarts here after previous syntax error
-                memory27.Funcnum = PINSEL_FUNC_1;
-..\User\main.c(99): error:  #77-D: this declaration has no storage class or type specifier
-                memory27.OpenDrain = PINSEL_PINMODE_NORMAL;
-..\User\main.c(99): error:  #65: expected a ";"
-                memory27.OpenDrain = PINSEL_PINMODE_NORMAL;
-..\User\main.c(100): error:  #77-D: this declaration has no storage class or type specifier
-                memory27.Pinmode = PINSEL_PINMODE_PULLUP;
-..\User\main.c(100): error:  #65: expected a ";"
-                memory27.Pinmode = PINSEL_PINMODE_PULLUP;
-..\User\main.c(101): error:  #77-D: this declaration has no storage class or type specifier
-                memory27.Pinnum = PINSEL_PIN_27;
-..\User\main.c(101): error:  #65: expected a ";"
-                memory27.Pinnum = PINSEL_PIN_27;
-..\User\main.c(102): error:  #77-D: this declaration has no storage class or type specifier
-                memory27.Portnum = PINSEL_PORT_0; // GPIO0
-..\User\main.c(102): error:  #65: expected a ";"
-                memory27.Portnum = PINSEL_PORT_0; // GPIO0
-..\User\main.c(103): error:  #79: expected a type specifier
-                PINSEL_ConfigPin(&memory27);
-..\User\main.c(103): warning:  #77-D: this declaration has no storage class or type specifier
-                PINSEL_ConfigPin(&memory27);
-..\User\main.c(103): error:  #147: declaration is incompatible with "void PINSEL_ConfigPin(PINSEL_CFG_Type *)"  (declared at line 176 of "..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_pinsel.h")
-                PINSEL_ConfigPin(&memory27);
-..\User\main.c(105): error:  #77-D: this declaration has no storage class or type specifier
-                memory28.Funcnum = PINSEL_FUNC_1;
-..\User\main.c(105): error:  #65: expected a ";"
-                memory28.Funcnum = PINSEL_FUNC_1;
-..\User\main.c(106): error:  #77-D: this declaration has no storage class or type specifier
-                memory28.OpenDrain = PINSEL_PINMODE_NORMAL;
-..\User\main.c(106): error:  #65: expected a ";"
-                memory28.OpenDrain = PINSEL_PINMODE_NORMAL;
-..\User\main.c(107): error:  #77-D: this declaration has no storage class or type specifier
-                memory28.Pinmode = PINSEL_PINMODE_PULLUP;
-..\User\main.c(107): error:  #65: expected a ";"
-                memory28.Pinmode = PINSEL_PINMODE_PULLUP;
-..\User\main.c(108): error:  #77-D: this declaration has no storage class or type specifier
-                memory28.Pinnum = PINSEL_PIN_28;
-..\User\main.c(108): error:  #65: expected a ";"
-                memory28.Pinnum = PINSEL_PIN_28;
-..\User\main.c(109): error:  #77-D: this declaration has no storage class or type specifier
-                memory28.Portnum = PINSEL_PORT_0; // GPIO0
-..\User\main.c(109): error:  #65: expected a ";"
-                memory28.Portnum = PINSEL_PORT_0; // GPIO0
-..\User\main.c(110): error:  #79: expected a type specifier
-                PINSEL_ConfigPin(&memory28);
-..\User\main.c(110): warning:  #77-D: this declaration has no storage class or type specifier
-                PINSEL_ConfigPin(&memory28);
-..\User\main.c(113): error:  #169: expected a declaration
-                for (i=0; i<6; i++)
-..\User\main.c(154): warning:  #12-D: parsing restarts here after previous syntax error
-        char numSave = 0;
-..\User\main.c(166): warning:  #1295-D: Deprecated declaration lcd_Initializtion - give arg types
-        lcd_Initializtion(); // init pinsel ecran et init LCD
-..\User\main.c(166): warning:  #77-D: this declaration has no storage class or type specifier
-        lcd_Initializtion(); // init pinsel ecran et init LCD
-..\User\main.c(166): error:  #147: declaration is incompatible with "void lcd_Initializtion(void)"  (declared at line 74 of "..\User\touch\ili_lcd_general.h")
-        lcd_Initializtion(); // init pinsel ecran et init LCD
-..\User\main.c(167): warning:  #1295-D: Deprecated declaration touch_init - give arg types
-        touch_init(); // init pinsel tactile et init tactile
-..\User\main.c(167): warning:  #77-D: this declaration has no storage class or type specifier
-        touch_init(); // init pinsel tactile et init tactile
-..\User\main.c(167): error:  #147: declaration is incompatible with "void touch_init(void)"  (declared at line 29 of "..\User\touch\touch_panel.h")
-        touch_init(); // init pinsel tactile et init tactile
-..\User\main.c(168): warning:  #1295-D: Deprecated declaration pin_Configuration - give arg types
-        pin_Configuration(); // init pinsel memoire, buzzer, led
-..\User\main.c(168): warning:  #77-D: this declaration has no storage class or type specifier
-        pin_Configuration(); // init pinsel memoire, buzzer, led
-..\User\main.c(169): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
-        init_i2c_eeprom(); // init mémoire
-..\User\main.c(169): warning:  #77-D: this declaration has no storage class or type specifier
-        init_i2c_eeprom(); // init mémoire
-..\User\main.c(169): error:  #147: declaration is incompatible with "void init_i2c_eeprom(void)"  (declared at line 9 of "..\User\memory.h")
-        init_i2c_eeprom(); // init mémoire
-..\User\main.c(170): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
-        T0_Init(); // init timer musique
-..\User\main.c(170): warning:  #77-D: this declaration has no storage class or type specifier
-        T0_Init(); // init timer musique
-..\User\main.c(170): error:  #147: declaration is incompatible with "void T0_Init(void)"  (declared at line 39 of "..\User\musicien.h")
-        T0_Init(); // init timer musique
-..\User\main.c(171): warning:  #1295-D: Deprecated declaration T1_Init - give arg types
-        T1_Init();
-..\User\main.c(171): warning:  #77-D: this declaration has no storage class or type specifier
-        T1_Init();
-..\User\main.c(173): warning:  #1295-D: Deprecated declaration musintro - give arg types
-        musintro();
-..\User\main.c(173): warning:  #77-D: this declaration has no storage class or type specifier
-        musintro();
-..\User\main.c(173): error:  #147: declaration is incompatible with "void musintro(void)"  (declared at line 45 of "..\User\musicien.h")
-        musintro();
-..\User\main.c: 21 warnings, 30 errors
-=======
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
-..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
-   
-..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
-  void init_i2c_eeprom();
-..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
-  void clean_memory();
-..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
-  void create_gamekey();
-..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
-  int check_memory();
-..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
-  char readJoystick();
 ..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
   void init_i2c_eeprom();
 ..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
@@ -194,10 +77,21 @@ compiling main.c...
   void TIMER0_IRQHandler();
 ..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\main.c(190): warning:  #177-D: variable "testdata"  was declared but never referenced
-        uint8_t testdata[20];
+..\User\globaldec.h(33): warning:  #1-D: last line of file ends without a newline
+  char dying = 0;
+..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
+   
+..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
+  void init_i2c_eeprom();
+..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
+  void clean_memory();
+..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
+  void create_gamekey();
+..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
+  int check_memory();
+..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+  char readJoystick();
 ..\User\main.c: 15 warnings, 0 errors
->>>>>>> parent of b3c2c65... V.alpha
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -219,8 +113,8 @@ compiling display.c...
   int check_memory();
 ..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   char readJoystick();
-..\User\display.c(134): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
-  }
+..\User\texture.h(1759): warning:  #1-D: last line of file ends without a newline
+  //const unsigned char t[200];
 ..\User\display.c: 7 warnings, 0 errors
 compiling memory.c...
 compiling musicien.c...
@@ -230,22 +124,12 @@ compiling musicien.c...
   void TIMER0_IRQHandler();
 ..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\partitions.h(24): warning:  #1-D: last line of file ends without a newline
-  tnote alarme[3]={{sol4,700},{si4,200},finp};*/
-..\User\musicien.c: 4 warnings, 0 errors
+..\User\musicien.c: 3 warnings, 0 errors
 linking...
-<<<<<<< HEAD
-.\Output\Project.axf: error: L6002U: Could not open file .\output\main.o: No such file or directory
-Finished: 0 information, 0 warning, 0 error and 1 fatal error messages.
-".\Output\Project.axf" - 31 Error(s), 32 Warning(s).
-Target not created.
-Build Time Elapsed:  00:00:26
-=======
-Program Size: Code=27184 RO-data=5072 RW-data=436 ZI-data=988  
+Program Size: Code=27636 RO-data=4760 RW-data=336 ZI-data=992  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 37 Warning(s).
-Build Time Elapsed:  00:00:28
->>>>>>> parent of b3c2c65... V.alpha
+".\Output\Project.axf" - 0 Error(s), 36 Warning(s).
+Build Time Elapsed:  00:00:16
 </pre>
 </body>
 </html>

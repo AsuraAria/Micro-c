@@ -71,19 +71,41 @@ int check_memory();
  * - None.
  **********************************************************************/ 
 
-void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+void fillup_save(uint8_t*, char, unsigned char, unsigned char, unsigned char, unsigned short, unsigned short, char);
 /*********************************************************************//**
  * @brief			fill structure with wanted parameter
  * @param[in]	uint8_t*, buffer pointer
+ *						char, save num
+ *						unsigned char, life
+ *						unsigned char, Map_x
+ *						unsigned char, Map_y
+ *						unsigne short, Location_x
+ *						unsigne short, Location_y
+ *						char, score
  * @return		None
  *
  * Note:
  * - None
  **********************************************************************/ 
 
-void filldown_save(uint8_t* Buffer, char num, unsigned char *,unsigned char*,unsigned char* Map_y, unsigned short *Location_x, unsigned short *Location_y,char *score);
+void filldown_save(uint8_t*, char, unsigned char *,unsigned char*,unsigned char*, unsigned short *, unsigned short *,char *);
+/*********************************************************************//**
+ * @brief			fill structure with wanted parameter
+ * @param[in]	uint8_t*, buffer pointer
+ *						char, save num
+ *						unsigned char, life
+ *						unsigned char, Map_x
+ *						unsigned char, Map_y
+ *						unsigne short, Location_x
+ *						unsigne short, Location_y
+ *						char, score
+ * @return		None
+ *
+ * Note:
+ * - None
+ **********************************************************************/ 
 
-void create_save(int, uint8_t*);
+void create_save(char, uint8_t*);
 /*********************************************************************//**
  * @brief			Replace existing save by backup save
  * @param[in]	int, save number
