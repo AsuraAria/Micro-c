@@ -89,23 +89,30 @@ void drawMenu(char m)
 	{
 		drawText("tutorial", 1, TSIZE*0, (unsigned short)(320-8*TSIZE/1)/2);
 		
-		drawText("use the joystick to move", 2, TSIZE*2, TSIZE*3.5);
+		drawText("read readme.txt", 2, TSIZE*6, TSIZE*4.25);
+		/*drawText("use the joystick to move", 2, TSIZE*2, TSIZE*3.5);
 		drawText("use the joystick click to", 2, TSIZE*4, TSIZE*3);
 		drawText("attack", 2, TSIZE*5, TSIZE*12.5);
 		drawText("you can only attack if your", 2, TSIZE*6, TSIZE*2);
 		drawText("stamina is full ~ in blue", 2, TSIZE*7, TSIZE*3);
 		
 		drawText("you've only some life so stay", 2, TSIZE*9, TSIZE*1);
-		drawText("safe ~ left up corner", 2, TSIZE*10, TSIZE*5);
+		drawText("safe ~ left up corner", 2, TSIZE*10, TSIZE*5);*/
 	}
 	else if (m == 4)
 	{
 		drawText("story", 1, TSIZE*0, (unsigned short)(320-5*TSIZE/1)/2);
 		
-		drawText("a fluffy is a little entity", 2, TSIZE*2, TSIZE*2);
-		drawText("who lives in the darkest world", 2, TSIZE*3, TSIZE*0.5);
-		drawText("it use magic to defend himself", 2, TSIZE*5, TSIZE*0.5);
-		drawText("and his colony", 2, TSIZE*6, TSIZE*8.5);
+		drawText("fluffy is a fluffitten.", 2, TSIZE*2, TSIZE*4.5);
+		drawText("a devine race born from the", 2, TSIZE*3, TSIZE*2.5);
+		drawText("witch of madness long ago in", 2, TSIZE*4, TSIZE*2);
+		drawText("this sorrowful and maimed world.", 2, TSIZE*5, TSIZE*0);
+		
+		drawText("in this day and age the world", 2, TSIZE*7, TSIZE*1.5);
+		drawText("is starting to darn himself and", 2, TSIZE*8, TSIZE*0.5);
+		drawText("reclaim its peace. nonetheless", 2, TSIZE*9, TSIZE*1);
+		drawText("fluffy's duty is to protect the", 2, TSIZE*10, TSIZE*0.5);
+		drawText("fluffillage.", 2, TSIZE*11, TSIZE*10);
 	}
 }
 
@@ -173,7 +180,7 @@ void drawText(char*s, char l, unsigned short x, unsigned short y)
 							write_data(getColor(letterCode));
 						}
 					}
-					if (*s == 126)
+					if (*s == 46)
 					{
 						letterCode = unCompressLetter((a[27][j*l][(short)i*l/4]>>(((i*l)*2)%8))&3);
 						if (letterCode != 250)
@@ -461,7 +468,7 @@ void clearOldPlayer(unsigned short x, unsigned short y, unsigned char mx, unsign
 
 char readJoystick()
 {
-	if (!(GPIO_ReadValue(1) & (1<<20)))
+	if (!(GPIO_ReadValue(2) & (1<<11)))
 	{
 		return 6;
 	}
@@ -482,7 +489,7 @@ char readJoystick()
 	{
 		return 3;
 	}
-	else if (!(GPIO_ReadValue(2) & (1<<11)))
+	else if (!(GPIO_ReadValue(2) & (1<<10)))
 	{
 		return 5;
 	}

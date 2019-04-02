@@ -23,6 +23,7 @@ unsigned short peX[6] = {0, 0, 0, 0, 0, 0};
 unsigned short peY[6] = {0, 0, 0, 0, 0, 0};
 
 char staminaMax = 50;
+char staminaAttack = 30;
 char stamina = 50;
 
 char enFlag = 0;

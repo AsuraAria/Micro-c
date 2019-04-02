@@ -83,8 +83,8 @@ void pin_Configuration()
 		int ledBit = (1<<3);
 		int hpBit = (1<<9);
 	
-		int joystickPort[6] = {2, 2, 2, 2, 1, 1}; //Port
-		int joystickPin[6] = {10, 12, 13, 8, 20, 21}; //Pin
+		int joystickPort[6] = {2, 2, 2, 2, 2, 1}; //Port
+		int joystickPin[6] = {10, 12, 13, 8, 11, 21}; //Pin
 	
 		FIO_SetDir(2, (1<<11), 0); // Bouton Menu : Entrée
 		FIO_SetMask(2, (1<<11), 0); // Bouton Menu : Utilisable
@@ -237,7 +237,7 @@ int main(void)
 				pLife = 0;				// On le fait qu'une seule fois pour une question de rapidité d'execution
 			}
 			
-			if (stamina != 100)
+			if (stamina != staminaMax)
 				dessiner_rect(8,10, 4, staminaMax-stamina, 0, 1, Grey, Grey);
 			dessiner_rect(8,10+staminaMax-stamina, 4, stamina, 0, 1, Blue, Blue);
 			
@@ -296,10 +296,10 @@ int main(void)
 			}
 			
 			// Attaquer
-			if (dir == 6 && stamina == staminaMax)
+			if (dir == 6 && stamina >= staminaAttack)
 			{
 				attack(pX, pY, eX, eY, oneMoreClear, &numEn);
-				stamina = 0;
+				stamina -= staminaAttack;
 			}
 			
 			// Déplacement du personnage
@@ -430,7 +430,7 @@ int main(void)
 					vit = 1;
 				}
 			}
-			iEn = (iEn+1)%3;
+			//iEn = (iEn+1)%3;
 			
 			//sprintf(chaine,"%d - %d | %d - %d",pX, pY, mapX, mapY);
 			//LCD_write_english_string (30,30,chaine,White,Blue);
