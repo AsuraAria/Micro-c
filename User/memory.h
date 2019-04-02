@@ -6,7 +6,7 @@
 // Function: Prototypes
 //===========================================================//
 
-void init_i2c_eeprom(void);
+void init_i2c_eeprom();
 /*********************************************************************//**
  * @brief			Set I2C initialisation and exchange
  * @param[in]	None
@@ -41,7 +41,7 @@ void i2c_eeprom_read(uint16_t, uint8_t*, int);
  * - None.
  **********************************************************************/
 
-void clean_memory(void);
+void clean_memory();
 /*********************************************************************//**
  * @brief			Re-initialisation of memory
  * @param[in]	None
@@ -51,7 +51,7 @@ void clean_memory(void);
  * - Self explanatory.
  **********************************************************************/
 
-void create_gamekey(void);
+void create_gamekey();
 /*********************************************************************//**
  * @brief			Create gamekey
  * @param[in]	None
@@ -61,7 +61,7 @@ void create_gamekey(void);
  * - None.
  **********************************************************************/ 
 
-int check_memory(void);
+int check_memory();
 /*********************************************************************//**
  * @brief			Check gamekey
  * @param[in]	None
@@ -71,39 +71,18 @@ int check_memory(void);
  * - None.
  **********************************************************************/ 
 
-void fillup_save(uint8_t*, char, unsigned char ,unsigned char, unsigned char, unsigned short, unsigned short, char);
+void fillup_save(uint8_t*, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /*********************************************************************//**
  * @brief			fill structure with wanted parameter
  * @param[in]	uint8_t*, buffer pointer
- *						char, save number
- *						char, life
- *						unsigned char, Map_x
- *						unsigned char, Map_y
- *						unsigned short, Location_x
- *						unsigned short, Location_y
- *						char, score
  * @return		None
  *
  * Note:
  * - None
  **********************************************************************/ 
 
-void filldown_save(uint8_t*, char, unsigned char *,unsigned char*,unsigned char*, unsigned short *, unsigned short *,char *);
-/*********************************************************************//**
- * @brief			fill structure with wanted parameter
- * @param[in]	uint8_t*, buffer pointer
- *						char, save number
- *						char, life
- *						unsigned char, Map_x
- *						unsigned char, Map_y
- *						unsigned short, Location_x
- *						unsigned short, Location_y
- *						char, score
- * @return		None
- *
- * Note:
- * - None
- **********************************************************************/ 
+void filldown_save(uint8_t* Buffer, char num, unsigned char *,unsigned char*,unsigned char* Map_y, unsigned short *Location_x, unsigned short *Location_y,char *score);
+
 void create_save(int, uint8_t*);
 /*********************************************************************//**
  * @brief			Replace existing save by backup save
@@ -125,14 +104,14 @@ int check_save(char);
  * - None.
  **********************************************************************/ 
 
-void load_save(int, uint8_t*);
+int load_save(int);
 /*********************************************************************//**
- * @brief			Load a save
+ * @brief			Load a save if uncorrupted
  * @param[in]	int, save number
- * @return		None
+ * @return		int; 0 for succes, 1 for error
  *
  * Note:
- * - None.
+ * - If an error is seen no loading will be done.
  **********************************************************************/
 
 void restaure_backup(int);

@@ -1675,4 +1675,8 @@ const char a[11][TSIZE][TSIZE] = {
 */
 //
 
+<<<<<<< HEAD
 //const char t[80];
+=======
+//const char t[50];
+>>>>>>> parent of b3c2c65... V.alpha

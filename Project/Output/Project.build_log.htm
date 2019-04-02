@@ -61,6 +61,7 @@ compiling lpc17xx_i2c.c...
         CHECK_PARAM(PARAM_I2C_SLAVEADDR_CH(OwnSlaveAddrConfigStruct->SlaveAddrChannel));
 ..\Libraries\LCP1768_StdPeriph_Driver\source\lpc17xx_i2c.c: 9 warnings, 0 errors
 compiling main.c...
+<<<<<<< HEAD
 ..\User\globaldec.h(33): warning:  #1-D: last line of file ends without a newline
   short dying = 
 ..\User\main.c(25): error:  #29: expected an expression
@@ -164,6 +165,39 @@ compiling main.c...
 ..\User\main.c(173): error:  #147: declaration is incompatible with "void musintro(void)"  (declared at line 45 of "..\User\musicien.h")
         musintro();
 ..\User\main.c: 21 warnings, 30 errors
+=======
+..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
+   
+..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
+   
+..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
+  void init_i2c_eeprom();
+..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
+  void clean_memory();
+..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
+  void create_gamekey();
+..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
+  int check_memory();
+..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+  char readJoystick();
+..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
+  void init_i2c_eeprom();
+..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
+  void clean_memory();
+..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
+  void create_gamekey();
+..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
+  int check_memory();
+..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
+  void T0_Init();
+..\User\musicien.h(41): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
+  void TIMER0_IRQHandler();
+..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
+  void musintro();
+..\User\main.c(190): warning:  #177-D: variable "testdata"  was declared but never referenced
+        uint8_t testdata[20];
+..\User\main.c: 15 warnings, 0 errors
+>>>>>>> parent of b3c2c65... V.alpha
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -173,14 +207,45 @@ compiling touch_panel.c...
       uint8_t touch_data_tx[BUF_SIZE];
 ..\User\touch\touch_panel.c: 1 warning, 0 errors
 compiling display.c...
+..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
+   
+..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
+  void init_i2c_eeprom();
+..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
+  void clean_memory();
+..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
+  void create_gamekey();
+..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
+  int check_memory();
+..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+  char readJoystick();
+..\User\display.c(134): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
+  }
+..\User\display.c: 7 warnings, 0 errors
 compiling memory.c...
 compiling musicien.c...
+..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
+  void T0_Init();
+..\User\musicien.h(41): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
+  void TIMER0_IRQHandler();
+..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
+  void musintro();
+..\User\partitions.h(24): warning:  #1-D: last line of file ends without a newline
+  tnote alarme[3]={{sol4,700},{si4,200},finp};*/
+..\User\musicien.c: 4 warnings, 0 errors
 linking...
+<<<<<<< HEAD
 .\Output\Project.axf: error: L6002U: Could not open file .\output\main.o: No such file or directory
 Finished: 0 information, 0 warning, 0 error and 1 fatal error messages.
 ".\Output\Project.axf" - 31 Error(s), 32 Warning(s).
 Target not created.
 Build Time Elapsed:  00:00:26
+=======
+Program Size: Code=27184 RO-data=5072 RW-data=436 ZI-data=988  
+FromELF: creating hex file...
+".\Output\Project.axf" - 0 Error(s), 37 Warning(s).
+Build Time Elapsed:  00:00:28
+>>>>>>> parent of b3c2c65... V.alpha
 </pre>
 </body>
 </html>

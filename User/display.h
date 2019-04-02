@@ -146,7 +146,7 @@ void clearOldPlayer(unsigned short, unsigned short, unsigned char, unsigned char
 // Gestion du joueur
 //=======================
 
-char readJoystick(void);
+char readJoystick();
 /*********************************************************************//**
  * @brief			Get joystick (and buttons) inputs to move the player and choose what sprite is used
  * @param[in]	None
