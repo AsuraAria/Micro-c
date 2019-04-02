@@ -36,13 +36,13 @@ void jouer_note(tnote);
 
 void jouer_partition(tpartition);
 
-void T0_Init();
+void T0_Init(void);
 
-void TIMER0_IRQHandler();
+void TIMER0_IRQHandler(void);
 
 void n(int t);
 
-void musintro();
+void musintro(void);
 
 void jouer_en_repeat(tpartition p);
  //void n2();

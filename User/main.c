@@ -108,29 +108,6 @@ void pin_Configuration()
 		memory28.Pinnum = PINSEL_PIN_28;
 		memory28.Portnum = PINSEL_PORT_0; // GPIO0
 		PINSEL_ConfigPin(&memory28);
-
-		// Led Clignotante 1 fois
-		
-		/*FIO_ClearValue(0, ledBit);
-		pseudoSleep(100000); // Environ 1s
-		FIO_SetValue(0, ledBit);
-		pseudoSleep(100000); // Environ 1s*/
-		
-		//Au clair de la lune
-		/*
-		note(38);	//Pseudo Do
-		note(38);	//Pseudo Do
-		note(38);	//Pseudo Do
-		note(34);	//Pseudo Re
-		note(30); //Pseudo Mi
-		note(34);	//Pseudo Re
-		note(38);	//Pseudo Do
-		note(30); //Pseudo Mi
-		note(34);	//Pseudo Re
-		note(34);	//Pseudo Re
-		note(38);	//Pseudo Do
-		*/
-		//Fin
 		
 		// Congifuration
 		for (i=0; i<6; i++)
@@ -147,11 +124,6 @@ void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short 
 	*x = 30;
 	*y = 30;
 }
-
-/*short rand(short n)
-{
-	return (random/random2)%n;
-}*/
 
 //===========================================================//
 // Function: Main
@@ -186,8 +158,7 @@ int main(void)
 	
 	//uint16_t previousTouch = 0;
 	
-	uint8_t data[20];
-	uint8_t testdata[20];
+  	uint8_t data[20];
 	//=============
 	// Init
 	//=============
@@ -201,22 +172,12 @@ int main(void)
 	
 	musintro();
 	
-	//clean_memory();
-	
-	/*n=sprintf(chaine,"Ceci est un exemple      ");
-	LCD_write_english_string (32,30,chaine,White,Blue);
-	dessiner_rect(0,0,240,320,0,1,Black,Black);*/
-	
 	if (!check_memory() || !(GPIO_ReadValue(2) & (1<<11))) // (Si la sauvegarde 0 existe : 
 	{
 		clean_memory();
 		create_gamekey();
-		//i2c_eeprom_read(0,data,20);
-		//filldown_save(data, 0, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 	}
-	//fillup_save(data, 0, 0, 0, 0, 0, 0, 0); // Préparation de la sauvegarde "data"
-	//create_save(0,data);
-	//i2c_eeprom_read(0, testdata, 20);
+
 	//=============
 	// Boucle
 	//=============
@@ -225,8 +186,7 @@ int main(void)
 	
 	while(1)
 	{
-		/*randValue[iRandom] = rand(400);
-		iRandom = (iRandom+1)%20;*/
+
 		
 		if (menu == -1)
 		{
@@ -430,10 +390,6 @@ int main(void)
 					vit = 1;
 				}
 			}
-			//iEn = (iEn+1)%3;
-			
-			//sprintf(chaine,"%d - %d | %d - %d",pX, pY, mapX, mapY);
-			//LCD_write_english_string (30,30,chaine,White,Blue);
 		}
 		else
 		{
@@ -454,8 +410,6 @@ int main(void)
 				if (flagTouch && flagReset == 1)
 				{
 					flagTouch = 0;
-					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
-					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
 					if (touch_x>=1650 && touch_x<=2500
 							&& touch_y>=700 && touch_y<=1700)
@@ -485,9 +439,6 @@ int main(void)
 				if (flagTouch && flagReset == 1)
 				{
 					flagTouch = 0;
-					
-					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
-					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
 					// Save 3
 					if (touch_x >= 1900 && touch_x <= 3200
@@ -555,8 +506,6 @@ int main(void)
 				if (flagTouch && flagReset == 1)
 				{
 					flagTouch = 0;
-					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
-					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
 					// Tutorial
 					if (touch_x>=1650 && touch_x<=2500
@@ -591,7 +540,6 @@ int main(void)
 				//menu 3 et 4
 				if (mapLoad)
 				{
-					//drawMap(250, 0, &mapLoad);
 					dessiner_rect(0,0,240,320,0,1,Black, Black);
 					mapLoad = 0;
 					drawMenu(menu);

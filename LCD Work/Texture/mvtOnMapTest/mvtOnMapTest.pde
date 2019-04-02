@@ -2,7 +2,9 @@
 int mSizeX = 16;
 int mSizeY = 12;
 
-int[][] map =  {{2 , 2, 2, 2, 2, 2, 1, 2, 2 , 2 , 0 , 2, 2, 2, 2, 2 },
+int tSize = 20;
+
+int[][] map =  {{2 , 2, 2, 2, 2, 2, 1, 2, 2 , 2 , 2 , 2, 2, 2, 2, 2 },
                 {2 , 0, 0, 0, 1, 2, 1, 0, 0 , 0 , 0 , 0, 0, 2, 2, 2 },
                 {2 , 0, 0, 0, 1, 1, 1, 0, 0 , 0 , 0 , 0, 0, 0, 2, 2 },
                 {2 , 0, 0, 0, 0, 0, 0, 0, 0 , 0 , 0 , 0, 0, 0, 0, 2 },
@@ -26,7 +28,8 @@ PImage[] player = new PImage[4];
 
 void setup()
 {
-  size(480,360); //x1.5
+  //size(480,360); //x1.5
+  size(320,240);
   
   for(int i=0; i<3; i++)
   {
@@ -42,7 +45,7 @@ void setup()
   {
     for(int j=0; j<12; j++)
     {
-      image(tex[map[j][i]], 30*i, 30*j, 30, 30);
+      image(tex[map[j][i]], tSize*i, tSize*j, tSize, tSize);
     }
   }
   
@@ -74,19 +77,19 @@ void keyReleased()
 
 void move()
 {
-  if(dir[0] && map[floor((p.y+10)/30)][floor((pb.x-2)/30)] == 0)
+  if(dir[0] && map[floor((p.y+10)/tSize)][floor((pb.x-2)/tSize)] == 0)
   {
     p.x-=1.5;
   }
-  if(dir[1] && map[floor((pb.y-2)/30)][floor((p.x+10)/30)] == 0)
+  if(dir[1] && map[floor((pb.y-2)/tSize)][floor((p.x+10)/tSize)] == 0)
   {
     p.y-=1.5;
   }
-  if(dir[2] && map[floor((p.y+10)/30)][floor((p.x+22)/30)] == 0)
+  if(dir[2] && map[floor((p.y+10)/tSize)][floor((p.x+22)/tSize)] == 0)
   {
     p.x+=1.5;
   }
-  if(dir[3] && map[floor((p.y+22)/30)][floor((p.x+10)/30)] == 0)
+  if(dir[3] && map[floor((p.y+22)/tSize)][floor((p.x+10)/tSize)] == 0)
   {
     p.y+=1.5;
   }
@@ -97,13 +100,13 @@ void draw()
   move();
   
   if (pb.x-2>=0 && pb.y-2>=0)
-    image(tex[map[floor((pb.y-2)/30)][floor((pb.x-2)/30)]], 30*floor((pb.x-2)/30), 30*floor((pb.y-2)/30), 30, 30);
+    image(tex[map[floor((pb.y-2)/tSize)][floor((pb.x-2)/tSize)]], tSize*floor((pb.x-2)/tSize), tSize*floor((pb.y-2)/tSize), tSize, tSize);
   if (pb.x-2>=0)
-    image(tex[map[floor((pb.y+22)/30)][floor((pb.x-2)/30)]], 30*floor((pb.x-2)/30), 30*floor((pb.y+22)/30), 30, 30);
+    image(tex[map[floor((pb.y+22)/tSize)][floor((pb.x-2)/tSize)]], tSize*floor((pb.x-2)/tSize), tSize*floor((pb.y+22)/tSize), tSize, tSize);
   if (pb.y-2>=0)
-    image(tex[map[floor((pb.y-2)/30)][floor((pb.x+22)/30)]], 30*floor((pb.x+22)/30), 30*floor((pb.y-2)/30), 30, 30);
+    image(tex[map[floor((pb.y-2)/tSize)][floor((pb.x+22)/tSize)]], tSize*floor((pb.x+22)/tSize), tSize*floor((pb.y-2)/tSize), tSize, tSize);
     
-  image(tex[map[floor((pb.y+22)/30)][floor((pb.x+22)/30)]], 30*floor((pb.x+22)/30), 30*floor((pb.y+22)/30), 30, 30);
+  image(tex[map[floor((pb.y+22)/tSize)][floor((pb.x+22)/tSize)]], tSize*floor((pb.x+22)/tSize), tSize*floor((pb.y+22)/tSize), tSize, tSize);
   
   //noStroke();
   //rect(p.x, p.y, 20, 20);

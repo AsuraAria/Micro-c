@@ -130,6 +130,7 @@ char unCompressLetter(char v)
 			return 12;
 		case 3:
 			return 250;
+		default:return 0;
 	}
 }
 

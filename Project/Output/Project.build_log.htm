@@ -26,6 +26,7 @@ Project File Date:  03/19/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Programs\MDK\ARM\ARMCC\Bin'
+*** Note: Rebuilding project, since 'Options->Output->Create Batch File' is selected.
 Rebuild target 'Open1786'
 assembling startup_LPC17xx.s...
 compiling system_LPC17xx.c...
@@ -61,37 +62,6 @@ compiling lpc17xx_i2c.c...
         CHECK_PARAM(PARAM_I2C_SLAVEADDR_CH(OwnSlaveAddrConfigStruct->SlaveAddrChannel));
 ..\Libraries\LCP1768_StdPeriph_Driver\source\lpc17xx_i2c.c: 9 warnings, 0 errors
 compiling main.c...
-..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
-   
-..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
-   
-..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
-  void init_i2c_eeprom();
-..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
-  void clean_memory();
-..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
-  void create_gamekey();
-..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
-  int check_memory();
-..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
-  char readJoystick();
-..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
-  void init_i2c_eeprom();
-..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
-  void clean_memory();
-..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
-  void create_gamekey();
-..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
-  int check_memory();
-..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
-  void T0_Init();
-..\User\musicien.h(41): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
-  void TIMER0_IRQHandler();
-..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
-  void musintro();
-..\User\main.c(190): warning:  #177-D: variable "testdata"  was declared but never referenced
-        uint8_t testdata[20];
-..\User\main.c: 15 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -101,37 +71,14 @@ compiling touch_panel.c...
       uint8_t touch_data_tx[BUF_SIZE];
 ..\User\touch\touch_panel.c: 1 warning, 0 errors
 compiling display.c...
-..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
-   
-..\User\memory.h(9): warning:  #1295-D: Deprecated declaration init_i2c_eeprom - give arg types
-  void init_i2c_eeprom();
-..\User\memory.h(44): warning:  #1295-D: Deprecated declaration clean_memory - give arg types
-  void clean_memory();
-..\User\memory.h(54): warning:  #1295-D: Deprecated declaration create_gamekey - give arg types
-  void create_gamekey();
-..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
-  int check_memory();
-..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
-  char readJoystick();
-..\User\display.c(134): warning:  #940-D: missing return statement at end of non-void function "unCompressLetter" 
-  }
-..\User\display.c: 7 warnings, 0 errors
 compiling memory.c...
 compiling musicien.c...
-..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
-  void T0_Init();
-..\User\musicien.h(41): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
-  void TIMER0_IRQHandler();
-..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
-  void musintro();
-..\User\partitions.h(24): warning:  #1-D: last line of file ends without a newline
-  tnote alarme[3]={{sol4,700},{si4,200},finp};*/
-..\User\musicien.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=27184 RO-data=5072 RW-data=436 ZI-data=988  
-FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 37 Warning(s).
-Build Time Elapsed:  00:00:28
+.\Output\Project.axf: error: L6047U: The size of this image (32772 bytes) exceeds the maximum allowed for this version of the linker
+Finished: 0 information, 0 warning, 0 error and 1 fatal error messages.
+".\Output\Project.axf" - 1 Error(s), 11 Warning(s).
+Target not created.
+Build Time Elapsed:  00:00:26
 </pre>
 </body>
 </html>
