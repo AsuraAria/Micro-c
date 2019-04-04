@@ -23,40 +23,44 @@ void i2c_eeprom_write(uint16_t addr, uint8_t* data, int length)
 	I2C_M_SETUP_Type transferCfg;
 	uint8_t buffer[MAX_BUFFER];
 	int i;
-	
+
 	// Buffer //
 	buffer[0]=addr&0xFF;
-	
+
 	// Boucle
 	for (i=1;i<length+1;i++)
 	{
 		buffer[i]=data[i-1];
 	}
-	
-	// Configuration de *transferCfg //
-	
-	/* Addresse esclave en 7bit
-	   0xA0 correspond à 1010, le décalage de 1 correspond à l'ecriture en 7bits 1010xxx
-	   addr&0x700 est un mask sur l'element suivant et nous donne la page, decalage de 8 pour qu'ils deviennent les 3bits de fin xxx??? */
+
+	// Configuration of *transferCfg //
+
+	/*
+		Slave address in 7bit mode
+	  0xA0 correspond to 1010, the shift of 1 correspond to the writting in 7bits X1010xxx
+	  addr&0x700 is a mask on the next element and give the page, shift of 8 to make them the last 3bits Xxxx???
+	*/
   transferCfg.sl_addr7bit=(0xA0>>1)|(addr&0x700)>>8;
-	
-	/* Pointer to Transmit data - NULL if data transmit is not used
-     will transfer the whole tab know as buffer*/
+
+	/*
+		Pointer to Transmit data - NULL if data transmit is not used
+    will transfer the whole tab know as buffer
+	*/
   transferCfg.tx_data=buffer;
-	
+
 	// Transmit data length - 0 if data transmit is not used //
   transferCfg.tx_length=length+1;
 
 	// Pointer to Receive data - NULL if data receive is not used //
   transferCfg.rx_data=NULL;
-	
+
 	// Receive data length - 0 if data receive is not used //
   transferCfg.rx_length=0;
 
 	// Max Re-Transmission value //
 	transferCfg.retransmissions_max=1;
-	
-	// Opérations //
+
+	// Operations //
 	I2C_MasterTransferData(LPC_I2C0,&transferCfg,I2C_TRANSFER_POLLING);
 
 }
@@ -67,27 +71,31 @@ void i2c_eeprom_read(uint16_t addr, uint8_t* data, int length)
 	I2C_M_SETUP_Type transferCfg;
 	uint8_t addresse=addr&0xFF;
 	// *transferCfg configuration //
-	
-	/* Slave address in 7bit mode
-	   0xA0 correspond à 1010, le décalage de 1 correspond à l'ecriture en 7bits 1010xxx
-	   addr&0x700 est un mask sur l'element suivant et nous donne la page, decalage de 8 pour qu'ils deviennent les 3bits de fin xxx??? */
+
+	/*
+		Slave address in 7bit mode
+	  0xA0 correspond to 1010, the shift of 1 correspond to the writting in 7bits X1010xxx
+	  addr&0x700 is a mask on the next element and give the page, shift of 8 to make them the last 3bits Xxxx???
+	*/
   transferCfg.sl_addr7bit=(0xA0>>1)|(addr&0x700)>>8;
-	
-	/* Pointer to Transmit data - NULL if data transmit is not used
-     will transfer the whole tab know as buffer*/
+
+	/*
+	  Pointer to Transmit data - NULL if data transmit is not used
+    will transfer the whole tab know as buffe
+	*/
   transferCfg.tx_data=&addresse;
-	
+
 	// Transmit data length - 0 if data transmit is not used //
   transferCfg.tx_length=1;
 
 	// Pointer to Receive data - NULL if data receive is not used //
   transferCfg.rx_data=data;
-	
+
 	// Receive data length - 0 if data receive is not used //
   transferCfg.rx_length=length+1;
 
 	transferCfg.retransmissions_max=1;
-	// Opérations //
+	// Operations //
 	I2C_MasterTransferData(LPC_I2C0,&transferCfg,I2C_TRANSFER_POLLING);
 
 }
@@ -262,22 +270,16 @@ int check_save(char n)
 	}
 }
 
-int load_save(int num, uint8_t* Current_save)
+void load_save(char num, uint8_t* Current_save)
 {
 	// check eligibility of save
 	if (num<3 && check_save(num)==0)
 	{
 		// loading of said save in local
 		i2c_eeprom_read(20*num, Current_save,20);
-		return 1;
-	}
-	// if not eligible
-	else
-	{
-	return 0;
 	}
 }
-void restaure_backup(int num)
+void restaure_backup(char num)
 {
 	// local backup creation
 	uint8_t BK_save[20];

@@ -59,7 +59,7 @@ void create_gamekey();
  *
  * Note:
  * - None.
- **********************************************************************/ 
+ **********************************************************************/
 
 int check_memory();
 /*********************************************************************//**
@@ -69,7 +69,7 @@ int check_memory();
  *
  * Note:
  * - None.
- **********************************************************************/ 
+ **********************************************************************/
 
 void fillup_save(uint8_t*, char, unsigned char, unsigned char, unsigned char, unsigned short, unsigned short, char);
 /*********************************************************************//**
@@ -86,7 +86,7 @@ void fillup_save(uint8_t*, char, unsigned char, unsigned char, unsigned char, un
  *
  * Note:
  * - None
- **********************************************************************/ 
+ **********************************************************************/
 
 void filldown_save(uint8_t*, char, unsigned char *,unsigned char*,unsigned char*, unsigned short *, unsigned short *,char *);
 /*********************************************************************//**
@@ -103,18 +103,18 @@ void filldown_save(uint8_t*, char, unsigned char *,unsigned char*,unsigned char*
  *
  * Note:
  * - None
- **********************************************************************/ 
+ **********************************************************************/
 
 void create_save(char, uint8_t*);
 /*********************************************************************//**
  * @brief			Replace existing save by backup save
- * @param[in]	int, save number
+ * @param[in]	char, save number
  *						uint8_t*, backup pointer
  * @return		None
  *
  * Note:
  * - None
- **********************************************************************/ 
+ **********************************************************************/
 
 int check_save(char);
 /*********************************************************************//**
@@ -124,27 +124,27 @@ int check_save(char);
  *
  * Note:
  * - None.
- **********************************************************************/ 
+ **********************************************************************/
 
-int load_save(int);
+void load_save(char);
 /*********************************************************************//**
  * @brief			Load a save if uncorrupted
- * @param[in]	int, save number
+ * @param[in]	char, save number
  * @return		int; 0 for succes, 1 for error
  *
  * Note:
  * - If an error is seen no loading will be done.
  **********************************************************************/
 
-void restaure_backup(int);
+void restaure_backup(char);
 /*********************************************************************//**
  * @brief			Replace existing save by backup save
- * @param[in]	int, save number
+ * @param[in]	char, save number
  * @return		None
  *
  * Note:
  * - Use create_save.
- **********************************************************************/ 
+ **********************************************************************/
 //========================================
 // Fin
 //========================================
