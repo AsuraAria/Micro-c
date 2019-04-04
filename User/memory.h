@@ -90,7 +90,7 @@ void fillup_save(uint8_t*, char, unsigned char, unsigned char, unsigned char, un
 
 void filldown_save(uint8_t*, char, unsigned char *,unsigned char*,unsigned char*, unsigned short *, unsigned short *,char *);
 /*********************************************************************//**
- * @brief			fill structure with wanted parameter
+ * @brief			fill local structure with save
  * @param[in]	uint8_t*, buffer pointer
  *						char, save num
  *						unsigned char, life
@@ -145,6 +145,7 @@ void restaure_backup(char);
  * Note:
  * - Use create_save.
  **********************************************************************/
+
 //========================================
 // Fin
 //========================================
