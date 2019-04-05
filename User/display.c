@@ -95,11 +95,12 @@ void drawMenu(char m)
 		//drawText("read readme.txt", 2, TSIZE*6, TSIZE*4.25);
 		drawText("use the joystick to move", 2, TSIZE*2, TSIZE*3.5);
 		drawText("use the first button to attack.", 2, TSIZE*3, TSIZE*0.5);
-		drawText("you can only attack if your", 2, TSIZE*5, TSIZE*2);
-		drawText("stamina is blue.", 2, TSIZE*6, TSIZE*8);
+		drawText("the second send you to the menu.", 2, TSIZE*4, TSIZE*0);
+		drawText("you can only attack if your", 2, TSIZE*6, TSIZE*2);
+		drawText("stamina is blue.", 2, TSIZE*7, TSIZE*8);
 		
-		drawText("you've only some life so stay", 2, TSIZE*8, TSIZE*1);
-		drawText("safe. left up corner.", 2, TSIZE*9, TSIZE*5.5);
+		drawText("you've only some life so stay", 2, TSIZE*9, TSIZE*1);
+		drawText("safe. left up corner.", 2, TSIZE*10, TSIZE*5.5);
 	}
 	else if (m == 4)
 	{
@@ -297,8 +298,8 @@ unsigned short getMap(unsigned char x, unsigned char y, unsigned char j, unsigne
 	else if (x==1 && y==0)
 		return (t10[j][(char)i/4]>>((i*2)%8))&3;
 		//return t10[j][i];
-	else if (x==0 && y==1)
-		return (t01[j][(char)i/4]>>((i*2)%8))&3;
+	else if (x==2 && y==0)
+		return (t20[j][(char)i/4]>>((i*2)%8))&3;
 		//return t01[j][i];
 	else if (x==250)
 		return (tMenu[j][(char)i/4]>>((i*2)%8))&3;
