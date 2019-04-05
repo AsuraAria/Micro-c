@@ -339,6 +339,7 @@ int main(void)
 			// Affiche le joueur sur l'écran
 			drawPlayer(pX, pY, dir);//dir
 			
+			// Retourner au menu
 			if (iEn==0)
 			{
 				if (mapX<250 && (mapX > 0 || mapY > 0))
