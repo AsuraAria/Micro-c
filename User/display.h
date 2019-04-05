@@ -112,6 +112,16 @@ void drawMap(unsigned char, unsigned char, bool*);
 // Affichage du personnage
 //=======================
 
+unsigned char playerColor(unsigned char);
+/*********************************************************************//**
+ * @brief			Uncompress color code
+ * @param[in]	unsigned char, color code on 4bits
+ * @return		unsigned char, color code on 5bits (or more)
+ *
+ * Note:
+ * - None
+ **********************************************************************/
+ 
 void drawPlayer(unsigned short, unsigned short, unsigned char);
 /*********************************************************************//**
  * @brief			Draw player (or enemies) sprite at the (x,y) SCREEN coordinates

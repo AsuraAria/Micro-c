@@ -327,7 +327,7 @@ void drawMap(unsigned char x, unsigned char y, bool * notDone)
 // Affichage du personnage
 //=======================
 
-char playerColor(char c)
+unsigned char playerColor(unsigned char c)
 {
 	switch(c)
 	{

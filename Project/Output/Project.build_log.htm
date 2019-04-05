@@ -71,12 +71,14 @@ compiling main.c...
   void create_gamekey();
 ..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
-..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
+..\User\musicien.h(49): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
   void T0_Init();
-..\User\musicien.h(41): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
+..\User\musicien.h(59): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
   void TIMER0_IRQHandler();
-..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
+..\User\musicien.h(70): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
+..\User\musicien.h(90): warning:  #1295-D: Deprecated declaration arreter_repeat - give arg types
+  void arreter_repeat();
 ..\User\globaldec.h(34): warning:  #1-D: last line of file ends without a newline
   char dying = 0;
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
@@ -89,9 +91,9 @@ compiling main.c...
   void create_gamekey();
 ..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
-..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+..\User\display.h(159): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   char readJoystick();
-..\User\main.c: 15 warnings, 0 errors
+..\User\main.c: 16 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -111,25 +113,27 @@ compiling display.c...
   void create_gamekey();
 ..\User\memory.h(64): warning:  #1295-D: Deprecated declaration check_memory - give arg types
   int check_memory();
-..\User\display.h(149): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
+..\User\display.h(159): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   char readJoystick();
 ..\User\texture.h(1797): warning:  #1-D: last line of file ends without a newline
   //const unsigned char t[200];
 ..\User\display.c: 7 warnings, 0 errors
 compiling memory.c...
 compiling musicien.c...
-..\User\musicien.h(39): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
+..\User\musicien.h(49): warning:  #1295-D: Deprecated declaration T0_Init - give arg types
   void T0_Init();
-..\User\musicien.h(41): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
+..\User\musicien.h(59): warning:  #1295-D: Deprecated declaration TIMER0_IRQHandler - give arg types
   void TIMER0_IRQHandler();
-..\User\musicien.h(45): warning:  #1295-D: Deprecated declaration musintro - give arg types
+..\User\musicien.h(70): warning:  #1295-D: Deprecated declaration musintro - give arg types
   void musintro();
-..\User\musicien.c: 3 warnings, 0 errors
+..\User\musicien.h(90): warning:  #1295-D: Deprecated declaration arreter_repeat - give arg types
+  void arreter_repeat();
+..\User\musicien.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=27504 RO-data=4760 RW-data=336 ZI-data=992  
+Program Size: Code=27472 RO-data=4760 RW-data=336 ZI-data=992  
 FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 36 Warning(s).
-Build Time Elapsed:  00:00:29
+".\Output\Project.axf" - 0 Error(s), 38 Warning(s).
+Build Time Elapsed:  00:00:27
 </pre>
 </body>
 </html>
