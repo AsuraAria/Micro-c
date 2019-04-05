@@ -141,7 +141,7 @@ void drawText(char*s, char l, unsigned short x, unsigned short y)
 {
 	short i,j,k;
 	short len = 0;
-	char letterCode = 0;
+	unsigned char c;
 	
 	while (*s)
 	{
@@ -164,36 +164,22 @@ void drawText(char*s, char l, unsigned short x, unsigned short y)
 				
 				if (*s >= 97 && *s <=122)
 				{
-					letterCode = unCompressLetter((a[(*s)-97][j*l][(short)(i*l)/4]>>(((i*l)*2)%8))&3);
-					if (letterCode != 250)
-					{
-						lcd_SetCursor(x+j,y+k*TSIZE/l+i);
-						rw_data_prepare();
-						write_data(getColor(letterCode));
-					}
+					c = unCompressLetter((a[(*s)-97][j*l][(short)(i*l)/4]>>(((i*l)*2)%8))&3);
 				}
-				else
+				else if (*s == 39)
 				{
-					if (*s == 39)
-					{
-						letterCode = unCompressLetter((a[26][j*l][(short)i*l/4]>>(((i*l)*2)%8))&3);
-						if (letterCode != 250)
-						{
-							lcd_SetCursor(x+j,y+k*TSIZE/l+i);
-							rw_data_prepare();
-							write_data(getColor(letterCode));
-						}
-					}
-					if (*s == 46)
-					{
-						letterCode = unCompressLetter((a[27][j*l][(short)i*l/4]>>(((i*l)*2)%8))&3);
-						if (letterCode != 250)
-						{
-							lcd_SetCursor(x+j,y+k*TSIZE/l+i);
-							rw_data_prepare();
-							write_data(getColor(letterCode));
-						}
-					}
+					c = unCompressLetter((a[26][j*l][(short)i*l/4]>>(((i*l)*2)%8))&3);
+				}
+				else if (*s == 46)
+				{
+					c = unCompressLetter((a[27][j*l][(short)i*l/4]>>(((i*l)*2)%8))&3);
+				}
+				
+				if (c != 250)
+				{
+					lcd_SetCursor(x+j,y+k*TSIZE/l+i);
+					rw_data_prepare();
+					write_data(getColor(c));
 				}
 			}
 		}
@@ -361,6 +347,8 @@ char playerColor(char c)
 			return 13;
 		case 7:
 			return 4;
+		case 8:
+			return 6;
 		default:
 			return 10;
 	}
@@ -415,13 +403,13 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 		for (i=0; i<2; i++)
 		{
 			i*=4;
-			pDown[9][6+i] = 9+dying;
-			pDown[9][7+i] = 11-dying;
-			pDown[9][8+i] = 9+dying;
+			pDown[9][6+i] += dying;
+			pDown[9][7+i] -= dying;
+			pDown[9][8+i] += dying;
 			
-			pDown[11][6+i] = 9+dying;
-			pDown[11][7+i] = 11-dying;
-			pDown[11][8+i] = 9+dying;
+			pDown[11][6+i] += dying;
+			pDown[11][7+i] -= dying;
+			pDown[11][8+i] += dying;
 		}*/
 	
 		for(i=0; i<PSIZE*6; i++)
@@ -436,6 +424,18 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 				}
 			}
 		}
+		/*for (i=0; i<2; i++)
+		{
+			i*=4;
+			pDown[9][6+i] -= dying;
+			pDown[9][7+i] += dying;
+			pDown[9][8+i] -= dying;
+			
+			pDown[11][6+i] -= dying;
+			pDown[11][7+i] += dying;
+			pDown[11][8+i] -= dying;
+		}*/
+		
 	}
 	else if (d == 30 || d == 31)
 	{

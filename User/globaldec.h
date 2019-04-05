@@ -22,6 +22,7 @@ short eY[6] = {0, 0, 0, 0, 0, 0};
 unsigned short peX[6] = {0, 0, 0, 0, 0, 0};
 unsigned short peY[6] = {0, 0, 0, 0, 0, 0};
 
+//Gestion du stamina
 char staminaMax = 50;
 char staminaAttack = 30;
 char stamina = 50;

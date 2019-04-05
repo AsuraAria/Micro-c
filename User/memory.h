@@ -126,7 +126,7 @@ int check_save(char);
  * - None.
  **********************************************************************/
 
-void load_save(char);
+void load_save(char, uint8_t*);
 /*********************************************************************//**
  * @brief			Load a save if uncorrupted
  * @param[in]	char, save number

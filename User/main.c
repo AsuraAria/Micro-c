@@ -1,9 +1,13 @@
 //===========================================================//
 // Projet Micro - INFO1 - ENSSAT - S2 2018							 //
 //===========================================================//
-// File                : Programme de d�part
+// File                : Fluffy
 // Hardware Environment: Open1768
-// Build Environment   : Keil �Vision
+// Build Environment   : Keil uVision (EVALUATION LICENSE ONLY 32K)
+//===========================================================//
+
+//===========================================================//
+// Includes
 //===========================================================//
 
 #include "lpc17xx_gpio.h"
@@ -17,13 +21,17 @@
 
 #include "memory.h"
 #include "musicien.h"
-// fichier contenant toutes les d�clarations de variables globales
+// Fichier contenant toutes les declarations de variables globales
 #include "globaldec.h"
 #include <stdio.h>
 #include "display.h"
 
 
-void T1_Init()//initiation du timer1
+//===========================================================//
+// Secondary functions
+//===========================================================//
+
+void T1_Init() // Initiation du Timer1
 {
 
 	TIM_TIMERCFG_Type conf_timer;
@@ -49,9 +57,9 @@ void T1_Init()//initiation du timer1
 	TIM_Cmd(LPC_TIM1, ENABLE);
 }
 
-void TIMER1_IRQHandler()
+void TIMER1_IRQHandler() // Timer1 Handler
 {
-	if (!(GPIO_ReadValue(0) & (1<<19)))
+	if (!(GPIO_ReadValue(0) & (1<<19))) // Flag tactile
 	{
 		flagTouch = 1;
 	}
@@ -60,24 +68,24 @@ void TIMER1_IRQHandler()
 		flagReset = 1;
 	}
 	
-	if (hitReset<hitResetMax)
+	if (hitReset<hitResetMax) // Periode d'invulnérabilité
 	{
 		hitReset++;
 	}
 	
-	enFlag = 1;
+	enFlag = 1; // Les ennemis attaquent toutes les 100ms (a chaque Timer1 Handler)
 	
-	if (stamina < staminaMax)
+	if (stamina < staminaMax) // Stamina
 	{
 		stamina++;
 	}
 	
-	TIM_ClearIntPending(LPC_TIM1, TIM_MR1_INT);//Acquitement
+	TIM_ClearIntPending(LPC_TIM1, TIM_MR1_INT); // Acquitement
 }
 
 void pin_Configuration()
 {
-		unsigned char i;
+		unsigned char i; // Pour la boucle for des configs de pins
 	
 		PINSEL_CFG_Type memory27;
 		PINSEL_CFG_Type memory28;
@@ -85,6 +93,7 @@ void pin_Configuration()
 		int ledBit = (1<<3);
 		int hpBit = (1<<9);
 	
+		// Joystick et boutons
 		int joystickPort[6] = {2, 2, 2, 2, 2, 1}; //Port
 		int joystickPin[6] = {10, 12, 13, 8, 11, 21}; //Pin
 	
@@ -97,6 +106,7 @@ void pin_Configuration()
 		FIO_SetDir(1, hpBit, 1); // Haut-Parleur : Sortie
 		FIO_SetMask(1, hpBit, 0); // Haut-Patleut : Utilisable
 
+		// Mémoire
 		memory27.Funcnum = PINSEL_FUNC_1;
 		memory27.OpenDrain = PINSEL_PINMODE_NORMAL;
 		memory27.Pinmode = PINSEL_PINMODE_PULLUP;
@@ -111,7 +121,7 @@ void pin_Configuration()
 		memory28.Portnum = PINSEL_PORT_0; // GPIO0
 		PINSEL_ConfigPin(&memory28);
 		
-		// Congifuration
+		// Congifuration joystick et boutons
 		for (i=0; i<6; i++)
 		{
 			FIO_SetDir(joystickPort[i], joystickPin[i], 0); // joystick : Entrée
@@ -119,6 +129,7 @@ void pin_Configuration()
 		}
 }
 
+// Reset map00 position du début
 void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short *y)
 {
 	*mX = 0;
@@ -126,11 +137,6 @@ void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short 
 	*x = 30;
 	*y = 30;
 }
-
-/*short rand(short n)
-{
-	return (random/random2)%n;
-}*/
 
 //===========================================================//
 // Function: Main
@@ -164,7 +170,6 @@ int main(void)
 	//Les enemies bougent 2 fois moins vite
 	char iEn=0;
 	
-	//uint16_t previousTouch = 0;
 	
 	uint8_t data[20];
 	
@@ -179,24 +184,13 @@ int main(void)
 	T0_Init(); // init timer musique
 	T1_Init();
 	
-	musintro();
-	
-	//clean_memory();
-	
-	/*n=sprintf(chaine,"Ceci est un exemple      ");
-	LCD_write_english_string (32,30,chaine,White,Blue);
-	dessiner_rect(0,0,240,320,0,1,Black,Black);*/
+	musintro(); // Lance l'intro
 	
 	if (!check_memory() || !(GPIO_ReadValue(2) & (1<<11))) // (Si la sauvegarde 0 existe : 
 	{
 		clean_memory();
 		create_gamekey();
-		//i2c_eeprom_read(0,data,20);
-		//filldown_save(data, 0, 0, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 	}
-	//fillup_save(data, 0, 0, 0, 0, 0, 0, 0); // Préparation de la sauvegarde "data"
-	//create_save(0,data);
-	//i2c_eeprom_read(0, testdata, 20);
 	//=============
 	// Boucle
 	//=============
@@ -208,12 +202,9 @@ int main(void)
 	
 	while(1)
 	{
-		/*randValue[iRandom] = rand(400);
-		iRandom = (iRandom+1)%20;*/
 		
 		if (menu == -1)
 		{
-			// Si il y a un changement de tableau, on affiche ce tableau (x,y) sur l'écran
 			if (mapLoad)
 			{
 				drawMap(mapX, mapY, &mapLoad);
@@ -418,10 +409,6 @@ int main(void)
 					vit = 1;
 				}
 			}
-			//iEn = (iEn+1)%3;
-			
-			//sprintf(chaine,"%d - %d | %d - %d",pX, pY, mapX, mapY);
-			//LCD_write_english_string (30,30,chaine,White,Blue);
 		}
 		else
 		{
@@ -442,8 +429,6 @@ int main(void)
 				if (flagTouch && flagReset == 1)
 				{
 					flagTouch = 0;
-					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
-					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
 					if (touch_x>=1650 && touch_x<=2500
 							&& touch_y>=700 && touch_y<=1700)
@@ -474,10 +459,8 @@ int main(void)
 				{
 					flagTouch = 0;
 					
-					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
-					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
-					// Save 3
+					// Save 2
 					if (touch_x >= 1900 && touch_x <= 3200
 							&& touch_y >= 2650 && touch_y <= 3500)
 					{
@@ -486,7 +469,7 @@ int main(void)
 						numSave = 2;
 						if (check_save(2))
 						{
-							i2c_eeprom_read(numSave*20,data,20);
+							load_save(numSave, data);
 							filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 						}
 						else
@@ -504,7 +487,7 @@ int main(void)
 						numSave = 1;
 						if (check_save(1))
 						{
-							i2c_eeprom_read(numSave*20, data,20);
+							load_save(numSave, data);
 							filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 						}
 						else
@@ -522,7 +505,7 @@ int main(void)
 						numSave = 0;
 						if (check_save(0))
 						{
-							i2c_eeprom_read(numSave*20,data,20);
+							load_save(numSave, data);
 							filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 						}
 						else
@@ -543,8 +526,6 @@ int main(void)
 				if (flagTouch && flagReset == 1)
 				{
 					flagTouch = 0;
-					//sprintf(chaine,"%d - %d ",touch_x , touch_y);
-					//LCD_write_english_string(30,30,chaine,White,Blue);
 					
 					// Tutorial
 					if (touch_x>=1650 && touch_x<=2500
@@ -579,7 +560,6 @@ int main(void)
 				//menu 3 et 4
 				if (mapLoad)
 				{
-					//drawMap(250, 0, &mapLoad);
 					dessiner_rect(0,0,240,320,0,1,Black, Black);
 					mapLoad = 0;
 					drawMenu(menu);

@@ -273,7 +273,7 @@ int check_save(char n)
 void load_save(char num, uint8_t* Current_save)
 {
 	// check eligibility of save
-	if (num<3 && check_save(num)==0)
+	if (num<3 && check_save(num))
 	{
 		// loading of said save in local
 		i2c_eeprom_read(20*num, Current_save,20);
