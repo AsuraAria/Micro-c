@@ -79,7 +79,7 @@ compiling main.c...
   void musintro();
 ..\User\musicien.h(90): warning:  #1295-D: Deprecated declaration arreter_repeat - give arg types
   void arreter_repeat();
-..\User\globaldec.h(34): warning:  #1-D: last line of file ends without a newline
+..\User\globaldec.h(63): warning:  #1-D: last line of file ends without a newline
   char dying = 0;
 ..\User\affichagelcd.h(9): warning:  #1-D: last line of file ends without a newline
    
@@ -93,7 +93,17 @@ compiling main.c...
   int check_memory();
 ..\User\display.h(159): warning:  #1295-D: Deprecated declaration readJoystick - give arg types
   char readJoystick();
-..\User\main.c: 16 warnings, 0 errors
+..\User\main.c(35): warning:  #1295-D: Deprecated declaration T1_Init - give arg types
+  void T1_Init();
+..\User\main.c(36): warning:  #1295-D: Deprecated declaration TIMER1_IRQHandler - give arg types
+  void TIMER1_IRQHandler();
+..\User\main.c(39): warning:  #1295-D: Deprecated declaration initAll - give arg types
+  void initAll();
+..\User\main.c(40): warning:  #1295-D: Deprecated declaration pin_Configuration - give arg types
+  void pin_Configuration();
+..\User\main.c(44): warning:  #1295-D: Deprecated declaration game - give arg types
+  void game();
+..\User\main.c: 21 warnings, 0 errors
 compiling ili_lcd_general.c...
 compiling lcd_api.c...
 compiling english_16x8.c...
@@ -130,10 +140,11 @@ compiling musicien.c...
   void arreter_repeat();
 ..\User\musicien.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=27520 RO-data=4760 RW-data=336 ZI-data=992  
-FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 38 Warning(s).
-Build Time Elapsed:  00:00:27
+.\Output\Project.axf: error: L6047U: The size of this image (33224 bytes) exceeds the maximum allowed for this version of the linker
+Finished: 0 information, 0 warning, 0 error and 1 fatal error messages.
+".\Output\Project.axf" - 1 Error(s), 43 Warning(s).
+Target not created.
+Build Time Elapsed:  00:00:23
 </pre>
 </body>
 </html>
