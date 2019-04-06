@@ -20,9 +20,9 @@
 .\output\main.o: ..\User\globaldec.h
 .\output\main.o: ..\User\constantes.h
 .\output\main.o: ..\Libraries\LCP1768_StdPeriph_Driver\include\lpc17xx_i2c.h
+.\output\main.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\output\main.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\main.o: ..\User\display.h
-.\output\main.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\output\main.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\math.h
 .\output\main.o: D:\Programs\MDK\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\main.o: ..\User\touch/ili_lcd_general.h

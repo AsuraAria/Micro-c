@@ -1,4 +1,7 @@
 SET PATH=D:\Programs\MDK\ARM\ARMCC\Bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Live\Shared;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;%SYSTEMROOT%\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\WorldPainter;C:\Android;C:\Users\ElexXVII\AppData\Local\Microsoft\WindowsApps;C:\Users\ElexXVII\AppData\Local\atom\bin;C:\Users\ElexXVII\AppData\Local\GitHubDesktop\bin
+SET ARMCC5_ASMOPT=--diag_suppress=9931
+SET ARMCC5_CCOPT=--diag_suppress=9931
+SET ARMCC5_LINKOPT=--diag_suppress=9931
 SET CPU_TYPE=LPC1768
 SET CPU_VENDOR=NXP (founded by Philips)
 SET UV2_TARGET=Open1786
@@ -24,4 +27,3 @@ SET CPU_CLOCK=0x00B71B00
 "D:\Programs\MDK\ARM\ARMCC\Bin\ArmCC" --Via ".\output\memory.__i"
 "D:\Programs\MDK\ARM\ARMCC\Bin\ArmCC" --Via ".\output\musicien.__i"
 "D:\Programs\MDK\ARM\ARMCC\Bin\ArmLink" --Via ".\Output\Project.lnp"
-"D:\Programs\MDK\ARM\ARMCC\Bin\fromelf.exe" ".\Output\Project.axf" --i32combined --output ".\Output\Project.hex"
