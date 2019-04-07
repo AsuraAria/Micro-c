@@ -26,6 +26,13 @@
 #include <stdio.h>
 #include "display.h"
 
+#define Game -1
+#define MainMenu 1
+#define SaveMenu 2
+#define BonusMenu 0
+#define TutorialMenu 3
+#define StoryMenu 4
+
 //
 //===========================================================//
 // Main prototypes
@@ -43,6 +50,10 @@ void reset(unsigned char*, unsigned char*, unsigned short*, unsigned short*);
 // Game functions
 void game();
 
+// Menu functions
+void menuManagement(signed char);
+void buttonManagement(signed char);
+
 //
 //===========================================================//
 // Main function
@@ -50,184 +61,23 @@ void game();
 
 int main(void)
 {
-	//=============
-	// Init
-	//=============
+	// Init pins, variables, timers, I2C
 	initAll();
-	
-	//=============
-	// Boucle
-	//=============
 	
 	while(1)
 	{
-		if (menu == -1)
+		if (menu == Game) // If we are in the game, the user can play
 		{
-			game();
+			game(); // Display the game
 		}
-		else
+		else // If not in game
 		{
-			// If not in game : use of touch screen
+			// Use of touch screen (beacause we are on a menu)
 			touch_read();
 			
-			if (menu == 1)
-			{
-				if (mapLoad)
-				{
-					drawMap(250, 0, &mapLoad);
-					drawMenu(menu);
-				}
-				
-				// Play 
-				// x : 1950 - 2300
-				// y : 800 - 1670
-				
-				if (flagTouch && flagReset == 1)
-				{
-					flagTouch = 0;
-					
-					if (touch_x>=1650 && touch_x<=2500
-							&& touch_y>=700 && touch_y<=1700)
-					{
-						mapLoad = true;
-						menu = 2;
-						flagReset = 0;
-					}
-					
-					if (touch_x>=2500 && touch_x<=3400
-							&& touch_y>=700 && touch_y<=1700)
-					{
-						mapLoad = true;
-						menu = 0;
-						flagReset = 0;
-					}
-				}
-			}
-			else if (menu == 2)
-			{
-				if (mapLoad)
-				{
-					drawMap(250, 0, &mapLoad);
-					drawMenu(menu);
-				}
-				
-				if (flagTouch && flagReset == 1)
-				{
-					flagTouch = 0;
-					
-					
-					// Save 2
-					if (touch_x >= 1900 && touch_x <= 3200
-							&& touch_y >= 2650 && touch_y <= 3500)
-					{
-						mapLoad = true;
-						menu = -1;
-						numSave = 2;
-						if (check_save(2))
-						{
-							load_save(numSave, data);
-							filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
-						}
-						else
-						{
-							reset(&mapX, &mapY, &pX, &pY);
-						}
-					}
-					
-					// Save 1
-					if (touch_x >= 1900 && touch_x <= 3200
-							&& touch_y >= 1650 && touch_y <= 2650)
-					{
-						mapLoad = true;
-						menu = -1;
-						numSave = 1;
-						if (check_save(1))
-						{
-							load_save(numSave, data);
-							filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
-						}
-						else
-						{
-							reset(&mapX, &mapY, &pX, &pY);
-						}
-					}
-					
-					// Save 0
-					if (touch_x >= 1900 && touch_x <= 3200
-							&& touch_y >= 650 && touch_y <= 1650)
-					{
-						mapLoad = true;
-						menu = -1;
-						numSave = 0;
-						if (check_save(0))
-						{
-							load_save(numSave, data);
-							filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
-						}
-						else
-						{
-							reset(&mapX, &mapY, &pX, &pY);
-						}
-					}
-				}
-			}
-			else if (menu == 0)
-			{
-				if (mapLoad)
-				{
-					drawMap(250, 0, &mapLoad);
-					drawMenu(menu);
-				}
-				
-				if (flagTouch && flagReset == 1)
-				{
-					flagTouch = 0;
-					
-					// Tutorial
-					if (touch_x>=1650 && touch_x<=2500
-							&& touch_y>=700 && touch_y<=2200)
-					{
-						mapLoad = true;
-						menu = 3;
-						flagReset = 0;
-					}
-					
-					// Story
-					if (touch_x>=2500 && touch_x<=3400
-							&& touch_y>=700 && touch_y<=1700)
-					{
-						mapLoad = true;
-						menu = 4;
-						flagReset = 0;
-					}
-					
-					// Back
-					if (touch_x>=2500 && touch_x<=3400
-							&& touch_y>=2200 && touch_y<=3800)
-					{
-						mapLoad = true;
-						menu = 1;
-						flagReset = 0;
-					}
-				}
-			}
-			else
-			{
-				//menu 3 et 4
-				if (mapLoad)
-				{
-					dessiner_rect(0,0,240,320,0,1,Black, Black);
-					mapLoad = 0;
-					drawMenu(menu);
-				}
-				if (flagTouch && flagReset == 1 && touch_x>=10)
-				{
-					flagTouch = 0;
-					mapLoad = true;
-					menu = 0;
-					flagReset = 0;
-				}
-			}
+			// Manage each menu and each button
+			menuManagement(menu);
+			buttonManagement(menu);
 		}
 	}
 }
@@ -376,12 +226,7 @@ void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short 
 	*y = 30;
 }
 
-//
-//===========================================================//
-// Game Functions
-//===========================================================//
-
-// Game fonctionality
+// Game function
 void game()
 {
 	if (mapLoad)
@@ -588,6 +433,158 @@ void game()
 		{
 			vit = 1;
 		}
+	}
+}
+// Menu function
+void menuManagement(signed char m)
+{
+	if (mapLoad)
+	{
+		// Dans les menus Tutorial et Story, un fond noir est affiché
+		// et non une map !
+		if (m != StoryMenu && m != TutorialMenu)
+		{
+			drawMap(250, 0, &mapLoad);
+		}
+		else
+		{
+			dessiner_rect(0,0,240,320,0,1,Black, Black);
+			mapLoad = 0;
+		}
+		drawMenu(m); // Draw the right menu
+	}
+}
+
+void buttonManagement(signed char m)
+{
+	switch(menu)
+	{
+		case MainMenu:
+			if (flagTouch && flagReset == 1)
+			{
+				flagTouch = 0;
+				
+				if (touch_x>=1650 && touch_x<=2500
+						&& touch_y>=700 && touch_y<=1700)
+				{
+					mapLoad = true;
+					menu = 2;
+					flagReset = 0;
+				}
+				
+				if (touch_x>=2500 && touch_x<=3400
+						&& touch_y>=700 && touch_y<=1700)
+				{
+					mapLoad = true;
+					menu = 0;
+					flagReset = 0;
+				}
+			}
+			break;
+		case SaveMenu:
+			if (flagTouch && flagReset == 1)
+			{
+				flagTouch = 0;
+				
+				
+				// Save 2
+				if (touch_x >= 1900 && touch_x <= 3200
+						&& touch_y >= 2650 && touch_y <= 3500)
+				{
+					mapLoad = true;
+					menu = -1;
+					numSave = 2;
+					if (check_save(2))
+					{
+						load_save(numSave, data);
+						filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+					}
+					else
+					{
+						reset(&mapX, &mapY, &pX, &pY);
+					}
+				}
+				
+				// Save 1
+				if (touch_x >= 1900 && touch_x <= 3200
+						&& touch_y >= 1650 && touch_y <= 2650)
+				{
+					mapLoad = true;
+					menu = -1;
+					numSave = 1;
+					if (check_save(1))
+					{
+						load_save(numSave, data);
+						filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+					}
+					else
+					{
+						reset(&mapX, &mapY, &pX, &pY);
+					}
+				}
+				
+				// Save 0
+				if (touch_x >= 1900 && touch_x <= 3200
+						&& touch_y >= 650 && touch_y <= 1650)
+				{
+					mapLoad = true;
+					menu = -1;
+					numSave = 0;
+					if (check_save(0))
+					{
+						load_save(numSave, data);
+						filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
+					}
+					else
+					{
+						reset(&mapX, &mapY, &pX, &pY);
+					}
+				}
+			}
+			break;
+		case BonusMenu:
+			if (flagTouch && flagReset == 1)
+			{
+				flagTouch = 0;
+				
+				// Tutorial
+				if (touch_x>=1650 && touch_x<=2500
+						&& touch_y>=700 && touch_y<=2200)
+				{
+					mapLoad = true;
+					menu = 3;
+					flagReset = 0;
+				}
+				
+				// Story
+				if (touch_x>=2500 && touch_x<=3400
+						&& touch_y>=700 && touch_y<=1700)
+				{
+					mapLoad = true;
+					menu = 4;
+					flagReset = 0;
+				}
+				
+				// Back
+				if (touch_x>=2500 && touch_x<=3400
+						&& touch_y>=2200 && touch_y<=3800)
+				{
+					mapLoad = true;
+					menu = 1;
+					flagReset = 0;
+				}
+			}
+			break;
+		case TutorialMenu:
+		case StoryMenu:
+			if (flagTouch && flagReset == 1 && touch_x>=10)
+			{
+				flagTouch = 0;
+				mapLoad = true;
+				menu = 0;
+				flagReset = 0;
+			}
+			break;
 	}
 }
 

@@ -3,6 +3,13 @@
 // Defined in .c to avoid defining variables multiple times
 #include "texture.h"
 
+#define Game -1
+#define MainMenu 1
+#define SaveMenu 2
+#define BonusMenu 0
+#define TutorialMenu 3
+#define StoryMenu 4
+
 //=======================
 // Affichage des menus
 //=======================
@@ -16,7 +23,7 @@ void drawMenu(char m)
 {
 	unsigned short color = White;
 	
-	if (m == 1)
+	if (m == MainMenu)
 	{
 		/*sprintf(text,"klmnopqrstuvw");
 		drawText(text, 1, TSIZE*2, (unsigned short)(320-12*TSIZE/1)/2);
@@ -32,7 +39,7 @@ void drawMenu(char m)
 	
 		drawPlayer((unsigned short) TSIZE*5, TSIZE*2, 10);
 	}
-	else if (m == 2)
+	else if (m == SaveMenu)
 	{
 		drawText("choose your", 1, TSIZE*1, (unsigned short)(320-11*TSIZE/1)/2);
 		drawText("save", 1, TSIZE*2, (unsigned short)(320-4*TSIZE/1)/2);
@@ -80,7 +87,7 @@ void drawMenu(char m)
 		drawText(text1, 1, 8.5*TSIZE,(text1[0]=='l'?1.5:2)*TSIZE);
 		
 	}
-	else if (m == 0)
+	else if (m == BonusMenu)
 	{
 		drawText("extra", 1, TSIZE*1.5, (unsigned short)(320-5*TSIZE/1)/2);
 		
@@ -88,7 +95,7 @@ void drawMenu(char m)
 		drawText("story", 1, TSIZE*8.5, (unsigned short) 320-TSIZE*2-TSIZE*5);
 		drawText("back", 1, TSIZE*8.5, (unsigned short) TSIZE*2);		
 	}
-	else if (m == 3)
+	else if (m == TutorialMenu)
 	{
 		drawText("tutorial", 1, TSIZE*0, (unsigned short)(320-8*TSIZE/1)/2);
 		
@@ -102,7 +109,7 @@ void drawMenu(char m)
 		drawText("you've only some life so stay", 2, TSIZE*9, TSIZE*1);
 		drawText("safe. left up corner.", 2, TSIZE*10, TSIZE*5.5);
 	}
-	else if (m == 4)
+	else if (m == StoryMenu)
 	{
 		drawText("story", 1, TSIZE*0, (unsigned short)(320-5*TSIZE/1)/2);
 		
