@@ -298,8 +298,8 @@ unsigned short getMap(unsigned char x, unsigned char y, unsigned char j, unsigne
 	else if (x==1 && y==0)
 		return (t10[j][(char)i/4]>>((i*2)%8))&3;
 		//return t10[j][i];
-	else if (x==2 && y==0)
-		return (t20[j][(char)i/4]>>((i*2)%8))&3;
+	/*else if (x==2 && y==0)
+		return (t20[j][(char)i/4]>>((i*2)%8))&3;*/
 		//return t01[j][i];
 	else if (x==250)
 		return (tMenu[j][(char)i/4]>>((i*2)%8))&3;
@@ -350,6 +350,10 @@ unsigned char playerColor(unsigned char c)
 			return 4;
 		case 8:
 			return 6;
+		case 9:
+			return 14;
+		case 10:
+			return 15;
 		default:
 			return 10;
 	}

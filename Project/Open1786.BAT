@@ -24,3 +24,4 @@ SET CPU_CLOCK=0x00B71B00
 "D:\Programs\MDK\ARM\ARMCC\Bin\ArmCC" --Via ".\output\memory.__i"
 "D:\Programs\MDK\ARM\ARMCC\Bin\ArmCC" --Via ".\output\musicien.__i"
 "D:\Programs\MDK\ARM\ARMCC\Bin\ArmLink" --Via ".\Output\Project.lnp"
+"D:\Programs\MDK\ARM\ARMCC\Bin\fromelf.exe" ".\Output\Project.axf" --i32combined --output ".\Output\Project.hex"
