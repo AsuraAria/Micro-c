@@ -50,6 +50,19 @@ void reset(unsigned char*, unsigned char*, unsigned short*, unsigned short*);
 // Game functions
 void game();
 
+void mapManagement();
+void staminaManagement();
+void lifeManagement();
+
+void clearPlayer();
+void clearEnemies();
+
+void joystickManagement();
+void mapChange();
+
+void enemiesManagement();
+void playerManagement();
+
 // Menu functions
 void menuManagement(signed char);
 void buttonManagement(signed char);
@@ -154,12 +167,12 @@ void initAll()
 	T0_Init(); // Init timer musique
 	T1_Init(); // Init game/touchscreen timer
 	
-	musintro(); // Lance la musique
+	musintro(); // Start the theme song
 	
 	initEnemy(eX, eY, random); // Init enemies positions
 	
 	// Init memory => Reset if bad or if manual request
-	if (!check_memory() || !(GPIO_ReadValue(2) & (1<<11))) // (Si la sauvegarde 0 existe : 
+	if (!check_memory() || !(GPIO_ReadValue(2) & (1<<11))) // (If the the memory is already initialized : 
 	{
 		clean_memory();
 		create_gamekey();
@@ -226,15 +239,42 @@ void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short 
 	*y = 30;
 }
 
-// Game function
+// Game functions
 void game()
+{
+	mapManagement();
+	staminaManagement();
+	lifeManagement();
+	
+	// Rafraîchir les cases derrière l'ancienne position du personnage pour le faire disparaître
+	clearPlayer();
+	clearEnemies();
+	
+	// Gestion du joystick
+	joystickManagement();
+	
+	// Changement de tableau
+	mapChange();
+	
+	// Player and enemies management
+	playerManagement();
+	enemiesManagement();
+}
+
+//
+// In game functions
+
+void mapManagement()
 {
 	if (mapLoad)
 	{
 		drawMap(mapX, mapY, &mapLoad);
 		pLife = 0; // On le fait qu'une seule fois pour une question de rapidité d'execution
 	}
-	
+}
+
+void staminaManagement()
+{
 	if (stamina != staminaMax)
 		dessiner_rect(8,10, 4, staminaMax-stamina, 0, 1, Grey, Grey);
 	
@@ -242,7 +282,10 @@ void game()
 		dessiner_rect(8,10+staminaMax-stamina, 4, stamina, 0, 1, 0x8c71, 0x8c71);
 	else
 		dessiner_rect(8,10+staminaMax-stamina, 4, stamina, 0, 1, Blue, Blue);
-	
+}
+
+void lifeManagement()
+{
 	if (pLife != life)
 	{
 		for (i=0; i<3; i++)
@@ -258,13 +301,20 @@ void game()
 		}
 		pLife = life;
 	}
-	
-	// Rafraîchir les cases derrière l'ancienne position du personnage pour le faire disparaître
+}
+
+void clearPlayer()
+{
 	if (pBX!=pX || pBY != pY)
 	{
 		clearOldPlayer(pBX, pBY, mapX, mapY);
 	}
-	
+	// Raffraichir la zone d'effaçage
+	pBX=pX, pBY=pY;
+}
+
+void clearEnemies()
+{
 	if (iEn==0)
 	{
 		if (mapX<250 && (mapX > 0 || mapY > 0))
@@ -280,12 +330,11 @@ void game()
 			}
 		}
 	}
-	
-	// Raffraichir la zone d'effaçage
-	pBX=pX, pBY=pY;
-	
-	// Gestion du joystick
-	dir = readJoystick();
+}
+
+void joystickManagement()
+{
+dir = readJoystick();
 	
 	// Retourner au menu
 	if (dir == 5)
@@ -328,8 +377,10 @@ void game()
 	{
 		dir = 4;
 	}
-	
-	// Changement de tableau
+}
+
+void mapChange()
+{
 	if (pX >= 220)
 	{
 		mapY++;
@@ -359,11 +410,16 @@ void game()
 		numEn = 3;
 		initEnemy(eX, eY, random);
 	}
-	
+}
+
+void playerManagement()
+{
 	// Affiche le joueur sur l'écran
 	drawPlayer(pX, pY, dir);//dir
-	
-	// Retourner au menu
+}
+
+void enemiesManagement()
+{
 	if (iEn==0)
 	{
 		if (mapX<250 && (mapX > 0 || mapY > 0))
@@ -435,6 +491,7 @@ void game()
 		}
 	}
 }
+
 // Menu function
 void menuManagement(signed char m)
 {
