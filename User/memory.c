@@ -23,40 +23,40 @@ void i2c_eeprom_write(uint16_t addr, uint8_t* data, int length)
 	I2C_M_SETUP_Type transferCfg;
 	uint8_t buffer[MAX_BUFFER];
 	int i;
-	
+
 	// Buffer //
 	buffer[0]=addr&0xFF;
-	
+
 	// Boucle
 	for (i=1;i<length+1;i++)
 	{
 		buffer[i]=data[i-1];
 	}
-	
+
 	// Configuration de *transferCfg //
-	
+
 	/* Addresse esclave en 7bit
-	   0xA0 correspond à 1010, le décalage de 1 correspond à l'ecriture en 7bits 1010xxx
+	   0xA0 correspond ï¿½ 1010, le dï¿½calage de 1 correspond ï¿½ l'ecriture en 7bits 1010xxx
 	   addr&0x700 est un mask sur l'element suivant et nous donne la page, decalage de 8 pour qu'ils deviennent les 3bits de fin xxx??? */
   transferCfg.sl_addr7bit=(0xA0>>1)|(addr&0x700)>>8;
-	
+
 	/* Pointer to Transmit data - NULL if data transmit is not used
      will transfer the whole tab know as buffer*/
   transferCfg.tx_data=buffer;
-	
+
 	// Transmit data length - 0 if data transmit is not used //
   transferCfg.tx_length=length+1;
 
 	// Pointer to Receive data - NULL if data receive is not used //
   transferCfg.rx_data=NULL;
-	
+
 	// Receive data length - 0 if data receive is not used //
   transferCfg.rx_length=0;
 
 	// Max Re-Transmission value //
 	transferCfg.retransmissions_max=1;
-	
-	// Opérations //
+
+	// Opï¿½rations //
 	I2C_MasterTransferData(LPC_I2C0,&transferCfg,I2C_TRANSFER_POLLING);
 
 }
@@ -67,27 +67,27 @@ void i2c_eeprom_read(uint16_t addr, uint8_t* data, int length)
 	I2C_M_SETUP_Type transferCfg;
 	uint8_t addresse=addr&0xFF;
 	// *transferCfg configuration //
-	
+
 	/* Slave address in 7bit mode
-	   0xA0 correspond à 1010, le décalage de 1 correspond à l'ecriture en 7bits 1010xxx
+	   0xA0 correspond ï¿½ 1010, le dï¿½calage de 1 correspond ï¿½ l'ecriture en 7bits 1010xxx
 	   addr&0x700 est un mask sur l'element suivant et nous donne la page, decalage de 8 pour qu'ils deviennent les 3bits de fin xxx??? */
   transferCfg.sl_addr7bit=(0xA0>>1)|(addr&0x700)>>8;
-	
+
 	/* Pointer to Transmit data - NULL if data transmit is not used
      will transfer the whole tab know as buffer*/
   transferCfg.tx_data=&addresse;
-	
+
 	// Transmit data length - 0 if data transmit is not used //
   transferCfg.tx_length=1;
 
 	// Pointer to Receive data - NULL if data receive is not used //
   transferCfg.rx_data=data;
-	
+
 	// Receive data length - 0 if data receive is not used //
-  transferCfg.rx_length=length+1;
+  transferCfg.rx_length=length;
 
 	transferCfg.retransmissions_max=1;
-	// Opérations //
+	// Opï¿½rations //
 	I2C_MasterTransferData(LPC_I2C0,&transferCfg,I2C_TRANSFER_POLLING);
 
 }
