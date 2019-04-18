@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include "display.h"
 
+// Each possibility of menu variable
 #define Game -1
 #define MainMenu 1
 #define SaveMenu 2
@@ -132,24 +133,24 @@ void TIMER1_IRQHandler() // Timer1 Handler
 	{
 		flagTouch = 1;
 	}
-	else
+	else // When user stay on screen, flagReset allow only one entry
 	{
 		flagReset = 1;
 	}
 	
-	if (hitReset<hitResetMax) // Periode d'invulnérabilité
+	if (hitReset<hitResetMax) // Invulnérability time
 	{
 		hitReset++;
 	}
 	
-	enFlag = 1; // Les ennemis attaquent toutes les 100ms (a chaque Timer1 Handler)
+	enFlag = 1; // Enemies attack only each 100ms
 	
-	if (stamina < staminaMax) // Stamina
+	if (stamina < staminaMax) // Stamina rise to max
 	{
 		stamina++;
 	}
 	
-	TIM_ClearIntPending(LPC_TIM1, TIM_MR1_INT); // Acquitement
+	TIM_ClearIntPending(LPC_TIM1, TIM_MR1_INT); // Acknowledge
 }
 
 //
@@ -160,24 +161,23 @@ void TIMER1_IRQHandler() // Timer1 Handler
 // Initialize all
 void initAll()
 {
-	lcd_Initializtion(); // Init pinsel ecran et init LCD
-	touch_init(); // Init pinsel tactile et init tactile
-	pin_Configuration(); // Init pinsel memoire, buzzer, led
-	init_i2c_eeprom(); // Init mémoire
-	T0_Init(); // Init timer musique
-	T1_Init(); // Init game/touchscreen timer
+	lcd_Initializtion(); // Pinsel and LCD init
+	touch_init(); // Touchscreen init
+	pin_Configuration(); // Led, buzzer and I2D init
+	init_i2c_eeprom(); // Memory init
+	T0_Init(); // Music timer init
+	T1_Init(); // Game/Touchscreen init
 	
 	musintro(); // Start the theme song
 	
 	initEnemy(eX, eY, random); // Init enemies positions
 	
 	// Init memory => Reset if bad or if manual request
-	if (!check_memory() || !(GPIO_ReadValue(2) & (1<<11))) // (If the the memory is already initialized : 
+	if (!check_memory() || !(GPIO_ReadValue(2) & (1<<11)))
 	{
 		clean_memory();
 		create_gamekey();
 	}
-	//numEn = 3;
 	
 	// Black Background
 	dessiner_rect(0,0,240,320,0,1,Black,Black);
@@ -225,16 +225,18 @@ void pin_Configuration()
 		// Congifuration joystick et boutons
 		for (i=0; i<6; i++)
 		{
-			FIO_SetDir(joystickPort[i], joystickPin[i], 0); // joystick : Entrée
-			FIO_SetMask(joystickPort[i], joystickPin[i], 0); // joystick : Utilisable
+			FIO_SetDir(joystickPort[i], joystickPin[i], 0); // Joystick : Inputs
+			FIO_SetMask(joystickPort[i], joystickPin[i], 0); // Joystick : Usable
 		}
 }
 
 // Reset : map00, initial position
 void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short *y)
 {
+	// Map coordinates
 	*mX = 0;
 	*mY = 0;
+	// Player coordinates on the map
 	*x = 30;
 	*y = 30;
 }
@@ -242,22 +244,27 @@ void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short 
 // Game functions
 void game()
 {
+	// Manage map
 	mapManagement();
+	// Manage Stamina
 	staminaManagement();
+	// Manage life
 	lifeManagement();
 	
-	// Rafraîchir les cases derrière l'ancienne position du personnage pour le faire disparaître
+	// Clean up old player sprite
 	clearPlayer();
+	// Clean up old enemy sprites
 	clearEnemies();
 	
-	// Gestion du joystick
+	// Joystick management
 	joystickManagement();
 	
-	// Changement de tableau
+	// Map change
 	mapChange();
 	
-	// Player and enemies management
+	// Player management
 	playerManagement();
+	// Enemies management
 	enemiesManagement();
 }
 
@@ -265,18 +272,21 @@ void game()
 // In game functions
 void mapManagement()
 {
-	if (mapLoad)
+	if (mapLoad) // If this is the first display
 	{
-		drawMap(mapX, mapY, &mapLoad);
-		pLife = 0; // On le fait qu'une seule fois pour une question de rapidité d'execution
+		drawMap(mapX, mapY, &mapLoad); // Display map and give the value "False" to mapLoad to display only 1 time
+		pLife = 0; // Old life count, to refresh the life display only when it change (to speed up the game)
 	}
 }
 
 void staminaManagement()
 {
+	// If stamina is not at is max : display the grey part of the stamina bar
 	if (stamina != staminaMax)
 		dessiner_rect(8,10, 4, staminaMax-stamina, 0, 1, Grey, Grey);
 	
+	// If there is enough stamina to attack, display the bar in blue 
+	// Else display it in dark grey
 	if (stamina < staminaAttack)
 		dessiner_rect(8,10+staminaMax-stamina, 4, stamina, 0, 1, 0x8c71, 0x8c71);
 	else
@@ -285,136 +295,185 @@ void staminaManagement()
 
 void lifeManagement()
 {
+	// If the number of lives has changed: display it again 
 	if (pLife != life)
 	{
+		// 3 life max : Life still available are white sheeps and life lost are black sheeps
 		for (i=0; i<3; i++)
 		{
 			if(i<life)
 			{
+				// Draw white sheeps
 				drawPlayer(0, 20*(13+2-i), 30);
 			}
 			else
 			{
+				// Draw black sheeps
 				drawPlayer(0, 20*(13+2-i), 31);
 			}
 		}
+		// Reset old life count to new life count (Draw sheeps only when the life count changes)
 		pLife = life;
 	}
 }
 
 void clearPlayer()
 {
+	// If the player has moved
 	if (pBX!=pX || pBY != pY)
 	{
+		// Clean old player sprite
 		clearOldPlayer(pBX, pBY, mapX, mapY);
 	}
-	// Raffraichir la zone d'effaçage
+	// Reset old position to new position (Clean sprite only when player moves)
 	pBX=pX, pBY=pY;
 }
 
 void clearEnemies()
 {
+	// This condition is used to reduce the speed of enemies (See at the end of this function)
 	if (iEn==0)
 	{
+		/* If player is not on the first map (map00 is enemy safe)
+		 * In addition, mapX=250 is the menu map, so no enemies should be displayed.
+		*/
 		if (mapX<250 && (mapX > 0 || mapY > 0))
 		{
+			// Display 6 enemies
 			for (i=0; i<6; i++)
 			{
+				/* When an enemy dies, he is teleported outside the screen (eX = -100 and eY = -100)
+				 * so if eX[i]>=0 then the enemy [i] is not dead	
+				 *
+				 * BUT when an enemy dies, he need to be clean one more time : so oneMoreClear[i] will 
+				 * be at "1" if the enemiy [i] just died
+				*/
 				if (eX[i] >= 0 || oneMoreClear[i])
 				{
+					// Clear the enemy [i]
 					clearOldPlayer(peX[i], peY[i], mapX, mapY);
+					// Reset oneMoreClear[i] because the enemy has been cleaned
 					oneMoreClear[i]=0;
-				}	
+				}
+				// Reset old position to new position (Clean sprite only when enemy moves)
 				peX[i] = eX[i], peY[i] = eY[i];
 			}
 		}
 	}
+	
+	// Divide enemy speed by the number to the right of "%".
+	// iEn=(iEn+1)%1;
 }
 
 void joystickManagement()
 {
-dir = readJoystick();
+	/* Get the current input used : Button or Joystick (Only one can be detected at 
+	 * the same time) so there is a priority for each one (See inside the function)
+	*/
+	dir = readJoystick();
 	
-	// Retourner au menu
+	// If key1 : Go back to menu
 	if (dir == 5)
 	{
-		menu = 1;
+		// Set the menu to main menu
+		menu = MainMenu ;
+		// Reset mapLoad boolean to draw menu
 		mapLoad = true;
 		
-		fillup_save(data, numSave, life, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
+		// Save the new player position (map and pixel coordinates) into the current save
+		fillup_save(data, numSave, life, mapX, mapY, pX, pY, 0);
 		create_save(numSave,data);
 	}
 	
-	// Attaquer
+	// If key0 AND if player has enough stamina : Attack
 	if (dir == 6 && stamina >= staminaAttack)
 	{
 		attack(pX, pY, eX, eY, oneMoreClear, &numEn);
+		// Take off stamina used
 		stamina -= staminaAttack;
 	}
 	
-	// Déplacement du personnage
+	// If player is not colliding with the map : Move the player
 	if (!isColliding(pX, pY, mapX, mapY, dir))
 	{
 		if (dir==1)
 		{
+			// Go up
 			pX+=vit;
 		}
 		else if (dir==2)
 		{
+			// Go right
 			pY+=vit;
 		}
 		else if (dir==3)
 		{
+			// Go down
 			pX-=vit;
 		}
 		else if (dir==0)
 		{
+			// Go left
 			pY-=vit;
 		}
 	}
 	else
 	{
+		// Default direction (The player does not move)
 		dir = 4;
 	}
 }
 
 void mapChange()
 {
+	// If the player is in the bottom cell of the screen : Jump to the next map
 	if (pX >= 220)
 	{
 		mapY++;
 		pX = 10;
 		mapLoad = true;
 	}
+	// If the player is in the top cell of the screen : Jump to the next map
 	else if (pX <= 5)
 	{
 		mapY--;
 		pX = 215;
 		mapLoad = true;
 	}
+	// If the player is in the far left cell of the screen
 	else if (pY >= 300)
 	{
 		mapX++;
 		pY = 10;
 		mapLoad = true;
 	}
+	// If the player is in the far right cell of the screen
 	else if (pY <= 5)
 	{
 		mapX--;
 		pY = 295;
 		mapLoad = true;
 	}
+	
+	// If mapLoad=True then player has changed map
 	if (mapLoad)
 	{
+		/* Set the "pseudo number of ennemies" to 3 (It is not the real number of enemies which are 6)
+		 * numEn is equal to the number of enemies divided by 2
+		 *
+		 * It is used to define the player's speed which is relative to the number of enemies due to 
+		 * the time required to display them.
+		*/ 
 		numEn = 3;
+		// Init random position for each of them
 		initEnemy(eX, eY, random);
 	}
 }
 
 void playerManagement()
 {
-	// Affiche le joueur sur l'écran
-	drawPlayer(pX, pY, dir);//dir
+	// Draw the player sprite
+	drawPlayer(pX, pY, dir);
 }
 
 void enemiesManagement()

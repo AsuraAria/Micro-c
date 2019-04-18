@@ -20,7 +20,7 @@ char flagReset = 1;
 // Loop variables
 char i;
 
-// Variable to know if a map should be displayed
+// Variable to know if a map should be displayed (to display it only one time)
 bool mapLoad = true;
 // Variables of the coordinates of the map to be displayed
 unsigned char mapX=0, mapY=0;
@@ -52,7 +52,7 @@ uint8_t data[20];
 // Random
 unsigned int random = 0;
 
-//Ennemies
+// Ennemies variables
 float numEn = 3;
 char oneMoreClear[6] = {0, 0, 0, 0, 0, 0};
 short eX[6] = {0, 0, 0, 0, 0, 0};
@@ -60,7 +60,7 @@ short eY[6] = {0, 0, 0, 0, 0, 0};
 unsigned short peX[6] = {0, 0, 0, 0, 0, 0};
 unsigned short peY[6] = {0, 0, 0, 0, 0, 0};
 
-//Gestion du stamina
+// Stamina management
 char staminaMax = 50;
 char staminaAttack = 30;
 char stamina = 50;
