@@ -263,7 +263,6 @@ void game()
 
 //
 // In game functions
-
 void mapManagement()
 {
 	if (mapLoad)
