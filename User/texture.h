@@ -1,5 +1,5 @@
 //================================================================================================
-// Fichier contenants les textures, les tableaux
+// File with constants, matrix definitions
 //================================================================================================
 
 // THE OLD MATRIX VERSION IS UNDER COMMENTS MODE
@@ -7,37 +7,36 @@
 
 // Screen 320*240
 
-// Tactile
+// Touch Screen
 // x : 180-3850
 // y : 380-3850
 
 //========================================
-// Definition des constantes
+// Constants definitions
 //========================================
 
-const char TSIZE = 20; // Tailles des textures (en pixels)
+const char TSIZE = 20; // Textures size (in pixels)
+const char MSIZEY = 16; // Number of textures in a map (horizontally)
+const char MSIZEX = 12; // Number of textures in a map (vertically)
 
-const char MSIZEY = 16; // Nombre de "cases" dans un tableau (en largeur)
-const char MSIZEX = 12; // Nombre de "cases" dans un tableau (en hauteur)
-
-const char PSIZE = 15; // Tailles des sprites du joueur (en pixels)
+const char PSIZE = 15; // Size of a player (in pixels)
 
 //========================================
-// Definitions des couleurs
+// Colors definitions
 //========================================
 
 // 7 Noir : #000000 => #0000
 // 8 Blanc : #ffffff => #ffff
 
-// Herbe
+// Grass
 // 0 Vert clair : #98f400 => #9f80
 // 1 Vert fonc� : #339966 => #34cc
 
-// Buisson
+// Bush
 // 2 Vert fonc� 1 : #2dbf13 => #2de2
 // 3 Vert fonc� 2 : #288830 => #2c46
 
-// Pierre
+// Stone
 // 4 Gris clair : #B0B0B0 => #b596
 // 5 Gris fonc� 1 : #8C8C8C => #8c71
 // 6 Gris fonc� 2 : #808080 => #8410
@@ -53,15 +52,15 @@ const char PSIZE = 15; // Tailles des sprites du joueur (en pixels)
 // Enemies
 // 13 Rouge fonce : #8a0000 => #8800
 
-// Moutons
+// Sheeps
 // 14 beige : #efb775 => #edae
 // 15 bordeau : #9b1a0a => #98c1
 
 //========================================
-// Definitions des textures
+// Textures definitions
 //========================================
 
-// Herbe 0 :
+// Grass 0 :
 /*
 const unsigned char grass[TSIZE][TSIZE] = {
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -109,7 +108,7 @@ const unsigned char grass[TSIZE][5] = {
 {0, 0, 0, 0, 0}};
 
 
-// Buisson 1 :
+// Bush 1 :
 /*
 const unsigned char bush[TSIZE][TSIZE] = {
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -156,7 +155,7 @@ const unsigned char bush[TSIZE][5] = {
 {0, 240, 243, 63, 0},
 {0, 0, 0, 0, 0}};
 
-// Rocher 2 :
+// Stone 2 :
 /*
 const unsigned char stone[TSIZE][TSIZE] = {
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -205,10 +204,10 @@ const unsigned char stone[TSIZE][5] = {
 
 //
 //========================================
-// Definitions des tableaux
+// Maps definitions
 //========================================
 	
-// Tableau du menu
+// Menu map
 /*
 const char tMenu[MSIZEX][MSIZEY] = {
 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
@@ -239,7 +238,7 @@ const char tMenu[MSIZEX][4] = {
 {10, 0, 0, 160},
 {170, 170, 170, 170}};
 
-// Tableau 0 0
+// Map 0 0
 /*
 const char t00[MSIZEX][MSIZEY] = [
 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
@@ -270,7 +269,7 @@ const char t00[MSIZEX][4] = {
 {66, 16, 0, 128},
 {170, 170, 170, 170}};
 
-// Tableau 1 0
+// Map 1 0
 /*
 const char t10[MSIZEX][MSIZEY] = [
 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
@@ -301,7 +300,7 @@ const char t10[MSIZEX][4] = {
 {2, 0, 0, 148},
 {170, 170, 170, 170}};
 
-// Tableau 2 0
+// Map 2 0
 /*
 const char t20[MSIZEX][MSIZEY] = [
 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
@@ -334,10 +333,10 @@ const char t20[MSIZEX][MSIZEY] = [
 
 //
 //========================================
-// Definitions des sprites du joueur
+// Player sprites definitions
 //========================================
 
-//STOCKER SUR 4 BIT
+//STOCKED ON 4 BITS
 /*250 => 0
 7 => 1
 9 => 2
@@ -473,7 +472,7 @@ const unsigned char pLeft[PSIZE][PSIZE] = {
 
 //
 //========================================
-// Definitions des enemies
+// Enemies definitions
 //========================================
 
 const unsigned char en[PSIZE][8] = {
@@ -553,7 +552,7 @@ const unsigned char en[PSIZE][PSIZE] = [
 
 //
 //========================================
-// Definitions des enemies
+// Life Sheeps definitions
 //========================================
 
 // Mouton
@@ -655,7 +654,7 @@ const unsigned char demouton[TSIZE][10] = {
 
 //
 //========================================
-// Definitions des lettres
+// Letters definitions
 //========================================
 
 const char a[28][TSIZE][5] ={
@@ -1843,5 +1842,3 @@ const char a[11][TSIZE][TSIZE] = {
 
 */
 //
-
-//const unsigned char t[200];

@@ -3,6 +3,7 @@
 // Defined in .c to avoid defining variables multiple times
 #include "texture.h"
 
+// Each possibility of menu variable
 #define Game -1
 #define MainMenu 1
 #define SaveMenu 2
@@ -11,7 +12,7 @@
 #define StoryMenu 4
 
 //=======================
-// Affichage des menus
+// Menu display
 //=======================
 //char text[20];
 
@@ -197,7 +198,7 @@ void drawText(char*s, char l, unsigned short x, unsigned short y)
 
 //
 //=======================
-// Affichage des maps
+// Map display
 //=======================
 
 unsigned short getColor(unsigned char c)
@@ -332,7 +333,7 @@ void drawMap(unsigned char x, unsigned char y, bool * notDone)
 
 //
 //=======================
-// Affichage du personnage
+// Player display
 //=======================
 
 unsigned char playerColor(unsigned char c)
@@ -482,7 +483,7 @@ void clearOldPlayer(unsigned short x, unsigned short y, unsigned char mx, unsign
 
 //
 //=======================
-// Gestion personnage
+// Player management
 //=======================
 
 char readJoystick()
@@ -586,7 +587,7 @@ void attack(unsigned short x, unsigned short y, short eX[6], short eY[6], char c
 
 //
 //========================================
-// Gestion enemies
+// Enemies management
 //========================================
 
 void initEnemy(short x[6], short y[6], unsigned int r)
@@ -625,5 +626,5 @@ char attackE(unsigned short x, unsigned short y, short eX[6], short eY[6], unsig
 
 //
 //========================================
-// Fin
+// End
 //========================================

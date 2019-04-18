@@ -335,7 +335,7 @@ void clearEnemies()
 	if (iEn==0)
 	{
 		/* If player is not on the first map (map00 is enemy safe)
-		 * In addition, mapX=250 is the menu map, so no enemies should be displayed.
+		 * In addition, mapX=250 is the menu map, so no enemies should be cleaned.
 		*/
 		if (mapX<250 && (mapX > 0 || mapY > 0))
 		{
@@ -478,39 +478,52 @@ void playerManagement()
 
 void enemiesManagement()
 {
+	// This condition is used to reduce the speed of enemies (See in clearEnemies function)
 	if (iEn==0)
 	{
+		/* If player is not on the first map (map00 is enemy safe)
+		 * In addition, mapX=250 is the menu map, so no enemies should be displayed.
+		*/
 		if (mapX<250 && (mapX > 0 || mapY > 0))
 		{
+			// If flag is activate (each 100ms) and the player is not invulnerabilty mode : Enemies attack 1 time
 			if (enFlag && hitReset == hitResetMax)
 			{
+				// Enemies attack
 				if (attackE(pX, pY, eX, eY, &life))
 				{
+					// If the player is within range of one of them: the player becomes invulnerable for a period of time.
 					hitReset = 0;
 				}
+				// Reset flag and so wait 100ms
 				enFlag = 0;
 			}
+			
+			// If life count is at zero
 			if (life == 0)
 			{
+				// Reset all variables : life count, position of player, an go to menu
 				life = 3;
 				menu = 1;
 				mapLoad = 1;
-				pX=30;
-				pY=30;
-				mapX=0;
-				mapY=0;
+				reset(&mapX, &mapY, &pX, &pY);
 				dying = 1;
 				
+				// Save the new player position : which are equivalent to inital position
 				fillup_save(data, numSave, life, mapX, mapY, pX, pY, 0); // Préparation de la sauvegarde "data"
 				create_save(numSave,data);
 			}
 			
+			// Define the player speed in relation to the number of enemies still alive.
 			vit = (signed char)numEn;
 			
+			// For each enemy
 			for (i=0; i<6; i++)
 			{
+				// If enemy is not dead (See in clearEnemies function)
 				if (eX[i] > 0)
 				{
+					// For enemy [0], [3] : AI is defined to go VERTICALLY THEN HORIZONTALLY
 					if (i%3==0)
 					{
 						if (eX[i] != pX)
@@ -522,6 +535,7 @@ void enemiesManagement()
 							eY[i]>pY?eY[i]--:eY[i]++;
 						}
 					}
+					// For enemy [1], [4] : AI is defined to go HORIZONTALLY THEN VERTICALLY
 					else if (i%3 == 1)
 					{
 						if (eY[i] != pY)
@@ -533,16 +547,19 @@ void enemiesManagement()
 							eX[i]>pX?eX[i]--:eX[i]++;
 						}
 					}
+					// For enemy [2], [5] : AI is defined to MOVE DIAGONALLY
 					else
 					{
 						eY[i]>pY?eY[i]--:eY[i]++;
 						eX[i]>pX?eX[i]--:eX[i]++;
 					}
 					
+					//Draw each enemy
 					drawPlayer(eX[i], eY[i], 20);
 				}
 			}
 		}
+		// If enemy should not be displayed : then set player speed to 1
 		else
 		{
 			vit = 1;
@@ -555,28 +572,32 @@ void menuManagement(signed char m)
 {
 	if (mapLoad)
 	{
-		// Dans les menus Tutorial et Story, un fond noir est affiché
-		// et non une map !
+		// In Tutorial and Story menu : draw a black background
 		if (m != StoryMenu && m != TutorialMenu)
 		{
 			drawMap(250, 0, &mapLoad);
 		}
+		// Else : draw the map
 		else
 		{
 			dessiner_rect(0,0,240,320,0,1,Black, Black);
 			mapLoad = 0;
 		}
-		drawMenu(m); // Draw the right menu
+		
+		// Draw the menu: Text and button
+		drawMenu(m);
 	}
 }
 
 void buttonManagement(signed char m)
 {
-	switch(menu)
+	// If flagTouch is enabled and touch screen has already been reset
+	if (flagTouch && flagReset == 1)
 	{
-		case MainMenu:
-			if (flagTouch && flagReset == 1)
-			{
+		// Manage button 
+		switch(menu)
+		{
+			case MainMenu:
 				flagTouch = 0;
 				
 				if (touch_x>=1650 && touch_x<=2500
@@ -594,72 +615,88 @@ void buttonManagement(signed char m)
 					menu = 0;
 					flagReset = 0;
 				}
-			}
-			break;
-		case SaveMenu:
-			if (flagTouch && flagReset == 1)
-			{
+				break;
+			case SaveMenu:
 				flagTouch = 0;
 				
+				/* =============================
+				 * Save 2 Button
+				 * =============================
+				*/
 				
-				// Save 2
 				if (touch_x >= 1900 && touch_x <= 3200
 						&& touch_y >= 2650 && touch_y <= 3500)
 				{
+					// Load the save 2
 					mapLoad = true;
 					menu = -1;
 					numSave = 2;
+					
+					// If the save exists : load it
 					if (check_save(2))
 					{
 						load_save(numSave, data);
 						filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 					}
+					// Else : set initial player position
 					else
 					{
 						reset(&mapX, &mapY, &pX, &pY);
 					}
 				}
 				
-				// Save 1
+				/* =============================
+				 * Save 1 Button
+				 * =============================
+				*/
+				
 				if (touch_x >= 1900 && touch_x <= 3200
 						&& touch_y >= 1650 && touch_y <= 2650)
 				{
 					mapLoad = true;
 					menu = -1;
 					numSave = 1;
+					
+					// If the save exists : load it
 					if (check_save(1))
 					{
+						// Load the save 1
 						load_save(numSave, data);
 						filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 					}
+					// Else : set initial player position
 					else
 					{
 						reset(&mapX, &mapY, &pX, &pY);
 					}
 				}
 				
-				// Save 0
+				/* =============================
+				 * Save 0 Button
+				 * =============================
+				*/
 				if (touch_x >= 1900 && touch_x <= 3200
 						&& touch_y >= 650 && touch_y <= 1650)
 				{
+					// Load the save 0
 					mapLoad = true;
 					menu = -1;
 					numSave = 0;
+					
+					// If the save exists : load it
 					if (check_save(0))
 					{
 						load_save(numSave, data);
 						filldown_save(data, numSave, &life, &mapX, &mapY, &pX, &pY, 0); // Chargement de la sauvegarde "data"
 					}
+					// Else : set initial player position
 					else
 					{
 						reset(&mapX, &mapY, &pX, &pY);
 					}
 				}
-			}
-			break;
-		case BonusMenu:
-			if (flagTouch && flagReset == 1)
-			{
+				break;
+			case BonusMenu:
 				flagTouch = 0;
 				
 				// Tutorial
@@ -688,18 +725,18 @@ void buttonManagement(signed char m)
 					menu = 1;
 					flagReset = 0;
 				}
-			}
-			break;
-		case TutorialMenu:
-		case StoryMenu:
-			if (flagTouch && flagReset == 1 && touch_x>=10)
-			{
-				flagTouch = 0;
-				mapLoad = true;
-				menu = 0;
-				flagReset = 0;
-			}
-			break;
+				break;
+			case TutorialMenu:
+			case StoryMenu:
+				if (touch_x>=10)
+				{
+					flagTouch = 0;
+					mapLoad = true;
+					menu = 0;
+					flagReset = 0;
+				}
+				break;	
+		}
 	}
 }
 
