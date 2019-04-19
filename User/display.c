@@ -14,10 +14,12 @@
 //=======================
 // Menu display
 //=======================
-//char text[20];
 
+// dying variable to know if the player just died
+// Not used because of 32K limit
 extern char dying;
 
+// To write "Load" or "New" on save squares
 char text1[5];
 
 void drawMenu(char m)
@@ -26,11 +28,6 @@ void drawMenu(char m)
 	
 	if (m == MainMenu)
 	{
-		/*sprintf(text,"klmnopqrstuvw");
-		drawText(text, 1, TSIZE*2, (unsigned short)(320-12*TSIZE/1)/2);
-		sprintf(text,"abcdefghij");
-		drawText(text, 1, TSIZE*4, (unsigned short)(320-9*TSIZE/1)/2);*/
-		
 		drawText("fluffiten's", 1, TSIZE*1, (unsigned short)(320-11*TSIZE/1)/2);
 		drawText("adventure", 1, TSIZE*2, (unsigned short)(320-9*TSIZE/1)/2);
 		
@@ -152,11 +149,13 @@ void drawText(char*s, char l, unsigned short x, unsigned short y)
 	short len = 0;
 	unsigned char c;
 	
+	// Get number of char
 	while (*s)
 	{
 		len ++;
 		s++;
 	}
+	// Return before EOF
 	s--;
 	
 	for (k=0;k<len;k++)
