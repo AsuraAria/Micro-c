@@ -46,7 +46,7 @@ void TIMER1_IRQHandler();
 // Initialize (Timers, pins, LCD, TouchScreen, I2C) and reset function
 void initAll();
 void pin_Configuration();
-void reset(unsigned char*, unsigned char*, unsigned short*, unsigned short*);
+void reset(unsigned char*, unsigned char*, unsigned short*, unsigned short*, unsigned char*);
 
 // Game functions
 void game();
@@ -231,7 +231,7 @@ void pin_Configuration()
 }
 
 // Reset : map00, initial position
-void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short *y)
+void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short*y, unsigned char*l)
 {
 	// Map coordinates
 	*mX = 0;
@@ -239,6 +239,7 @@ void reset(unsigned char*mX, unsigned char*mY, unsigned short*x, unsigned short 
 	// Player coordinates on the map
 	*x = 30;
 	*y = 30;
+	*l = 3;
 }
 
 // Game functions
@@ -503,10 +504,9 @@ void enemiesManagement()
 			if (life == 0)
 			{
 				// Reset all variables : life count, position of player, an go to menu
-				life = 3;
 				menu = 1;
 				mapLoad = 1;
-				reset(&mapX, &mapY, &pX, &pY);
+				reset(&mapX, &mapY, &pX, &pY, &life);
 				dying = 1;
 				
 				// Save the new player position : which are equivalent to inital position
@@ -641,7 +641,7 @@ void buttonManagement(signed char m)
 					// Else : set initial player position
 					else
 					{
-						reset(&mapX, &mapY, &pX, &pY);
+						reset(&mapX, &mapY, &pX, &pY, &life);
 					}
 				}
 				
@@ -667,7 +667,7 @@ void buttonManagement(signed char m)
 					// Else : set initial player position
 					else
 					{
-						reset(&mapX, &mapY, &pX, &pY);
+						reset(&mapX, &mapY, &pX, &pY, &life);
 					}
 				}
 				
@@ -692,7 +692,7 @@ void buttonManagement(signed char m)
 					// Else : set initial player position
 					else
 					{
-						reset(&mapX, &mapY, &pX, &pY);
+						reset(&mapX, &mapY, &pX, &pY, &life);
 					}
 				}
 				break;

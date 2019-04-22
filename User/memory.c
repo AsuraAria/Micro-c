@@ -92,7 +92,7 @@ void i2c_eeprom_read(uint16_t addr, uint8_t* data, int length)
   transferCfg.rx_data=data;
 
 	// Receive data length - 0 if data receive is not used //
-  transferCfg.rx_length=length+1;
+  transferCfg.rx_length=length;
 
 	transferCfg.retransmissions_max=1;
 	// Operations //

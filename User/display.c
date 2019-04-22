@@ -386,15 +386,19 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 					case 1:
 						c = playerColor((pDown[j][(char)i/2]>>((i*4)%8))&15);
 						break;
+					
 					case 0:
 						c = playerColor((pRight[j][(char)(PSIZE-i-1)/2]>>(((PSIZE-i-1)*4)%8))&15);
 						break;
+					
 					case 3:
 						c = playerColor((pUp[j][(char)i/2]>>((i*4)%8))&15);
 						break;
+					
 					case 2:
 						c = playerColor((pRight[j][(char)i/2]>>((i*4)%8))&15);
 						break;
+					
 					case 20:
 						c = playerColor((en[j][(char)i/2]>>((i*4)%8))&15);
 					default:
@@ -455,11 +459,14 @@ void drawPlayer(unsigned short x, unsigned short y, unsigned char d)
 		{
 			for(j=0; j<TSIZE; j++)
 			{
-				if ((d==30?mouton[j][i]:demouton[j][i]) != 250)
+				//No more space on 32K version to make a switch
+				c = playerColor(((d==30?mouton[j][(char)i/2]:demouton[j][(char)i/2])>>((i*4)%8))&15);
+				
+				if (c != 250)
 				{
 					lcd_SetCursor(x+j,y+i);
 					rw_data_prepare();
-					write_data(getColor(d==30?mouton[j][i]:demouton[j][i]));
+					write_data(getColor(c));
 				}
 			}
 		}
