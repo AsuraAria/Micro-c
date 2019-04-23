@@ -13,7 +13,9 @@
 
 void init_i2c_eeprom()
 {
+	//Set speed on signal I2C number 0 to 1Mhz (as it is allowed by both compoent)
 	I2C_Init(LPC_I2C0, 1000000);
+	//Activation of the use of signal I2C number 0
 	I2C_Cmd (LPC_I2C0, ENABLE);
 }
 
